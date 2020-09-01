@@ -1,0 +1,75 @@
+<h1 mat-dialog-title>Sub Category List</h1>
+<div mat-dialog-content>
+  
+ 
+ 
+<!--add sub category input-->
+<form class="form-horizontal" [formGroup]="subCategoryForm">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <input type="text" class="form-control" formControlName="name" id="subCategoryId" placeholder="Enter Sub Category Name">
+        
+      </div>
+    </div>
+    <div class="col-md-6">
+    <!----  <div class="form-group">
+        <input type="text" placeholder="Regular" class="form-control">
+      </div> -->
+        <button type="button" (click)="addNewSubCategory()" class="btn btn-primary fas fa-plus merchantbtn">Add</button>
+
+    </div>
+  </div>
+  </form>
+
+  <!--List data -->
+<div class="table-responsive">
+  <table class="table align-items-center table-flush">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">S.No.</th>
+        <th scope="col">Sub Category</th>
+        <th scope="col">Created</th>
+        <th scope="col">Image</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let subcategory of data.subCategories;">
+        <td>
+         {{subcategory.name}}
+        </td>
+        <td scope="row">
+          <div class="media align-items-center">
+            <div class="media-body">
+              <span class="mb-0 text-sm">American</span>
+            </div>
+          </div>
+        </td>
+        <td>
+          20.08.2020
+        </td>
+        <td>
+        <!-- <a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Click Here</a>-->
+       <!---- <a class="btn btn-secondary" (click)="openDialog()">Click Here</a>-->
+        </td>
+        <td>
+          <span class="badge badge-success">Active</span>
+        </td>
+        <td>
+          <a class="ni ni-basket"></a>
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+</div>
+
+
+
+<!-- Copyright 2020 Google LLC. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->
