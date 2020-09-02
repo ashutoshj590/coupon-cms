@@ -5,7 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
     selector: 'dialog-data-example-dialog',
-    templateUrl: 'dialog-data-example-dialog.html',
+   // templateUrl: 'dialog-data-example-dialog.html',
   })
   export class DialogDataExampleDialog implements OnInit {
       
