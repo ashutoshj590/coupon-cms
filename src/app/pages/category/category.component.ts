@@ -5,7 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 
-import { DialogDataExampleDialog } from './dialog-data-example'
+//import { DialogDataExampleDialog } from './dialog-data-example'
 
 
 
@@ -84,7 +84,7 @@ export class CategoryComponent implements OnInit {
     } 
     
   
-    clickSubCategory(id) {
+  /*  clickSubCategory(id) {
       this.categoryService.getSubCategory(id).subscribe((data: {}) => {
        this.allSubCategories = data;
           this.dialog.open(DialogDataExampleDialog, { data: this.allSubCategories});
@@ -93,7 +93,7 @@ export class CategoryComponent implements OnInit {
        
       });
       
-    }
+    } */
 
 
      
