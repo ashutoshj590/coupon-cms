@@ -77,22 +77,33 @@ export class CategoryComponent implements OnInit {
 
 
 
-    deleteConfirm(id) {
+   /* warningDialog(id) {
       this.categoryService.deleteCategory(id).subscribe((data: {}) => {
         window.location.reload()
         });
-    } 
+    } */
     
   
     clickSubCategory(id) {
       this.categoryService.getSubCategory(id).subscribe((data: {}) => {
        this.allSubCategories = data;
           this.dialog.open(DialogDataExampleDialog, { data: this.allSubCategories});
-          console.log("//////");
-          console.log(this.allSubCategories);
+          
        
       });
       
+    }
+
+    warningDialog(id) {
+     let dialogRef = this.dialog.open(warningDialogComponent);
+     dialogRef.afterClosed().subscribe(result  => {
+      if (result == "true"){
+        this.categoryService.deleteCategory(id).subscribe((data: {}) => { 
+          window.location.reload();
+        });
+      }
+      console.log(result);
+     });
     }
 
 
@@ -100,6 +111,15 @@ export class CategoryComponent implements OnInit {
 
 
 }
+/* code always on the bottom of page. **************************** */
+@Component({
+  selector: 'warning-dialog.component',
+  templateUrl: 'warning-dialog.component.html',
+})
+export class warningDialogComponent {}
+
+
+
 
 
 
