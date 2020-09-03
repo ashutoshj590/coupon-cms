@@ -76,12 +76,6 @@ export class CategoryComponent implements OnInit {
       }
 
 
-
-   /* warningDialog(id) {
-      this.categoryService.deleteCategory(id).subscribe((data: {}) => {
-        window.location.reload()
-        });
-    } */
     
   
     clickSubCategory(id) {

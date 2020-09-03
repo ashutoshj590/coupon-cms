@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
@@ -21,7 +21,8 @@ import { coerceArray } from '@angular/cdk/coercion';
     
     constructor(@Inject(MAT_DIALOG_DATA) public data: any,
                           private formBuilder: FormBuilder,
-                          private categoryService: CategoryService
+                          private categoryService: CategoryService,
+                          public dialog: MatDialog
     ) {}
 
     ngOnInit() {
@@ -45,22 +46,43 @@ import { coerceArray } from '@angular/cdk/coercion';
     this.subCategoryId = {category_id, name: this.f.name.value}; //, "status": 1
     this.categoryService.addSubCategory(this.subCategoryId).subscribe((data: {}) => {
       //  this.router.navigate(['/food/types']);
-       // window.location.reload()
+        window.location.reload()
        console.log("sub cate added..")
     });
   }
 
 
 
-  deleteSubCatConfirm(id) {
+ /* deleteSubCatConfirm(id) {
     this.categoryService.deleteSubCategory(id).subscribe((data: {}) => {
       window.location.reload()
       });
-  } 
+  }  */
+
+
+  deleteSubCatConfirm(id) {
+    let dialogRef = this.dialog.open(warningDialogSubCate);
+    dialogRef.afterClosed().subscribe(result  => {
+     if (result == "true"){
+       this.categoryService.deleteSubCategory(id).subscribe((data: {}) => { 
+         window.location.reload();
+       });
+     }
+     console.log(result);
+    });
+   }
   
 
 
   
 }
+
+/* code always on the bottom of page. **************************** */
+@Component({
+  selector: 'warning-dialog-sub-cate',
+  templateUrl: 'warning-dialog-sub-cate.html',
+})
+export class warningDialogSubCate {}
+
   
   

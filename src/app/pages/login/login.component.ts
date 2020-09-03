@@ -82,11 +82,11 @@ export class LoginComponent implements OnInit {
         this.getUserRoles(data.id);
       }
     });
-  } */
+  } 
 
   getUserRoles(id) {
     this.authenticationService.getUserRoles(id).subscribe(data => {
       this.router.navigate([this.returnUrl]);
     });
-  }
+  } */
 }

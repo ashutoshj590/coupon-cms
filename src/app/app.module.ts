@@ -17,6 +17,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MerchantComponent } from './pages/merchant/merchant.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { warningDialogComponent } from './pages/category/category.component';
+import { warningDialogSubCate } from './pages/category/dialog-data-example';
 import {DialogDataExampleDialog} from './pages/category/dialog-data-example';
 import { MatButtonModule } from '@angular/material/button';
 import {  MatIconModule  } from '@angular/material/icon';
@@ -54,7 +55,8 @@ import { CommonModule } from '@angular/common';
     MerchantComponent,
     CategoryComponent,
     DialogDataExampleDialog,
-    warningDialogComponent
+    warningDialogComponent,
+    warningDialogSubCate
 
   ],
   providers: [],
