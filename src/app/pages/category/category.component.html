@@ -20,7 +20,7 @@
       <!----  <div class="form-group">
           <input type="text" placeholder="Regular" class="form-control">
         </div> -->
-          <button type="button" class="btn btn-primary fas fa-plus merchantbtn">Add</button> <!--(click)="addNewCategory()"-->
+          <button type="button" (click)="addNewCategory()" class="btn btn-primary fas fa-plus merchantbtn">Add</button>
 
       </div>
     </div>
@@ -62,7 +62,7 @@
                 </td>
                 <td>
                 <!-- <a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Click Here</a>-->
-                <a class="btn btn-secondary">Click Here</a> <!--(click)="clickSubCategory(category.id)"-->
+                <a class="btn btn-secondary" (click)="clickSubCategory(category.id)">Click Here</a>
                 </td>
                 <td>
                   <span class="badge badge-success">Active</span>

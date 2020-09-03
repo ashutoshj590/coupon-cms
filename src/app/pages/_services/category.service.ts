@@ -71,6 +71,31 @@ export class CategoryService {
             }));
     }
 
+
+    addSubCategory(value: any) {
+        return this.http.post<any>(this.apiURL + '/category/add-sub-category', value)
+            .pipe(map(response => {
+                console.log(response);
+                return response;
+            }));
+    }
+
+
+    deleteSubCategory(id: any) { 
+        const httpOpt = {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+              'Accept': 'application/json, text/plain'
+            })
+          };
+        return this.http.post<any>(this.apiURL + '/category/delete-sub-category', JSON.stringify({sub_category_id:id}), httpOpt)
+            .pipe(map(response => {  
+                console.log(response);
+                return response;
+            }));
+    }
+
+
     
     
 }

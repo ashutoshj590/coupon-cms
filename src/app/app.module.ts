@@ -16,12 +16,13 @@ import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MerchantComponent } from './pages/merchant/merchant.component';
 import { CategoryComponent } from './pages/category/category.component';
+import {DialogDataExampleDialog} from './pages/category/dialog-data-example';
 import { MatButtonModule } from '@angular/material/button';
 import {  MatIconModule  } from '@angular/material/icon';
 import {  MatTreeModule  } from '@angular/material/tree';
 import {MatDialogModule} from '@angular/material/dialog';
-//import { BrowserModule } from '@angular/platform-browser';
-//import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -39,9 +40,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatTreeModule,
     MatIconModule,
     MatButtonModule,
-    MatDialogModule
-   // BrowserModule,
-  //  CommonModule
+    MatDialogModule,
+    BrowserModule,
+    CommonModule
   ],
   declarations: [
     AppComponent,
@@ -50,7 +51,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     LoginComponent,
     DashboardComponent,
     MerchantComponent,
-    CategoryComponent
+    CategoryComponent,
+    DialogDataExampleDialog
   ],
   providers: [],
   bootstrap: [AppComponent]

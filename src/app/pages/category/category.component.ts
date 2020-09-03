@@ -5,7 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 
-//import { DialogDataExampleDialog } from './dialog-data-example'
+import { DialogDataExampleDialog } from './dialog-data-example'
 
 
 
@@ -24,8 +24,8 @@ export class CategoryComponent implements OnInit {
     
 
     categoryForm: FormGroup;
-    subCategoryForm: FormGroup;
-    subCategoryId: any;
+    
+    
     categoryId: any;
     submitted = false;
 
@@ -84,16 +84,16 @@ export class CategoryComponent implements OnInit {
     } 
     
   
-  /*  clickSubCategory(id) {
+    clickSubCategory(id) {
       this.categoryService.getSubCategory(id).subscribe((data: {}) => {
        this.allSubCategories = data;
           this.dialog.open(DialogDataExampleDialog, { data: this.allSubCategories});
           console.log("//////");
-          console.log(data);
+          console.log(this.allSubCategories);
        
       });
       
-    } */
+    }
 
 
      

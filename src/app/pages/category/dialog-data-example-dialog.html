@@ -4,7 +4,7 @@
  
  
 <!--add sub category input-->
-<form class="form-horizontal"> <!--[formGroup]="subCategoryForm"-->
+<form class="form-horizontal" [formGroup]="subCategoryForm">
   <div class="row">
     <div class="col-md-6">
       <div class="form-group">
@@ -16,7 +16,7 @@
     <!----  <div class="form-group">
         <input type="text" placeholder="Regular" class="form-control">
       </div> -->
-        <button type="button" (click)="addNewSubCategory()" class="btn btn-primary fas fa-plus merchantbtn">Add</button>
+        <button type="button" (click)="addSubCate()" class="btn btn-primary fas fa-plus merchantbtn">Add</button>
 
     </div>
   </div>
@@ -36,19 +36,19 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr *ngFor="let subcategory of data.subCategories;">
         <td>
-         1
+        {{subcategory.id}}
         </td>
         <td scope="row">
           <div class="media align-items-center">
             <div class="media-body">
-              <span class="mb-0 text-sm">American</span>
+              <span class="mb-0 text-sm">{{subcategory.name}}</span>
             </div>
           </div>
         </td>
         <td>
-          20.08.2020
+          {{subcategory.createdAt}}
         </td>
         <td>
         <!-- <a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Click Here</a>-->
@@ -58,7 +58,7 @@
           <span class="badge badge-success">Active</span>
         </td>
         <td>
-          <a class="ni ni-basket"></a>
+          <a class="ni ni-basket" (click)="deleteSubCatConfirm(subcategory.id)"></a>
         </td>
       </tr>
       
