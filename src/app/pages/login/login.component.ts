@@ -34,7 +34,8 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       email: ['ashutoshj590@gmail.com', Validators.required],
       password: ['9460482961', Validators.required],
-      type: ['admin', Validators.required]
+      type: ['admin', Validators.required],
+      device_type: ['apple', Validators.required]
     });
 
     // get return url from route parameters or default to '/'
@@ -60,7 +61,7 @@ export class LoginComponent implements OnInit {
     
     this.returnUrl =  '/dashboard'
     this.loading = true;
-    this.authenticationService.login(this.f.email.value, this.f.password.value, this.f.type.value)
+    this.authenticationService.login(this.f.email.value, this.f.password.value, this.f.type.value, this.f.device_type.value)
     .subscribe(data => {
      // this.getUser();
     }, error => {

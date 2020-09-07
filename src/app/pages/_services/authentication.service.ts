@@ -20,13 +20,14 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    login(email: string, password: string, type: string) {
+    login(email: string, password: string, type: string, device_type: string) {
        
         console.log(email, password, type);
         let user = {
             email: email,
             password: password,
             type: type,
+            device_type: device_type,
             grant_type: apiUrl.grant_type,
             client_id: apiUrl.client_id,
             client_secret: apiUrl.client_secret 
