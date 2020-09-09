@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   // userRoles: any;
+   userLoginData: any = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,14 +33,14 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ['ashutoshj590@gmail.com', Validators.required],
-      password: ['9460482961', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
       type: ['admin', Validators.required],
       device_type: ['apple', Validators.required]
     });
 
     // get return url from route parameters or default to '/'
-    this.returnUrl =  'dashboard'//this.route.snapshot.queryParams['returnUrl'] || '/';
+   // this.returnUrl =  'dashboard'//this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   // convenience getter for easy access to form fields
@@ -47,47 +48,32 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     console.log(this.f.email);
+
     this.submitted = true;
-
-    // reset alerts on submit
-    this.alertService.clear();
-
-    // // stop here if form is invalid
      if (this.loginForm.invalid) {
        return;
     }
 
-    console.log(this.f.email);
-    
-    this.returnUrl =  '/dashboard'
     this.loading = true;
     this.authenticationService.login(this.f.email.value, this.f.password.value, this.f.type.value, this.f.device_type.value)
-    .subscribe(data => {
-     // this.getUser();
-    }, error => {
-      this.alertService.error(error);
-      this.loading = false;
+    .subscribe((data: {}) => {
+      this.userLoginData =  data;
+      console.log("sucess");
+      console.log(this.userLoginData);
+      console.log(this.userLoginData.status)
+      if (this.userLoginData.status === "success"){
+            this.returnUrl =  '/dashboard'
+            this.router.navigate([this.returnUrl]);
+            this.loading = false;
+      }
+      
     });
-    this.router.navigate([this.returnUrl]);
-    this.loading = false; 
+   
   } 
+
+ 
 
   
 
-  /*getUser() {
-    this.authenticationService.getUser().subscribe(data => {
-      console.log(data,'Data');
-      if(data.user_type == 'admin') {
-        this.router.navigate([this.returnUrl]);
-      } else {
-        this.getUserRoles(data.id);
-      }
-    });
-  } 
-
-  getUserRoles(id) {
-    this.authenticationService.getUserRoles(id).subscribe(data => {
-      this.router.navigate([this.returnUrl]);
-    });
-  } */
+ 
 }
