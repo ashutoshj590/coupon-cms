@@ -1,7 +1,7 @@
 export const apiUrl = {
-    local: 'http://www.mccpapp.com:8080',
-    live: 'http://www.mccpapp.com:8080',
-    server: 'http://www.mccpapp.com:8080',
+    local: '45.79.152.67:8080',
+    live: '45.79.152.67:8080',
+    server: '45.79.152.67:8080',
     grant_type: "password",
     // Local
     // client_id: 2,
