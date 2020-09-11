@@ -60,8 +60,9 @@ export class LoginComponent implements OnInit {
       this.userLoginData =  data;
       console.log("sucess");
       console.log(this.userLoginData);
-      console.log(this.userLoginData.status)
-      if (this.userLoginData.status === "success"){
+      console.log(this.userLoginData.response_code)
+      if (this.userLoginData.response_code === 200){
+         console.log("aya kya yaha");
             this.returnUrl =  '/dashboard'
             this.router.navigate([this.returnUrl]);
             this.loading = false;
