@@ -4,7 +4,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { apiUrl } from '../../_constant';
 import { User } from '../_models';
-import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
