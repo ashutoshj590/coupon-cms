@@ -7,7 +7,7 @@ import { User } from '../_models';
 import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
-export class CategoryService {   
+export class CategoryService { 
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
     apiURL = apiUrl.server;
@@ -19,17 +19,18 @@ export class CategoryService {
 
     public get currentUserValue(): User {
         return this.currentUserSubject.value;
+        
     }
 
-  
-    
-    getAllCategory() {
+    getAllCategory(): Observable<any> {
         return this.http.post<any>(this.apiURL + '/category/get-all-category', null)
             .pipe(map(response => {
                 console.log(response);
                 return response;
             }));
     }
+
+
 
 
     addNewCategory(value: any) { 
@@ -40,8 +41,7 @@ export class CategoryService {
             }));
     }
     
-
-
+    
     deleteCategory(id: any) { 
         const httpOpt = {
             headers: new HttpHeaders({

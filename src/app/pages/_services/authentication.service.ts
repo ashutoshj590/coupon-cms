@@ -39,7 +39,12 @@ export class AuthenticationService {
                 console.log(response);
                 // login successful if there's a jwt token in the response
                 if (response.user_Detail && response.user_Detail.token != null || undefined ) {
-                    let user = {id:0,name:'',email:'',roles:'',token:response.user_Detail.token};
+                    let user = {
+                            user_id : response.user_Detail.user_id,
+                            email: response.user_Detail.email,
+                            type: response.user_Detail.type,
+                            token:response.user_Detail.token
+                        };
                     
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(user));
@@ -47,8 +52,13 @@ export class AuthenticationService {
 
                     return response;
                 }
-                return response;
             }));
+    }
+
+    logout() {
+        // remove user from local storage to log user out
+        localStorage.removeItem('currentUser');
+        this.currentUserSubject.next(null);
     }
 
   
