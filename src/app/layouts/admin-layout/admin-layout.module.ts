@@ -9,7 +9,7 @@ import { AdminLayoutRoutes } from './admin-layout.routing';
 //import { MerchantComponent } from '../../pages/merchant/merchant.component';
 //import { CategoryComponent } from '../../pages/category/category.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
-import { TablesComponent } from '../../pages/users/users.component';
+//import { TablesComponent } from '../../pages/users/users.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //import { BrowserModule } from '@angular/platform-browser';
 //import { CommonModule } from '@angular/common';
@@ -27,7 +27,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   declarations: [
    // DashboardComponent,
     UserProfileComponent,
-    TablesComponent,
+   // TablesComponent,
    // MerchantComponent,
    // CategoryComponent
   ]

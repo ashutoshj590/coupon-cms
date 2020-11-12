@@ -44,7 +44,7 @@ export class CategoryComponent implements OnInit {
         
 
         this.categoryForm = this.formBuilder.group({
-          name: ['', Validators.required],
+          name: ['', Validators.required]
       });
       }
 

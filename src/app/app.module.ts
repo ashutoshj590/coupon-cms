@@ -17,6 +17,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MerchantComponent } from './pages/merchant/merchant.component';
 import { CategoryComponent } from './pages/category/category.component';
+import { ConsumerComponent } from './pages/users/users.component';
 import { warningDialogComponent } from './pages/category/category.component';
 import { warningDialogSubCate } from './pages/category/dialog-data-example';
 import {DialogDataExampleDialog} from './pages/category/dialog-data-example';
@@ -54,6 +55,7 @@ import { CommonModule } from '@angular/common';
     DashboardComponent,
     MerchantComponent,
     CategoryComponent,
+    ConsumerComponent,
     DialogDataExampleDialog,
     warningDialogComponent,
     warningDialogSubCate

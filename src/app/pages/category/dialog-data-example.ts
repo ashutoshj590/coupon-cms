@@ -1,10 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
-import { AlertService, CategoryService } from '../_services';
-import { coerceArray } from '@angular/cdk/coercion';
+import { CategoryService } from '../_services';
 
 @Component({
     selector: 'dialog-data-example-dialog',
@@ -43,7 +40,7 @@ import { coerceArray } from '@angular/cdk/coercion';
       }
          
     let category_id = this.data.category_id;
-    this.subCategoryId = {category_id, name: this.f.name.value}; //, "status": 1
+    this.subCategoryId = {category_id, name: this.f.name.value}; 
     this.categoryService.addSubCategory(this.subCategoryId).subscribe((data: {}) => {
       //  this.router.navigate(['/food/types']);
         window.location.reload()
@@ -72,6 +69,11 @@ import { coerceArray } from '@angular/cdk/coercion';
     });
    }
   
+   selectedFile = null;
+   onFileSelected(event) {
+    console.log(event);
+    this.selectedFile = event.target.files[0];
+   }
 
 
   
