@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
-import { FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { CategoryService } from '../_services';
 
 @Component({
@@ -8,14 +8,16 @@ import { CategoryService } from '../_services';
     templateUrl: 'dialog-data-example-dialog.html',
   })
   export class DialogDataExampleDialog implements OnInit {
-   // subCategoryForm: FormGroup;
-   // subCategoryId: any;
-   subCategoryForm = new FormGroup({
-    name: new FormControl()
-   });
+   subCategoryForm: FormGroup;
+  /* subCategoryForm = new FormGroup({
+    name: new FormControl(),
+    subcateimg: new FormControl()
+
+   }); */
    submitted = false;
-   subCategoryId: any;
-    
+
+   subCategory: any;
+   images;
     constructor(@Inject(MAT_DIALOG_DATA) public data: any,
                           private formBuilder: FormBuilder,
                           private categoryService: CategoryService,
@@ -25,36 +27,48 @@ import { CategoryService } from '../_services';
     ngOnInit() {
       this.subCategoryForm = this.formBuilder.group({
         name: ['', Validators.required],
+        subcateimg: ['']
     });
 
     }
 
-    get f() { return this.subCategoryForm.controls; }
+   // get f() { return this.subCategoryForm.controls; }
+ get name() { return this.subCategoryForm.get('name'); }
 
 
-  addSubCate() {
+  onFileSelected(event) {
+    if (event.target.files.length > 0){
+      const file = event.target.files[0];
+      this.subCategoryForm.get('subcateimg').setValue(file);
+    }
+   
+  }
+
+  
+
+
+ /* addSubCate() {
       this.submitted = true;
       // stop here if form is invalid
       if (this.subCategoryForm.invalid) {
         return;
       }
-         
+    const formData = new FormData();
     let category_id = this.data.category_id;
-    this.subCategoryId = {category_id, name: this.f.name.value}; 
-    this.categoryService.addSubCategory(this.subCategoryId).subscribe((data: {}) => {
-      //  this.router.navigate(['/food/types']);
+    formData.append('category_id', category_id,);
+    formData.append('name', this.subCategoryForm.get('name').value);
+    formData.append('subcateimg', this.subCategoryForm.get('subcateimg').value);
+    this.categoryService.addSubCategory(formData).subscribe((data: {}) => {
+      console.log("//////");
+      console.log(data);
         window.location.reload()
        console.log("sub cate added..")
     });
+  } */
+  addSubCate() {
+    console.log("form value");
+    console.log(this.subCategoryForm.value);
   }
-
-
-
- /* deleteSubCatConfirm(id) {
-    this.categoryService.deleteSubCategory(id).subscribe((data: {}) => {
-      window.location.reload()
-      });
-  }  */
 
 
   deleteSubCatConfirm(id) {
@@ -68,12 +82,9 @@ import { CategoryService } from '../_services';
      console.log(result);
     });
    }
+
   
-   selectedFile = null;
-   onFileSelected(event) {
-    console.log(event);
-    this.selectedFile = event.target.files[0];
-   }
+   
 
 
   

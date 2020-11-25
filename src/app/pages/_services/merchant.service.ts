@@ -38,4 +38,68 @@ export class MerchantService {
                 return response;
             }));
     }
+
+
+
+    getCouponsById(id: any) {
+        const httpOpt = {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+              'Accept': 'application/json, text/plain'
+            })
+          };
+        return this.http.post<any>(this.apiURL + '/coupon/get-coupons-admin', JSON.stringify({merchant_id:id}), httpOpt)
+            .pipe(map(response => {
+                console.log(response);
+                return response;
+            }));
+    }
+
+
+    getCouponsConsumerId(id: any) {
+        const httpOpt = {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+              'Accept': 'application/json, text/plain'
+            })
+          };
+        return this.http.post<any>(this.apiURL + '/coupon/get-coupons-consumer', JSON.stringify({consumer_id:id}), httpOpt)
+            .pipe(map(response => {
+                console.log(response);
+                return response;
+            }));
+    }
+
+    getImagesById(id: any) {
+        const httpOpt = {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+              'Accept': 'application/json, text/plain'
+            })
+          };
+        return this.http.post<any>(this.apiURL + '/user/get-all-images', JSON.stringify({merchant_id:id}), httpOpt)
+            .pipe(map(response => {
+                console.log(response);
+                return response;
+            }));
+    }
+
+
+    statusForMerchant(id: any) {
+        const httpOpt = {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+              'Accept': 'application/json, text/plain'
+            })
+          };
+        return this.http.post<any>(this.apiURL + '/user/status-update', JSON.stringify({merchant_id:id}), httpOpt)
+            .pipe(map(response => {
+                console.log(response);
+                return response;
+            }));
+    }
+
+
+
+
 }

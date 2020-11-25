@@ -3,27 +3,27 @@
   
  
  
-<!--add sub category input-->
-<form class="form-horizontal" [formGroup]="subCategoryForm">
+<form class="form-horizontal" [formGroup]="subCategoryForm" (ngSubmit)="addSubCate()">
   <div class="row">
     <div class="col-md-6">
       <div class="form-group">
-        <input type="text" class="form-control" formControlName="name" id="subCategoryId" placeholder="Enter Sub Category Name">
+        <input type="text" class="form-control" formControlName="name" placeholder="Enter Sub Category Name">
         
       </div>
     </div>
     <div class="col-md-6">
-    <!----  <div class="form-group">
-        <input type="text" placeholder="Regular" class="form-control">
-      </div> -->
-        <button type="button" (click)="addSubCate()" class="btn btn-primary fas fa-plus merchantbtn">Add</button>
+        <button type="button" class="btn btn-primary fas fa-plus merchantbtn">Add</button>
 
     </div>
     <div class="col-md-6">
-      <input type="file" class="form-control" (change)="onFileSelected($event)">
+      <div class="form-group">
+      <input type="file" class="form-control" name="subcateimg" (change)="onFileSelected($event)">
+      </div>
       </div>
   </div>
-  </form>
+  </form> 
+  
+  
 
   <!--List data -->
 <div class="table-responsive">
@@ -51,17 +51,16 @@
           </div>
         </td>
         <td>
-          {{subcategory.createdAt}}
+          {{subcategory.createdAt | date:'short' }}
         </td>
         <td>
-        <!-- <a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Click Here</a>-->
-       <!---- <a class="btn btn-secondary" (click)="openDialog()">Click Here</a>-->
+            <img height="50px" width="50px" src="https://www.mccpapp.com:8080/{{subcategory.img_url}}">
         </td>
         <td>
           <span class="badge badge-success">Active</span>
         </td>
         <td>
-          <mat-icon aria-hidden="false" (click)="deleteSubCatConfirm(subcategory.id)" aria-label="Example home icon">delete_outline</mat-icon>
+          <mat-icon aria-hidden="false" style="cursor: pointer;" (click)="deleteSubCatConfirm(subcategory.id)" aria-label="Example home icon">delete_outline</mat-icon>
         </td>
       </tr>
       

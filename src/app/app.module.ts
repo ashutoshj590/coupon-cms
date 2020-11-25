@@ -21,6 +21,9 @@ import { ConsumerComponent } from './pages/users/users.component';
 import { warningDialogComponent } from './pages/category/category.component';
 import { warningDialogSubCate } from './pages/category/dialog-data-example';
 import {DialogDataExampleDialog} from './pages/category/dialog-data-example';
+import {DialogForCoupon} from './pages/merchant/dialog-coupon';
+import {DialogForConsumer} from './pages/users/dialog-consumer';
+import {DialogGallary} from './pages/merchant/dialog-gallary';
 import { MatButtonModule } from '@angular/material/button';
 import {  MatIconModule  } from '@angular/material/icon';
 import {  MatTreeModule  } from '@angular/material/tree';
@@ -58,7 +61,10 @@ import { CommonModule } from '@angular/common';
     ConsumerComponent,
     DialogDataExampleDialog,
     warningDialogComponent,
-    warningDialogSubCate
+    warningDialogSubCate,
+    DialogForCoupon,
+    DialogForConsumer,
+    DialogGallary
 
   ],
  providers: [

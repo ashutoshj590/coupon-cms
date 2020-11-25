@@ -33,8 +33,8 @@ export class CategoryService {
 
 
 
-    addNewCategory(value: any) { 
-        return this.http.post<any>(this.apiURL + '/category/add-category', value)
+    addNewCategory(formData) { 
+        return this.http.post<any>(this.apiURL + '/category/add-category', formData)
             .pipe(map(response => {
                 console.log(response);
                 return response;
@@ -80,6 +80,14 @@ export class CategoryService {
             }));
     }
 
+    fileUploadImg(value: any) {
+        return this.http.post<any>(this.apiURL + '/category/file', value)
+            .pipe(map(response => {
+                console.log(response);
+                return response;
+            }));
+    }
+
 
     deleteSubCategory(id: any) { 
         const httpOpt = {
@@ -95,7 +103,15 @@ export class CategoryService {
             }));
     }
 
+    
 
+    getAllCounts(): Observable<any> {
+        return this.http.post<any>(this.apiURL + '/category/admin-reports', null)
+            .pipe(map(response => {
+                console.log(response);
+                return response;
+            }));
+    }
     
     
 }

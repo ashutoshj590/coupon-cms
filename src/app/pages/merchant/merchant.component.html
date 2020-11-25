@@ -8,7 +8,7 @@
 </div>
 <!-- Page content -->
 <div class="container-fluid mt--7">
-  <button type="button" class="btn btn-primary fas fa-plus merchantbtn">Add</button>
+ <!---- <button type="button" class="btn btn-primary fas fa-plus merchantbtn">Add</button> -->
 
   <!-- Table -->
   <div class="row">
@@ -32,7 +32,7 @@
                 <th scope="col">Registration<br>Date & Time</th>
                 <th scope="col">Status</th>
                 <th scope="col">Coupon Detail</th>
-                <th scope="col">Gallary</th> 
+                <th scope="col">Merchant Gallary</th> 
               </tr>
             </thead>
             <tbody>
@@ -67,14 +67,22 @@
                 </td>
                 <td>
                   {{merchant.createdAt | date:'short' }}
-                <td>
-                  <span class="badge badge-success">Active</span>
                 </td>
                 <td>
-                  <a class="btn btn-secondary" role="button" aria-pressed="true">Click Here</a>
+                  <div (click)="changeStatus(merchant.user_id)">
+                  <div *ngIf="merchant.status == 1">
+                  <span class="badge badge-success" style="cursor: pointer;">Active</span>
+                  </div>
+                  <div *ngIf="merchant.status == 0">
+                  <span class="badge badge-danger" style="cursor: pointer;">Deactivate</span>
+                  </div>
+                  </div>
                 </td>
                 <td>
-                  <a class="btn btn-secondary" role="button" aria-pressed="true">Click Here</a>
+                  <a class="btn btn-secondary" (click)="clickOnCouponDetail(merchant.user_id)">Click Here</a>
+                </td>
+                <td>
+                  <a class="btn btn-secondary" (click)="clickOnGallary(merchant.user_id)">Click Here</a>
                 </td>
               </tr>
               

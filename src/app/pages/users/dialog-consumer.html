@@ -1,0 +1,94 @@
+<h1 mat-dialog-title>Coupon List</h1>
+<div mat-dialog-content>
+  
+ 
+ 
+<!--add sub category input-->
+<form class="form-horizontal" [formGroup]="couponsForm">
+  <div class="row">
+    <div class="col-md-6">
+     
+    </div>
+    <div class="col-md-6">
+    
+    </div>
+    <div class="col-md-6">
+
+      </div>
+  </div>
+  </form>
+
+  <!--List data -->
+<div class="table-responsive">
+  <table class="table align-items-center table-flush">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">ID.No.</th>
+        <th scope="col">Short Name</th>
+        <th scope="col">Coupon Type</th>
+        <th scope="col">Start Time</th>
+        <th scope="col">End Time</th>
+        <th scope="col">expiry Date</th>
+        <th scope="col">Description</th>
+        <th scope="col">Restriction</th>
+        <th scope="col">Coupon Code</th>
+        <th scope="col">Created At</th>
+        <th scope="col">Status</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let coupon of data.coupon_detail;">
+        <td>
+           {{coupon.id}}
+        </td>
+        <td scope="row">
+          <div class="media align-items-center">
+            <div class="media-body">
+              <span class="mb-0 text-sm">{{coupon.short_name}}</span>
+            </div>
+          </div>
+        </td>
+        <td>
+            {{coupon.coupon_type}}
+        </td>
+        <td>
+            {{coupon.start_time}}
+        </td>
+        <td>
+            {{coupon.end_time}}
+        </td>
+        <td>
+            {{coupon.expiry_date}}
+        </td>
+      <!---  <td>
+          <mat-icon aria-hidden="false" (click)="deleteSubCatConfirm(subcategory.id)" aria-label="Example home icon">delete_outline</mat-icon>
+        </td> -->
+        <td>
+            {{coupon.description}}
+        </td>
+        <td>
+            {{coupon.restriction}}
+        </td>
+        <td>
+            {{coupon.coupon_code}}
+        </td>
+        <td>
+            {{coupon.createdAt | date:'short'}}
+        </td>
+        <td>
+            {{coupon.status}}
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+</div>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
+
+
+
