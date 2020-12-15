@@ -1,9 +1,37 @@
+
+<div class="container">
+  <h3>Upload File</h3>
+  <form [formGroup]="fileUploadForm" (ngSubmit)="onFormSubmit()">
+    <div class="row">
+      <div class="col-sm-12">
+        <div>
+          <h6 class="head-title margin-top-8"><span>Select Image File</span></h6>
+        </div>
+      </div>
+      <div class="col-sm-6">
+
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="customFile" name="uploadedImage"
+            (change)="onFileSelect($event)" #UploadFileInput>
+
+          <label class="custom-file-label" for="customFile">{{fileInputLabel || 'Choose File'}}</label>
+        
+        </div>
+
+      </div>
+      <div class="col-sm-6"> 
+        <button class="btn btn-primary" type="submit">Upload</button> 
+      </div>
+    </div>
+  </form> 
+</div>
+
 <h1 mat-dialog-title>Sub Category List</h1>
 <div mat-dialog-content>
   
  
  
-<form class="form-horizontal" [formGroup]="subCategoryForm" (ngSubmit)="addSubCate()">
+<!--<form class="form-horizontal" enctype="multipart/form-data" [formGroup]="subCategoryForm" (ngSubmit)="addSubCate()">
   <div class="row">
     <div class="col-md-6">
       <div class="form-group">
@@ -12,16 +40,21 @@
       </div>
     </div>
     <div class="col-md-6">
-        <button type="button" class="btn btn-primary fas fa-plus merchantbtn">Add</button>
+        <button type="submit" class="btn btn-primary fas fa-plus merchantbtn">Add</button>
 
     </div>
     <div class="col-md-6">
       <div class="form-group">
-      <input type="file" class="form-control" name="subcateimg" (change)="onFileSelected($event)">
+      <input type="file" class="form-control" formControlName="subcateimg" (change)="onFileSelected($event)">
       </div>
       </div>
   </div>
-  </form> 
+  </form> -->
+
+
+  
+  
+ 
   
   
 
@@ -54,7 +87,7 @@
           {{subcategory.createdAt | date:'short' }}
         </td>
         <td>
-            <img height="50px" width="50px" src="https://www.mccpapp.com:8080/{{subcategory.img_url}}">
+            <img height="50px" width="50px" src="http://localhost:8080/{{subcategory.img_url}}">
         </td>
         <td>
           <span class="badge badge-success">Active</span>

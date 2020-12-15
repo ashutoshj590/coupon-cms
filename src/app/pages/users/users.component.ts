@@ -1,9 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AlertService, MerchantService } from '../_services';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
-
+import * as _ from 'lodash';
 import { DialogForConsumer } from './dialog-consumer'
 
 @Component({
@@ -12,6 +12,8 @@ import { DialogForConsumer } from './dialog-consumer'
   styleUrls: ['./users.component.scss']
 })
 export class ConsumerComponent implements OnInit {
+
+
   allConsumer: any = [];
   public copy: string;
   allCoupons: any = [];
@@ -20,14 +22,18 @@ export class ConsumerComponent implements OnInit {
   constructor(
     private MerchantService: MerchantService,
     private formBuilder: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private http: HttpClient,
     
   ) { }
 
-  ngOnInit() {
+  //ngOnInit() {
+  //  this.getAllConsumer();
+  //}
+  ngOnInit(){
     this.getAllConsumer();
+  
   }
-
 
 
 
@@ -48,5 +54,24 @@ export class ConsumerComponent implements OnInit {
              
   }
 
+  warningDialog(id) {
+    let dialogRef = this.dialog.open(warningDialogConsumer);
+    dialogRef.afterClosed().subscribe(result  => {
+     if (result == "true"){
+       this.MerchantService.deleteConsumer(id).subscribe((data: {}) => { 
+         window.location.reload();
+       });
+     }
+     console.log(result);
+    });
+   }
+
 
 }
+
+/* code always on the bottom of page. **************************** */
+@Component({
+  selector: 'warning-dialog.consumer',
+  templateUrl: 'warning-dialog.consumer.html',
+})
+export class warningDialogConsumer {}

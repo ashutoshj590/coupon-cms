@@ -57,14 +57,9 @@ export class CategoryService {
     }
 
 
-    getSubCategory(id: any) {
-        const httpOpt = {
-            headers: new HttpHeaders({
-              'Content-Type': 'application/json',
-              'Accept': 'application/json, text/plain'
-            })
-          };
-        return this.http.post<any>(this.apiURL + '/category/get-sub-category', JSON.stringify({category_id:id}), httpOpt)
+    getSubCategory() {
+       
+        return this.http.post<any>(this.apiURL + '/category/get-sub-category',null)
             .pipe(map(response => {
                 console.log(response);
                 return response;
@@ -80,13 +75,7 @@ export class CategoryService {
             }));
     }
 
-    fileUploadImg(value: any) {
-        return this.http.post<any>(this.apiURL + '/category/file', value)
-            .pipe(map(response => {
-                console.log(response);
-                return response;
-            }));
-    }
+   
 
 
     deleteSubCategory(id: any) { 
@@ -113,5 +102,20 @@ export class CategoryService {
             }));
     }
     
+
+    statusForCategory(id: any) {
+        const httpOpt = {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+              'Accept': 'application/json, text/plain'
+            })
+          };
+        return this.http.post<any>(this.apiURL + '/category/status-update', JSON.stringify({sub_category_id:id}), httpOpt)
+            .pipe(map(response => {
+                console.log(response);
+                return response;
+            }));
+    }
+
     
 }

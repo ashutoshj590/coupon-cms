@@ -85,6 +85,39 @@ export class MerchantService {
     }
 
 
+
+    getMerchantDetail(id: any) {
+      const httpOpt = {
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Accept': 'application/json, text/plain'
+          })
+        };
+      return this.http.post<any>(this.apiURL + '/user/get-merchant-detail', JSON.stringify({user_id:id}), httpOpt)
+          .pipe(map(response => {
+              console.log(response);
+              return response;
+          }));
+  }
+
+
+  getCouponDetail(id: any) {
+    const httpOpt = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Accept': 'application/json, text/plain'
+        })
+      };
+    return this.http.post<any>(this.apiURL + '/coupon/get-coupon-detail', JSON.stringify({coupon_id:id}), httpOpt)
+        .pipe(map(response => {
+            console.log(response);
+            return response;
+        }));
+}
+
+
+
+
     statusForMerchant(id: any) {
         const httpOpt = {
             headers: new HttpHeaders({
@@ -98,6 +131,96 @@ export class MerchantService {
                 return response;
             }));
     }
+
+
+    deleteMerchant(id: any) { 
+        const httpOpt = {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+              'Accept': 'application/json, text/plain'
+            })
+          };
+        return this.http.post<any>(this.apiURL + '/user/delete-merchant', JSON.stringify({user_id:id}), httpOpt)
+            .pipe(map(response => {  
+                console.log(response);
+                return response;
+            }));
+    }
+
+
+    editMerchantDetail(formData) { 
+      return this.http.post<any>(this.apiURL + '/user/update-register-merchant', formData)
+          .pipe(map(response => {
+              console.log(response);
+              return response;
+          }));
+    }
+
+
+  deleteCouponMerchant(id: any) { 
+    const httpOpt = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Accept': 'application/json, text/plain'
+        })
+      };
+    return this.http.post<any>(this.apiURL + '/coupon/delete-coupon', JSON.stringify({coupon_id:id}), httpOpt)
+        .pipe(map(response => {  
+            console.log(response);
+            return response;
+        }));
+  }
+
+  editCouponDetail(formData) { 
+    return this.http.post<any>(this.apiURL + '/coupon/edit-coupon', formData)
+        .pipe(map(response => {
+            console.log(response);
+            return response;
+        }));
+  }
+
+  editCouponDetailCustom(formData) { 
+    return this.http.post<any>(this.apiURL + '/coupon/edit-custom-coupon', formData)
+        .pipe(map(response => {
+            console.log(response);
+            return response;
+        }));
+  }
+
+
+
+  deleteImg(user_id: any, image_id: any) { 
+    const httpOpt = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Accept': 'application/json, text/plain'
+        })
+      };
+    return this.http.post<any>(this.apiURL + '/user/delete-image', JSON.stringify({user_id:user_id, image_id:image_id}), httpOpt)
+        .pipe(map(response => {  
+            console.log(response);
+            return response;
+        }));
+  }
+
+
+
+  deleteConsumer(id: any) { 
+    const httpOpt = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Accept': 'application/json, text/plain'
+        })
+      };
+    return this.http.post<any>(this.apiURL + '/user/delete-consumer', JSON.stringify({user_id:id}), httpOpt)
+        .pipe(map(response => {  
+            console.log(response);
+            return response;
+        }));
+}
+
+
+
 
 
 

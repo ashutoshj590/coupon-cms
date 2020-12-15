@@ -1,0 +1,80 @@
+<style>
+    .input {
+        margin-left: 20px;
+    }
+    .button-submit {
+      margin-left: 20%;
+      margin-bottom: 1%;
+    }
+  
+    
+</style>
+<h1>Edit Coupon</h1>
+<p *ngIf="data.coupon_detail.coupon_type == 'custom'">Custom Coupon Not editable from here!</p>
+<div class="row">
+    <div class="example-container" *ngIf="data.coupon_detail.coupon_type != 'custom'">
+        <form #couponPost="ngForm" (ngSubmit)="onSubmit(couponPost.value)" >
+          <mat-form-field hidden>
+            <mat-label>coupon_id</mat-label>
+            <input matInput name="coupon_id" ngModel="{{data.coupon_detail.id}}" >
+          </mat-form-field>
+          <mat-form-field hidden>
+            <mat-label>user_id</mat-label>
+            <input matInput name="user_id" ngModel="{{data.coupon_detail.user_id}}" >
+          </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Coupon Type</mat-label>
+          <input matInput name="coupon_type" ngModel="{{data.coupon_detail.coupon_type}}">
+        </mat-form-field>
+        <mat-form-field class="input" appearance="fill">
+            <mat-label>Days</mat-label>
+            <input matInput name="days" ngModel="{{data.coupon_detail.days}}">
+          </mat-form-field>
+        <mat-form-field class="input" appearance="fill">
+            <mat-label>Start Time</mat-label>
+            <input matInput name="start_time" ngModel="{{data.coupon_detail.start_time}}">
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>End Time</mat-label>
+            <input matInput name="end_time" ngModel="{{data.coupon_detail.end_time}}">
+          </mat-form-field>
+          <mat-form-field class="input" appearance="fill">
+            <mat-label>Expiry Date</mat-label>
+            <input matInput name="expiry_date" ngModel="{{data.coupon_detail.expiry_date}}">
+          </mat-form-field>
+          <mat-form-field class="input" appearance="fill">
+            <mat-label>Description</mat-label>
+            <input matInput name="description" ngModel="{{data.coupon_detail.description}}">
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>Restriction</mat-label>
+            <input matInput name="restriction" ngModel="{{data.coupon_detail.restriction}}">
+          </mat-form-field>
+          <mat-form-field class="input" appearance="fill">
+            <mat-label>Short Name</mat-label>
+            <input matInput name="short_name" ngModel="{{data.coupon_detail.short_name}}">
+          </mat-form-field>
+        
+            <mat-label>Flash Deal</mat-label>
+            <input name="flash_deal" class="input" type="checkbox" [(ngModel)]="ischeckbox">
+          <mat-dialog-actions> 
+            <button class="btn btn-primary button-submit" type="submit">Save</button> 
+          </mat-dialog-actions> 
+    </form>
+      </div>
+  
+  
+  </div>
+ <!--- <form #userPost="ngForm" (ngSubmit)="onSubmit(userPost.value)" >  
+    <input type="text" name="name" ngModel="{{data.merchant_detail.address}}" placeholder="name"> <br><br>
+    <input type="text" name="email" ngModel placeholder="email"> <br><br>
+    <input type="text" name="address" ngModel placeholder="address"> <br><br>
+    <input type="text" name="rating" ngModel placeholder="rating"> <br><br>
+    <button type="submit">submit data</button>
+    </form> -->
+
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+  </mat-dialog-actions>

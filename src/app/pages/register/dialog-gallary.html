@@ -1,0 +1,42 @@
+<style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    .column {
+      float: left;
+      width: 33.33%;
+      padding: 5px;
+    }
+    
+    /* Clearfix (clear floats) */
+    .row::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+    .close {
+      margin-right: 60px;
+      margin-bottom: -2px;
+    }
+    </style>
+
+<div class="row">
+    <div class="column" *ngFor="let imageData of data.images;">
+      <button type="button" class="close" aria-label="Close" (click)="imgDelete(imageData.user_id, imageData.id)">
+        <span aria-hidden="true">&times;</span>
+         </button>
+      <img src="https://www.mccpapp.com:8080/{{imageData.image}}" alt="Forest" style="width:80%">
+
+    </div>
+
+ 
+  
+  
+  </div>
+  
+
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+  </mat-dialog-actions>
+  

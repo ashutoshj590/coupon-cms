@@ -1,89 +1,8 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
-      <!-- Card stats -->
-   <!----   <div class="row">
-        <div class="col-xl-3 col-lg-6">
-          <div class="card card-stats mb-4 mb-xl-0">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">Total Consumers</h5>
-                  <span class="h2 font-weight-bold mb-0">200</span>
-                </div>
-                <div class="col-auto">
-                  <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                    <i class="fas fa-chart-bar"></i>
-                  </div>
-                </div>
-              </div>
-              <p class="mt-3 mb-0 text-muted text-sm">
-                <span class="text-nowrap"></span>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-lg-6">
-          <div class="card card-stats mb-4 mb-xl-0">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">New users</h5>
-                  <span class="h2 font-weight-bold mb-0">60</span>
-                </div>
-                <div class="col-auto">
-                  <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
-                    <i class="fas fa-chart-pie"></i>
-                  </div>
-                </div>
-              </div>
-              <p class="mt-3 mb-0 text-muted text-sm">
-                <span class="text-nowrap">Since last week</span>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-lg-6">
-          <div class="card card-stats mb-4 mb-xl-0">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">Android User</h5>
-                  <span class="h2 font-weight-bold mb-0">100</span>
-                </div>
-                <div class="col-auto">
-                  <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                    <i class="fas fa-users"></i>
-                  </div>
-                </div>
-              </div>
-              <p class="mt-3 mb-0 text-muted text-sm">
-                <span class="text-nowrap"></span>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-lg-6">
-          <div class="card card-stats mb-4 mb-xl-0">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">iOS User</h5>
-                  <span class="h2 font-weight-bold mb-0">100</span>
-                </div>
-                <div class="col-auto">
-                  <div class="icon icon-shape bg-info text-white rounded-circle shadow">
-                    <i class="fas fa-percent"></i>
-                  </div>
-                </div>
-              </div>
-              <p class="mt-3 mb-0 text-muted text-sm">
-                <span class="text-nowrap"></span>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div> -->
+   
+     
     </div>
   </div>
 </div>
@@ -106,6 +25,7 @@
                 <th scope="col">Device Type</th>
                 <th scope="col">Registration<br>Date & Time</th>
                 <th scope="col">Coupon Detail</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -123,10 +43,14 @@
                   {{consumer.device_type}}
                 </td>
                 <td>
-                  {{consumer.createdAt | date:'short' }}
+                  {{consumer.createdAt | date:'dd/MM/yyyy' }}
                 </td>
                 <td>
                   <a class="btn btn-secondary" (click)="clickOnCouponDetail(consumer.id)">Click Here</a>
+                </td>
+                <td>
+                  <mat-icon aria-hidden="false" style="cursor: pointer;" (click)="warningDialog(consumer.id)" aria-label="Example home icon">delete_outline</mat-icon>
+
                 </td>
           
               </tr>
@@ -138,5 +62,9 @@
       </div>
     </div>
   </div>
+  <div class="card-footer">
+    <pagination-controls style="text-align: center;" (pageChange)="p = $event"></pagination-controls>
+</div>
+
 
 </div>

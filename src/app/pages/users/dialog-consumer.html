@@ -18,6 +18,16 @@
   </div>
   </form>
 
+  <thead class="thead-light">
+    <tr>
+        <th class="color">Short Name <br> <input class="form-control" placeholder="Short Name" (keyup)="filterData($event, 'short_name')"></th>
+        <th class="color">Coupon Type <br> <input class="form-control" placeholder="Coupon Type" (keyup)="filterData($event, 'coupon_type')"></th>
+        <th class="color">Coupon Code <br> <input class="form-control" placeholder="Coupon Code" (keyup)="filterData($event, 'coupon_code')"></th>
+        <th class="color">Date <br> <input class="form-control" placeholder="Date" (keyup)="filterData($event, 'date')"></th>
+
+    </tr>
+</thead>
+
   <!--List data -->
 <div class="table-responsive">
   <table class="table align-items-center table-flush">
@@ -30,15 +40,16 @@
         <th scope="col">End Time</th>
         <th scope="col">expiry Date</th>
         <th scope="col">Description</th>
-        <th scope="col">Restriction</th>
         <th scope="col">Coupon Code</th>
         <th scope="col">Created At</th>
         <th scope="col">Status</th>
+        <th scope="col">Action</th>
+        <th scope="col"></th>
 
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let coupon of data.coupon_detail;">
+      <tr *ngFor="let coupon of tempSellers | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: tempTotalRecords }; let i = index">
         <td>
            {{coupon.id}}
         </td>
@@ -68,23 +79,32 @@
             {{coupon.description}}
         </td>
         <td>
-            {{coupon.restriction}}
-        </td>
-        <td>
             {{coupon.coupon_code}}
         </td>
         <td>
-            {{coupon.createdAt | date:'short'}}
+            {{coupon.createdAt | date:'dd/MM/yyyy'}}
         </td>
         <td>
             {{coupon.status}}
         </td>
+        <td>
+          <mat-icon aria-hidden="false" style="cursor: pointer;" (click)="deleteCoupon(coupon.id)" aria-label="Example home icon">delete_outline</mat-icon>
+
+        </td>
+        <td>
+          <a class="btn btn-primary" (click)="clickEditCoupon(coupon.id)">
+            Edit
+        </a>
+          </td>
       </tr>
       
     </tbody>
   </table>
 </div>
 
+</div>
+<div class="card-footer">
+  <pagination-controls style="text-align: center;" (pageChange)="p = $event"></pagination-controls>
 </div>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Close</button>

@@ -1,108 +1,170 @@
+<style>
+
+  .color {
+    color: white;
+  }
+  .box {
+    margin-top: -50px;
+  }
+  .subCateStyle {
+    padding-left: 80px;
+  }
+  .cateStyle {
+    padding-left: 15px;
+  }
+ 
+  
+</style>
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
-      <!-- Card stats -->  
-     <!---- <button mat-button (click)="openDialog()">Open dialog</button>   -->
+     
+
+      <!-- Card stats -->
+      <form class="form-horizontal box" [formGroup]="categoryForm">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="name" id="categoryId" placeholder="Enter Category Name">
+              
+            </div>
+          </div>
+          <div class="col-md-3">
+              <button type="button" (click)="addNewCategory()" class="btn btn-primary fas fa-plus merchantbtn">Add</button>
+      
+          </div>
+        </div>
+        </form>
+
+     
+
+      <div class="container">
+          <h3 class="color">Add Sub Category</h3>
+        
+        
+          <form [formGroup]="fileUploadForm" (ngSubmit)="onFormSubmit()">
+            <div class="row">
+            
+              <div class="col-sm-3">
+        
+                <div class="custom-file">
+        
+                  <input type="file" class="custom-file-input" id="customFile" name="subcateimg"
+                    (change)="onFileSelect($event)" #UploadFileInput>
+        
+                  <label class="custom-file-label" for="customFile">{{fileInputLabel || 'Choose File'}}</label>
+                
+                </div>
+        
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <input type="text" class="form-control" formControlName="name" id="name" placeholder="Sub Category Name">
+                  
+                </div>
+              </div>
+              <div class="col-md-3">
+                <select formControlName="category_id" class="form-control">
+                  <option value="">All</option>
+                  <option *ngFor="let category of allCategories.categories;" value="{{category.id}}">{{category.name}}</option>
+                   
+                </select>
+              </div>
+        
+              <div class="col-sm-3"> <button class="btn btn-primary" type="submit">Upload</button> </div>
+        
+            </div>
+          </form>
+        
+        </div> 
+         <!--code for search-->
+      <thead class="thead-light">
+        <tr>
+            <th class="color cateStyle">Category Name<br> <input class="form-control" placeholder="Category" (keyup)="filterData($event, 'category')"></th>
+            <th class="color subCateStyle">Sub Category Name<br> <input class="form-control" placeholder="Sub Category" (keyup)="filterData($event, 'subcategory')"></th>
+            <th class="color subCateStyle">Date<br> <input class="form-control" placeholder="Date" (keyup)="filterData($event, 'date')"></th>
+   
+        </tr>
+    </thead>
+      
+
+      
     </div>
   </div>
 </div>
 <!-- Page content -->
 <div class="container-fluid mt--7">
-  <form class="form-horizontal" [formGroup]="categoryForm">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <input type="text" class="form-control" formControlName="name" id="categoryId" placeholder="Enter Category Name">
-          
-        </div>
-      </div>
-      <div class="col-md-6">
-      <!----  <div class="form-group">
-          <input type="text" placeholder="Regular" class="form-control">
-        </div> -->
-          <button type="button" (click)="addNewCategory()" class="btn btn-primary fas fa-plus merchantbtn">Add</button>
-
-      </div>
-    </div>
-    </form>
-
+ <!---- <button type="button" class="btn btn-primary fas fa-plus merchantbtn">Add</button> -->
+ 
   <!-- Table -->
   <div class="row">
     <div class="col">
       <div class="card shadow">
         <div class="card-header border-0">
-          <h3 class="mb-0">Category List</h3>
+          <h3 class="mb-0">Sub Category List</h3>
         </div>
         <div class="table-responsive">
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
                 <th scope="col">S.No.</th>
-                <th scope="col">Category Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Sub Category</th>
                 <th scope="col">Created</th>
-                <th scope="col">Sub Category Detail</th>
+                <th scope="col">Image</th>
                 <th scope="col">Status</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let category of allCategories.categories;">
+           <tr *ngFor="let subcategory of tempSellers | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: tempTotalRecords }; let i = index">
                 <td>
-                  {{category.id}}
+                {{subcategory.id}}
                 </td>
                 <td scope="row">
                   <div class="media align-items-center">
                     <div class="media-body">
-                      <span class="mb-0 text-sm">{{category.name}}</span>
+                      <span class="mb-0 text-sm">{{subcategory.category_name}}</span>
+                    </div>
+                  </div>
+                </td>
+                <td scope="row">
+                  <div class="media align-items-center">
+                    <div class="media-body">
+                      <span class="mb-0 text-sm">{{subcategory.name}}</span>
                     </div>
                   </div>
                 </td>
                 <td>
-                  {{category.createdAt | date:'short'}}
+                  {{subcategory.createdAt | date:'dd/MM/yyyy' }}
                 </td>
                 <td>
-                <!-- <a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Click Here</a>-->
-                <a class="btn btn-secondary" (click)="clickSubCategory(category.id)">Click Here</a>
+                    <img height="100px" width="100px" src="https://www.mccpapp.com:8080/{{subcategory.img_url}}">
                 </td>
                 <td>
-                  <span class="badge badge-success">Active</span>
+                  <div (click)="changeStatus(subcategory.id)">
+                    <div *ngIf="subcategory.status == 1">
+                    <span class="btn btn-success" style="cursor: pointer;">Active</span>
+                    </div>
+                    <div *ngIf="subcategory.status == 0">
+                    <span class="btn btn-danger" style="cursor: pointer;">Deactivate</span>
+                    </div>
+                    </div>
                 </td>
                 <td>
-                  <mat-icon aria-hidden="false" style="cursor: pointer;" (click)="warningDialog(category.id)" aria-label="Example home icon">delete_outline</mat-icon>
-
+                  <mat-icon aria-hidden="false" style="cursor: pointer;" (click)="deleteSubCatConfirm(subcategory.id)" aria-label="Example home icon">delete_outline</mat-icon>
                 </td>
               </tr>
               
             </tbody>
           </table>
         </div>
-      <!----  <div class="card-footer py-4">
-          <nav aria-label="...">
-            <ul class="pagination justify-content-end mb-0">
-              <li class="page-item disabled">
-                <a class="page-link" href="javascript:void(0)" tabindex="-1">
-                  <i class="fas fa-angle-left"></i>
-                  <span class="sr-only">Previous</span>
-                </a>
-              </li>
-              <li class="page-item active">
-                <a class="page-link" href="javascript:void(0)">1</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="javascript:void(0)">2 <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="javascript:void(0)">
-                  <i class="fas fa-angle-right"></i>
-                  <span class="sr-only">Next</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div> -->
+       
       </div>
     </div>
   </div>
+  <div class="card-footer">
+    <pagination-controls style="text-align: center;" (pageChange)="p = $event"></pagination-controls>
+</div>
 
 </div>

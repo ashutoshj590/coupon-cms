@@ -1,7 +1,32 @@
+<style>
+  .block {
+      margin-left: 20px;
+  }
+  .color {
+    color: white;
+    padding-left: 40px;
+  }
+  
+</style>
+
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  
+  
   <div class="container-fluid">
     <div class="header-body">
       <!-- Card stats -->
+      <thead class="thead-light">
+        <tr>
+            <th class="color">Business Name <br> <input class="form-control" placeholder="Name" (keyup)="filterData($event, 'business_name')"></th>
+            <th class="color">Email <br> <input class="form-control" placeholder="Email" (keyup)="filterData($event, 'email')"></th>
+            <th class="color">Contact No <br> <input class="form-control" placeholder="Contact No" (keyup)="filterData($event, 'phone_no')"></th>
+            <th class="color">Website <br> <input class="form-control" placeholder="Website" (keyup)="filterData($event, 'website')"></th>
+            <th class="color">License No<br> <input class="form-control" placeholder="License No" (keyup)="filterData($event, 'business_license_no')"></th>
+            <th class="color">Date<br> <input class="form-control" placeholder="Date" (keyup)="filterData($event, 'date')"></th>
+
+            
+        </tr>
+    </thead>
       
     </div>
   </div>
@@ -32,11 +57,12 @@
                 <th scope="col">Registration<br>Date & Time</th>
                 <th scope="col">Status</th>
                 <th scope="col">Coupon Detail</th>
-                <th scope="col">Merchant Gallary</th> 
+                <th scope="col">Update</th>  
+                <th scope="col">Action</th>  
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let merchant of allMerchants.merchant_list;">
+              <tr *ngFor="let merchant of tempSellers | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: tempTotalRecords }; let i = index">
                 <td>
                   {{merchant.id}}
                 </td>
@@ -66,24 +92,31 @@
                   {{merchant.sub_category_id}}
                 </td>
                 <td>
-                  {{merchant.createdAt | date:'short' }}
+                  {{merchant.createdAt | date:'dd/MM/yyyy' }}
                 </td>
                 <td>
                   <div (click)="changeStatus(merchant.user_id)">
                   <div *ngIf="merchant.status == 1">
-                  <span class="badge badge-success" style="cursor: pointer;">Active</span>
+                  <span class="btn btn-success" style="cursor: pointer;">Active</span>
                   </div>
                   <div *ngIf="merchant.status == 0">
-                  <span class="badge badge-danger" style="cursor: pointer;">Deactivate</span>
+                  <span class="btn btn-danger" style="cursor: pointer;">Deactivate</span>
                   </div>
                   </div>
                 </td>
                 <td>
                   <a class="btn btn-secondary" (click)="clickOnCouponDetail(merchant.user_id)">Click Here</a>
                 </td>
+              
                 <td>
-                  <a class="btn btn-secondary" (click)="clickOnGallary(merchant.user_id)">Click Here</a>
-                </td>
+                  <a class="btn btn-primary" (click)="clickOnEdit(merchant.user_id)">
+                    Edit
+                </a>
+                  </td>
+                  <td>
+                <mat-icon aria-hidden="false" style="cursor: pointer;" (click)="warningDialog(merchant.user_id)" aria-label="Example home icon">delete_outline</mat-icon>
+
+                    </td>
               </tr>
               
             </tbody>
@@ -95,3 +128,7 @@
   </div>
 
 </div>
+<div class="card-footer">
+  <pagination-controls style="text-align: center;" (pageChange)="p = $event"></pagination-controls>
+</div>
+
