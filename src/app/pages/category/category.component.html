@@ -107,17 +107,17 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col">S.No.</th>
-                <th scope="col">Category</th>
-                <th scope="col">Sub Category</th>
-                <th scope="col">Created</th>
+                <th scope="col" (click)="sort('id')">S.NO&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('category_name')">Category&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('name')">Sub Category&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('createdAt')">Created&nbsp;<i class="fa fa-sort"></i></th>
                 <th scope="col">Image</th>
                 <th scope="col">Status</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
-           <tr *ngFor="let subcategory of tempSellers | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: tempTotalRecords }; let i = index">
+           <tr *ngFor="let subcategory of tempSellers | orderBy: key: reverse | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: tempTotalRecords }; let i = index">
                 <td>
                 {{subcategory.id}}
                 </td>

@@ -26,6 +26,9 @@ import { DialogEditCouponConsumer } from './edit-coupon.user';
     totalRecords: number = 0;
     pageSize: number = 5;
 
+    key: string = 'id';
+    reverse: boolean = false;
+
     constructor(@Inject(MAT_DIALOG_DATA) public data: any,
                           private formBuilder: FormBuilder,
                           private MerchantService: MerchantService,
@@ -36,6 +39,11 @@ import { DialogEditCouponConsumer } from './edit-coupon.user';
       this.sellers = this.tempSellers = this.data.coupon_detail;
       this.totalRecords = this.tempTotalRecords = this.sellers.length;
 
+    }
+
+    sort(key){
+      this.key = key;
+      this.reverse = !this.reverse;
     }
 
 

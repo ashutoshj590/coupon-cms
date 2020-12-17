@@ -25,6 +25,9 @@ import { DialogEditCoupon } from './edit-coupon';
     p: number = 1;
     totalRecords: number = 0;
     pageSize: number = 5;
+
+    key: string = 'id';
+    reverse: boolean = false;
     
     constructor(@Inject(MAT_DIALOG_DATA) public data: any,
                           private formBuilder: FormBuilder,
@@ -39,7 +42,10 @@ import { DialogEditCoupon } from './edit-coupon';
     
     }
 
-
+    sort(key){
+      this.key = key;
+      this.reverse = !this.reverse;
+    }
 
 
     deleteCoupon(id) {

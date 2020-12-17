@@ -1,6 +1,39 @@
+<style>
+
+  .color {
+    color: white;
+  }
+  
+  .emailStyle {
+    padding-left: 10px;
+  }
+  .typeStyle {
+    padding-left: 30px;
+  }
+  .deviceTypeStyle {
+    padding-left: 40px;
+  }
+  .dateStyle {
+    padding-left: 40px;
+  }
+ 
+ 
+  
+</style>
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
+        <!--code for search-->
+        <thead class="thead-light">
+          <tr>
+              <th class="color emailStyle">Email<br> <input class="form-control" placeholder="Email" (keyup)="filterData($event, 'email')"></th>
+              <th class="color typeStyle">User Type<br> <input class="form-control" placeholder="User Type" (keyup)="filterData($event, 'type')"></th>
+              <th class="color deviceTypeStyle">Device Type<br> <input class="form-control" placeholder="Device Type" (keyup)="filterData($event, 'device_type')"></th>
+              <th class="color dateStyle">Date<br> <input class="form-control" placeholder="Date" (keyup)="filterData($event, 'date')"></th>
+     
+          </tr>
+      </thead>
+        
    
      
     </div>
@@ -19,17 +52,19 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col">S.No.</th>
-                <th scope="col">Email</th>
-                <th scope="col">User Type</th>
-                <th scope="col">Device Type</th>
-                <th scope="col">Registration<br>Date & Time</th>
+                <th scope="col" (click)="sort('id')">S.NO&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('email')">Email&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('type')">User Type&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('device_type')">Device Type&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('createdAt')">Registration<br>Date & Time&nbsp;<i class="fa fa-sort"></i></th>
                 <th scope="col">Coupon Detail</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let consumer of allConsumer.consumer_list;">
+              <tr *ngFor="let consumer of tempSellers | orderBy: key: reverse | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: tempTotalRecords }; let i = index">
+
+            <!----  <tr *ngFor="let consumer of allConsumer.consumer_list;"> -->
                 <td>
                   {{consumer.id}}
                 </td>

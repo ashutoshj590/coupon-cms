@@ -32,6 +32,9 @@ export class CategoryComponent implements OnInit {
     totalRecords: number = 0;
     pageSize: number = 5;
 
+    key: string = 'id';
+    reverse: boolean = false;
+
 
     categoryForm: FormGroup;
 
@@ -68,6 +71,12 @@ export class CategoryComponent implements OnInit {
       get f() { return this.categoryForm.controls; }
       get fu() { return this.fileUploadForm.controls; }
 
+      sort(key){
+        this.key = key;
+        this.reverse = !this.reverse;
+      }
+    
+
       addNewCategory() {
      //   this.SpinnerService.show();
         this.submitted = true;
@@ -103,7 +112,7 @@ export class CategoryComponent implements OnInit {
       formData.append('name', this.fu.name.value);
       formData.append('category_id', this.fu.category_id.value);
       this.http
-        .post<any>('http://localhost:8080/category/add-sub-category', formData).subscribe(response => {
+        .post<any>('https://www.mccpapp.com:8080/category/add-sub-category', formData).subscribe(response => {
           console.log(response);
           if (response.statusCode === 200) {
             // Reset the file input

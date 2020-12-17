@@ -1,5 +1,27 @@
-<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+<style>
+
+  .color {
+    color: white;
+  }
+ 
+  .subCateStyle {
+    padding-left: 60px;
+  }
+  .cateStyle {
+    padding-left: 40px;
+  }
+ 
   
+</style>
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+      <!--code for search-->
+      <thead class="thead-light">
+        <tr>
+            <th class="color cateStyle">Business Name<br> <input class="form-control" placeholder="Business Name" (keyup)="filterData($event, 'business_name')"></th>
+            <th class="color subCateStyle">Email<br> <input class="form-control" placeholder="Email" (keyup)="filterData($event, 'email')"></th>
+   
+        </tr>
+    </thead>
   
   
   
@@ -20,16 +42,16 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col">S.NO.</th>
-                <th scope="col">Business Name</th>
-                <th scope="col">Email</th>
+                <th scope="col" (click)="sort('id')">S.NO&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('business_name')">Business Name&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('email')">Email&nbsp;<i class="fa fa-sort"></i></th>
                 <th scope="col">Gallary Photos</th>
                 <th scope="col">+Add</th>
 
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let merchant of tempSellers | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: tempTotalRecords }; let i = index">
+              <tr *ngFor="let merchant of tempSellers | orderBy: key: reverse | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: tempTotalRecords }; let i = index">
 
                 <td>
                   {{merchant.id}}
@@ -42,7 +64,7 @@
                   </div>
                 </th>
                 <td>
-                  {{merchant.user_id}}
+                  {{merchant.email}}
                 </td>
           
                 <td>
@@ -51,11 +73,7 @@
                 <td>
                    
                   <form [formGroup]="fileUploadForm" (ngSubmit)="onFormSubmit()">
-                    <div class="form-group">
-                      <input type="text" class="form-control" value="{{merchant.user_id}}"  name="user_id" id="user_id">
-                      
-                    </div>
-                   
+                 
                     <div class="row">
                    
                       <div class="col-sm-6">
@@ -72,7 +90,7 @@
                       </div>
                     
                 
-                      <div class="col-sm-6"> <button class="btn btn-primary" type="submit">Upload</button> </div>
+                      <div class="col-sm-6"> <button class="btn btn-primary" (click)="clickOnUserId(merchant.user_id)" type="submit">Upload</button> </div>
                 
                     </div>
                    

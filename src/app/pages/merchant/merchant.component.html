@@ -46,23 +46,23 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col">S.NO.</th>
-                <th scope="col">Business Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Address</th>
-                <th scope="col">Contact No.</th>
-                <th scope="col">Website</th>
-                <th scope="col">License No.</th>
-                <th scope="col">Sub Category</th>
-                <th scope="col">Registration<br>Date & Time</th>
+               <th scope="col" (click)="sort('id')">S.NO&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('business_name')">Business Name&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('email')">Email&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('address')">Address&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('phone_no')">Contact No&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('website')">Website&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('business_license_no')">License No&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('sub_category_id')">Sub Category&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('createdAt')">Registration<br>Date & Time&nbsp;<i class="fa fa-sort"></i></th>
                 <th scope="col">Status</th>
                 <th scope="col">Coupon Detail</th>
-                <th scope="col">Update</th>  
-                <th scope="col">Action</th>  
+                <th scope="col">Update</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let merchant of tempSellers | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: tempTotalRecords }; let i = index">
+              <tr *ngFor="let merchant of tempSellers | orderBy: key: reverse | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: tempTotalRecords }; let i = index">
                 <td>
                   {{merchant.id}}
                 </td>
@@ -122,7 +122,7 @@
             </tbody>
           </table>
         </div>
-       
+      
       </div>
     </div>
   </div>

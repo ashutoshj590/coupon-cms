@@ -32,7 +32,10 @@ export class RegisterComponent implements OnInit {
     p: number = 1;
     totalRecords: number = 0;
     pageSize: number = 10;
+    userId: any;
 
+    key: string = 'id';
+    reverse: boolean = false;
 
   constructor(
     private MerchantService: MerchantService,
@@ -50,7 +53,6 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  get fu() { return this.fileUploadForm.controls; }
 
   getAllMerchant() {
     this.MerchantService.getAllMerchant().subscribe(data => {
@@ -68,6 +70,19 @@ export class RegisterComponent implements OnInit {
              
   }
 
+  //get fu() { return this.fileUploadForm.controls; }
+
+
+  clickOnUserId(id){
+    this.userId = id;
+  }
+
+  sort(key){
+    this.key = key;
+    this.reverse = !this.reverse;
+  }
+
+
 
   onFileSelect(event) {
     const file = event.target.files[0];
@@ -77,7 +92,6 @@ export class RegisterComponent implements OnInit {
 
 
   onFormSubmit() {
-
     if (!this.fileUploadForm.get('images').value) {
       console.log('Please fill valid details!');
       return false;
@@ -85,9 +99,7 @@ export class RegisterComponent implements OnInit {
 
     const formData = new FormData();
     formData.append('images', this.fileUploadForm.get('images').value);
-    formData.append('user_id', this.fu.user_id.value);
-    console.log("=======");
-    console.log(this.fu.user_id.value);
+    formData.append('user_id', this.userId);
     this.http.post<any>('https://www.mccpapp.com:8080/user/uplaod-image', formData).subscribe(response => {
         console.log(response);
         if (response.statusCode === 200) {
@@ -100,6 +112,31 @@ export class RegisterComponent implements OnInit {
       });
      // window.location.reload()
   }
+
+
+  filterData(event, type) {
+    this.filterText = event.target.value;
+    switch (type) {
+      case 'business_name':
+        this.tempSellers = this.sellers.filter(item =>
+          item.business_name != null && item.business_name.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
+        );
+        this.tempTotalRecords = this.tempSellers.length;
+        break;
+      case 'email':
+        this.tempSellers = this.sellers.filter(item =>
+          item.email != null && item.email.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
+        );
+        this.tempTotalRecords = this.tempSellers.length;
+        break;
+    }
+    if(this.filterText.length == 0) {
+      this.tempSellers = this.sellers;
+      this.tempTotalRecords = this.tempSellers.length;
+    }
+    this.p = 1;
+  }
+
 
 
   

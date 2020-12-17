@@ -32,24 +32,24 @@
   <table class="table align-items-center table-flush">
     <thead class="thead-light">
       <tr>
-        <th scope="col">ID.No.</th>
-        <th scope="col">Short Name</th>
-        <th scope="col">Coupon Type</th>
-        <th scope="col">Start Time</th>
-        <th scope="col">End Time</th>
-        <th scope="col">expiry Date</th>
-        <th scope="col">Description</th>
-        <th scope="col">Restriction</th>
-        <th scope="col">Coupon Code</th>
-        <th scope="col">Created At</th>
+        <th scope="col" (click)="sort('id')">ID.NO&nbsp;<i class="fa fa-sort"></i></th>
+        <th scope="col" (click)="sort('short_name')">Short Name&nbsp;<i class="fa fa-sort"></i></th>
+        <th scope="col" (click)="sort('coupon_type')">Coupon Type&nbsp;<i class="fa fa-sort"></i></th>
+        <th scope="col" (click)="sort('start_time')">Start Time&nbsp;<i class="fa fa-sort"></i></th>
+        <th scope="col" (click)="sort('end_time')">End Time&nbsp;<i class="fa fa-sort"></i></th>
+        <th scope="col" (click)="sort('expiry_date')">expiry Date&nbsp;<i class="fa fa-sort"></i></th>
+        <th scope="col" (click)="sort('description')">Description&nbsp;<i class="fa fa-sort"></i></th>
+        <th scope="col" (click)="sort('restriction')">Restriction&nbsp;<i class="fa fa-sort"></i></th>
+        <th scope="col" (click)="sort('coupon_code')">Coupon Code&nbsp;<i class="fa fa-sort"></i></th>
+        <th scope="col" (click)="sort('createdAt')">Created At&nbsp;<i class="fa fa-sort"></i></th>
         <th scope="col">Action</th>
-        <th scope="col"></th>
+        <th scope="col">Update</th>
 
       </tr>
     </thead>  
     <tbody>
       <!--coupon_detail-->
-      <tr *ngFor="let coupon of tempSellers | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: tempTotalRecords }; let i = index">
+      <tr *ngFor="let coupon of tempSellers | orderBy: key: reverse | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: tempTotalRecords }; let i = index">
         <td>
            {{coupon.id}}
         </td>

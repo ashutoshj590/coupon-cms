@@ -41,10 +41,13 @@ import { CommonModule } from '@angular/common';
 import { MatFormFieldModule  } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { OrderModule } from 'ngx-order-pipe';
 
 @NgModule({
   imports: [
     BrowserAnimationsModule,
+    MDBBootstrapModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -62,7 +65,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    OrderModule
     
   ],
   declarations: [

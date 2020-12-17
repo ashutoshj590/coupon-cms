@@ -56,7 +56,7 @@ import * as _ from 'lodash';
       }
       const formData = new FormData();
       formData.append('uploadedImage', this.fileUploadForm.get('uploadedImage').value);
-      this.http.post<any>('http://localhost:8080/category/file', formData).subscribe(response => {
+      this.http.post<any>('https://www.mccpapp.com:8080/category/file', formData).subscribe(response => {
           console.log(response);
           if (response.statusCode === 200) {
             // Reset the file input

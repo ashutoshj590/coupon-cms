@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core'
 import { HttpClient } from '@angular/common/http';
 import { AlertService, MerchantService } from '../_services';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import * as _ from 'lodash';
 
 import { DialogForCoupon } from './dialog-coupon';
@@ -19,6 +19,7 @@ export class MerchantComponent implements OnInit {
   allMerchants: any = [];
   allCoupons: any = [];
   allImages: any = [];
+ 
   merchantDetail: any = {};
   public copy: string;
 
@@ -31,6 +32,9 @@ export class MerchantComponent implements OnInit {
     totalRecords: number = 0;
     pageSize: number = 10;
 
+    key: string = 'id';
+    reverse: boolean = false;
+
 
   constructor(
     private MerchantService: MerchantService,
@@ -42,11 +46,15 @@ export class MerchantComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllMerchant();
-
+       
   }
 
 
-
+  sort(key){
+    console.log("clicked !!!")
+    this.key = key;
+    this.reverse = !this.reverse;
+  }
 
  /* getAllMerchant() {
     this.MerchantService.getAllMerchant().subscribe((data: {}) => {
