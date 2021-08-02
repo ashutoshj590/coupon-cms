@@ -4,7 +4,7 @@ import { AlertService, MerchantService } from '../_services';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import * as _ from 'lodash';
-
+import { ActivatedRoute } from '@angular/router';
 import { DialogGallary } from './dialog-gallary';
 
 
@@ -20,18 +20,13 @@ export class RegisterComponent implements OnInit {
   fileUploadForm: FormGroup;
   fileInputLabel: string;
 
-  allMerchants: any = [];
+  merchantDe: any = {};
   allImages: any = [];
   public copy: string;
+  coupon_detail: any;
 
 
-    filterText = '';
-    sellers = [];
-    tempSellers = [];
-    tempTotalRecords: number = 0;
-    p: number = 1;
-    totalRecords: number = 0;
-    pageSize: number = 10;
+    
     userId: any;
 
     key: string = 'id';
@@ -41,11 +36,12 @@ export class RegisterComponent implements OnInit {
     private MerchantService: MerchantService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.getAllMerchant();
+    this.getAllMerchant(this.router.snapshot.params.id);
 
     this.fileUploadForm = this.formBuilder.group({
       images: [''],
@@ -54,13 +50,14 @@ export class RegisterComponent implements OnInit {
   }
 
 
-  getAllMerchant() {
-    this.MerchantService.getAllMerchant().subscribe(data => {
-      //   this.allCategories = data
-         this.sellers = this.tempSellers = data.merchant_list;
-         this.totalRecords = this.tempTotalRecords = this.sellers.length;
+ getAllMerchant(id) {
+    this.MerchantService.merchantDetail(id).subscribe(data => {
+        this.merchantDe = data.merchant_detail;
+       
        }); 
   }
+  
+ 
 
   clickOnGallary(id) {
     this.MerchantService.getImagesById(id).subscribe((data: {}) => {
@@ -77,10 +74,7 @@ export class RegisterComponent implements OnInit {
     this.userId = id;
   }
 
-  sort(key){
-    this.key = key;
-    this.reverse = !this.reverse;
-  }
+  
 
 
 
@@ -114,28 +108,7 @@ export class RegisterComponent implements OnInit {
   }
 
 
-  filterData(event, type) {
-    this.filterText = event.target.value;
-    switch (type) {
-      case 'business_name':
-        this.tempSellers = this.sellers.filter(item =>
-          item.business_name != null && item.business_name.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
-        );
-        this.tempTotalRecords = this.tempSellers.length;
-        break;
-      case 'email':
-        this.tempSellers = this.sellers.filter(item =>
-          item.email != null && item.email.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
-        );
-        this.tempTotalRecords = this.tempSellers.length;
-        break;
-    }
-    if(this.filterText.length == 0) {
-      this.tempSellers = this.sellers;
-      this.tempTotalRecords = this.tempSellers.length;
-    }
-    this.p = 1;
-  }
+ 
 
 
 

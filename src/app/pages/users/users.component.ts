@@ -4,7 +4,10 @@ import { AlertService, MerchantService } from '../_services';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import * as _ from 'lodash';
-import { DialogForConsumer } from './dialog-consumer'
+
+import { DialogForConsumer } from './dialog-consumer';
+import { DialogAddUser } from './dialog-addUser';
+import { UserResetPassword } from './dialog-resetUser';
 
 @Component({
   selector: 'app-icons',
@@ -37,9 +40,7 @@ export class ConsumerComponent implements OnInit {
     
   ) { }
 
-  //ngOnInit() {
-  //  this.getAllConsumer();
-  //}
+ 
   ngOnInit(){
     this.getAllConsumer();
   
@@ -82,6 +83,20 @@ export class ConsumerComponent implements OnInit {
      console.log(result);
     });
    }
+
+
+   clickOnAdd() {
+    //  this.MerchantService.getMerchantDetail().subscribe((data: {}) => {
+    //    this.merchantDetail = data;
+        this.dialog.open(DialogAddUser, {});
+    //  });
+       
+  }
+
+  clickReset() {
+    this.dialog.open(UserResetPassword, {});
+   
+}
 
 
 

@@ -7,6 +7,9 @@ import * as _ from 'lodash';
 
 import { DialogForCoupon } from './dialog-coupon';
 import { DialogEdit } from './dialog-edit';
+import { DialogAdd } from './dialog-add';
+import { DialogResetPassword } from './dialog-reset';
+
 
 @Component({
   selector: 'app-icons',
@@ -92,6 +95,19 @@ export class MerchantComponent implements OnInit {
       });
        
   }
+
+
+  clickOnAdd() {
+  //  this.MerchantService.getMerchantDetail().subscribe((data: {}) => {
+  //    this.merchantDetail = data;
+      this.dialog.open(DialogAdd, {});
+  //  });clickReset
+     
+}
+clickReset() {
+      this.dialog.open(DialogResetPassword, {});
+     
+}
 
 
   changeStatus(id) {

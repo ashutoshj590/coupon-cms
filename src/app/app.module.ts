@@ -25,7 +25,11 @@ import { warningDialogConsumer } from './pages/users/users.component';
 import { warningDialogCoupon } from './pages/merchant/dialog-coupon';
 import {DialogDataExampleDialog} from './pages/category/dialog-data-example';
 import {DialogForCoupon} from './pages/merchant/dialog-coupon';
-import {DialogEdit} from './pages/merchant/dialog-edit';
+import {DialogEdit} from './pages/merchant/dialog-edit'; 
+import {DialogAdd} from './pages/merchant/dialog-add';
+import {DialogAddUser} from './pages/users/dialog-addUser';
+import {DialogResetPassword} from './pages/merchant/dialog-reset';
+import {UserResetPassword} from './pages/users/dialog-resetUser';
 import {DialogEditCoupon} from './pages/merchant/edit-coupon';
 import {DialogEditCouponConsumer} from './pages/users/edit-coupon.user';
 import {DialogForConsumer} from './pages/users/dialog-consumer';
@@ -43,6 +47,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { OrderModule } from 'ngx-order-pipe';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
 @NgModule({
   imports: [
@@ -85,12 +90,17 @@ import { OrderModule } from 'ngx-order-pipe';
     DialogGallary,
     warningDialogMerchant,
     DialogEdit,
+    DialogAdd,
+    DialogAddUser,
+    DialogResetPassword,
+    UserResetPassword,
     warningDialogCoupon,
     DialogEditCoupon,
     warningDialogConsumerCoupon,
     DialogEditCouponConsumer,
     warningDialogConsumer,
-    RegisterComponent
+    RegisterComponent,
+    UserProfileComponent
 
   ],
  providers: [

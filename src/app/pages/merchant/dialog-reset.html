@@ -1,0 +1,48 @@
+<style>
+    .input {
+        margin-left: 20px;
+    }
+    .button-submit {
+      margin-left: 20%;
+      margin-bottom: 1%;
+    }
+  
+    
+</style>
+<h1>Reset Password</h1>
+<div class="row">
+    <div class="example-container">
+        <form #userPost="ngForm" (ngSubmit)="onSubmit(userPost.value)" >
+          <mat-form-field appearance="fill" class="input">
+            <mat-label>Enter OTP</mat-label>
+            <input matInput name="otp" ngModel>
+          </mat-form-field>
+          <br>
+          <mat-form-field class="input" appearance="fill">
+              <mat-label>New Password</mat-label>
+              <input matInput name="new_password" type="password" ngModel>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="input" appearance="fill">
+              <mat-label>Confirm Password</mat-label>
+              <input matInput name="confirm_password" type="password" ngModel>
+            </mat-form-field>
+          <mat-dialog-actions> 
+            <button class="btn btn-primary button-submit" type="submit">Submit</button> 
+          </mat-dialog-actions> 
+    </form>
+      </div>
+  
+  
+  </div> 
+ <!--- <form #userPost="ngForm" (ngSubmit)="onSubmit(userPost.value)" >  
+    <input type="text" name="name" ngModel="{{data.merchant_detail.address}}" placeholder="name"> <br><br>
+    <input type="text" name="email" ngModel placeholder="email"> <br><br>
+    <input type="text" name="address" ngModel placeholder="address"> <br><br>
+    <input type="text" name="rating" ngModel placeholder="rating"> <br><br>
+    <button type="submit">submit data</button>
+    </form> -->
+
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+  </mat-dialog-actions>

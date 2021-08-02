@@ -22,15 +22,7 @@ export class MerchantService {
         
     }
 
-    getAllMerchant(): Observable<any> {
-        return this.http.post<any>(this.apiURL + '/user/get-all-merchant', null)
-            .pipe(map(response => {
-                console.log(response);
-                return response;
-            }));
-    }
-
-
+   
     getAllConsumer(): Observable<any> {
         return this.http.post<any>(this.apiURL + '/user/get-all-consumer', null)
             .pipe(map(response => {
@@ -38,6 +30,30 @@ export class MerchantService {
                 return response;
             }));
     }
+
+
+    getAllMerchant(): Observable<any> {
+      return this.http.post<any>(this.apiURL + '/user/get-all-merchant', null)
+          .pipe(map(response => {
+              console.log(response);
+              return response;
+          }));
+  }
+
+
+    merchantDetail(id: any) {
+      const httpOpt = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Accept': 'application/json, text/plain'
+        })
+      };
+      return this.http.post<any>(this.apiURL + '/user/get-merchant-detail', JSON.stringify({user_id:id}), httpOpt)
+          .pipe(map(response => {
+              console.log(response);
+              return response;
+          }));
+  }
 
 
 
@@ -157,6 +173,33 @@ export class MerchantService {
     }
 
 
+    addMerchantDetail(formData) { 
+      return this.http.post<any>(this.apiURL + '/user/register-merchant', formData)
+          .pipe(map(response => {
+              console.log(response);
+              return response;
+          }));
+    }
+
+
+    addUserDetail(formData) { 
+      return this.http.post<any>(this.apiURL + '/auth/sign-up', formData)
+          .pipe(map(response => {
+              console.log(response);
+              return response;
+          }));
+    }
+
+
+    resetPassMerchant(formData) { 
+      return this.http.post<any>(this.apiURL + '/auth/reset-password', formData)
+          .pipe(map(response => {
+              console.log(response);
+              return response;
+          }));
+    }
+
+
   deleteCouponMerchant(id: any) { 
     const httpOpt = {
         headers: new HttpHeaders({
@@ -218,6 +261,17 @@ export class MerchantService {
             return response;
         }));
 }
+
+
+
+getAllCoupons(): Observable<any> {
+  return this.http.post<any>(this.apiURL + '/coupon/get-all-coupons-by-detail', null)
+      .pipe(map(response => {
+          console.log(response);
+          return response;
+      }));
+}
+
 
 
 

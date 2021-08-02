@@ -6,6 +6,10 @@
     color: white;
     padding-left: 40px;
   }
+  .addMerchantbtn {
+    margin-top: 22px;
+    margin-left: 32px;
+  }
   
 </style>
 
@@ -17,14 +21,16 @@
       <!-- Card stats -->
       <thead class="thead-light">
         <tr>
-            <th class="color">Business Name <br> <input class="form-control" placeholder="Name" (keyup)="filterData($event, 'business_name')"></th>
+          <div class="row">
+          <!---  <th class="color">Business Name <br> <input class="form-control" placeholder="Name" (keyup)="filterData($event, 'business_name')"></th> -->
             <th class="color">Email <br> <input class="form-control" placeholder="Email" (keyup)="filterData($event, 'email')"></th>
             <th class="color">Contact No <br> <input class="form-control" placeholder="Contact No" (keyup)="filterData($event, 'phone_no')"></th>
-            <th class="color">Website <br> <input class="form-control" placeholder="Website" (keyup)="filterData($event, 'website')"></th>
+         <!--   <th class="color">Website <br> <input class="form-control" placeholder="Website" (keyup)="filterData($event, 'website')"></th> -->
             <th class="color">License No<br> <input class="form-control" placeholder="License No" (keyup)="filterData($event, 'business_license_no')"></th>
             <th class="color">Date<br> <input class="form-control" placeholder="Date" (keyup)="filterData($event, 'date')"></th>
 
-            
+            <button type="button" class="btn btn-primary fas fa-plus addMerchantbtn" (click)="clickOnAdd()">Add</button> 
+            </div>
         </tr>
     </thead>
       
@@ -46,55 +52,51 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-               <th scope="col" (click)="sort('id')">S.NO&nbsp;<i class="fa fa-sort"></i></th>
-                <th scope="col" (click)="sort('business_name')">Business Name&nbsp;<i class="fa fa-sort"></i></th>
+              <th scope="col" (click)="sort('id')">S.NO&nbsp;<i class="fa fa-sort"></i></th>
+             <!-- <th scope="col" (click)="sort('business_name')">Business Name&nbsp;<i class="fa fa-sort"></i></th> -->
                 <th scope="col" (click)="sort('email')">Email&nbsp;<i class="fa fa-sort"></i></th>
-                <th scope="col" (click)="sort('address')">Address&nbsp;<i class="fa fa-sort"></i></th>
-                <th scope="col" (click)="sort('phone_no')">Contact No&nbsp;<i class="fa fa-sort"></i></th>
-                <th scope="col" (click)="sort('website')">Website&nbsp;<i class="fa fa-sort"></i></th>
-                <th scope="col" (click)="sort('business_license_no')">License No&nbsp;<i class="fa fa-sort"></i></th>
-                <th scope="col" (click)="sort('sub_category_id')">Sub Category&nbsp;<i class="fa fa-sort"></i></th>
-                <th scope="col" (click)="sort('createdAt')">Registration<br>Date & Time&nbsp;<i class="fa fa-sort"></i></th>
-                <th scope="col">Status</th>
-                <th scope="col">Coupon Detail</th>
-                <th scope="col">Update</th>
+              <!-- <th scope="col" (click)="sort('address')">Address&nbsp;<i class="fa fa-sort"></i></th> -->
+                <th scope="col" (click)="sort('phone_no')">Contact No&nbsp;<i class="fa fa-sort"></i></th> 
+             <!--   <th scope="col" (click)="sort('website')">Website&nbsp;<i class="fa fa-sort"></i></th> -->
+              <th scope="col" (click)="sort('business_license_no')">License No&nbsp;<i class="fa fa-sort"></i></th> 
+              <!---  <th scope="col" (click)="sort('sub_category_id')">Sub Category&nbsp;<i class="fa fa-sort"></i></th> -->
+               <th scope="col" (click)="sort('createdAt')">Date&nbsp;<i class="fa fa-sort"></i></th>
+             <!---  <th scope="col">Status</th>
+                <th scope="col">Merchant Detail</th>
+                <th scope="col">Update</th>-->
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let merchant of tempSellers | orderBy: key: reverse | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: tempTotalRecords }; let i = index">
                 <td>
-                  {{merchant.id}}
-                </td>
-                <th scope="row">
-                  <div class="media align-items-center">
-                    <div class="media-body">
-                      <span class="mb-0 text-sm">{{merchant.business_name}}</span>
-                    </div>
-                  </div>
-                </th>
+                  {{merchant.user_id}}
+                </td> 
+            <!-- <td>
+              {{merchant.business_name}}
+               </td> -->
                 <td>
+                  <a routerLinkActive="active" [routerLink]="['/gallary',merchant.user_id]">
                   {{merchant.email}}
+                  </a>
                 </td>
-                <td>
-                 {{merchant.address}}, {{merchant.city}}<br>{{merchant.state}}, {{merchant.zipcode}}
-                </td>
+              
                 <td>
                   {{merchant.phone_no}}
                 </td>
-                <td>
+             <!--  <td>
                   {{merchant.website}}
-                </td>
+                </td> -->
                 <td>
                   {{merchant.business_license_no}}
                 </td>
-                <td>
+             <!--   <td>
                   {{merchant.sub_category_id}}
-                </td>
+                </td> -->
                 <td>
                   {{merchant.createdAt | date:'dd/MM/yyyy' }}
-                </td>
-                <td>
+                </td> 
+              <!--  <td>
                   <div (click)="changeStatus(merchant.user_id)">
                   <div *ngIf="merchant.status == 1">
                   <span class="btn btn-success" style="cursor: pointer;">Active</span>
@@ -108,14 +110,35 @@
                   <a class="btn btn-secondary" (click)="clickOnCouponDetail(merchant.user_id)">Click Here</a>
                 </td>
               
-                <td>
+              <td>
                   <a class="btn btn-primary" (click)="clickOnEdit(merchant.user_id)">
                     Edit
                 </a>
                   </td>
-                  <td>
+                <td>
                 <mat-icon aria-hidden="false" style="cursor: pointer;" (click)="warningDialog(merchant.user_id)" aria-label="Example home icon">delete_outline</mat-icon>
 
+                    </td> -->
+                    <td class="text-right">
+                      <div ngbDropdown placement="bottom-right">
+                        <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>
+                          <i class="fas fa-ellipsis-v"></i>
+                        </a>
+                        <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                          <div (click)="changeStatus(merchant.user_id)">
+                            <div *ngIf="merchant.status == 1">
+                              <a class="dropdown-item" href="javascript:void(0)" style="color: green;">Activate</a>
+                            </div>
+                            <div *ngIf="merchant.status == 0">
+                              <a class="dropdown-item" href="javascript:void(0)" style="color: red;">Deactivate</a>
+                            </div>
+                            </div>
+                          <a class="dropdown-item" href="javascript:void(0)" (click)="clickOnCouponDetail(merchant.user_id)">Coupon Detail</a>
+                          <a class="dropdown-item" href="javascript:void(0)" (click)="clickOnEdit(merchant.user_id)">Edit</a>
+                          <a class="dropdown-item" href="javascript:void(0)" (click)="clickReset(merchant.user_id)">Reset Password</a>
+                          <a class="dropdown-item" href="javascript:void(0)" (click)="warningDialog(merchant.user_id)"><mat-icon aria-hidden="false" style="cursor: pointer;" (click)="warningDialog(merchant.user_id)" aria-label="Example home icon">delete_outline</mat-icon></a>
+                        </div>
+                      </div>
                     </td>
               </tr>
               

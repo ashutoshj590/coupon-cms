@@ -11,10 +11,10 @@ import { AuthGuard } from '../../pages/_helpers';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent },
-    { path: 'user-profile', canActivate: [AuthGuard], component: UserProfileComponent },
+    { path: 'coupon-detail', canActivate: [AuthGuard], component: UserProfileComponent },
     { path: 'users', canActivate: [AuthGuard], component: ConsumerComponent },
     { path: 'merchant', canActivate: [AuthGuard], component: MerchantComponent },
     { path: 'category', canActivate: [AuthGuard], component: CategoryComponent },
-    { path: 'gallary', canActivate: [AuthGuard], component: RegisterComponent }
+    { path: 'gallary/:id', canActivate: [AuthGuard], component: RegisterComponent }
 ];
 

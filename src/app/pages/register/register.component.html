@@ -1,114 +1,185 @@
-<style>
-
-  .color {
-    color: white;
-  }
- 
-  .subCateStyle {
-    padding-left: 60px;
-  }
-  .cateStyle {
-    padding-left: 40px;
-  }
- 
-  
-</style>
-<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
-      <!--code for search-->
-      <thead class="thead-light">
-        <tr>
-            <th class="color cateStyle">Business Name<br> <input class="form-control" placeholder="Business Name" (keyup)="filterData($event, 'business_name')"></th>
-            <th class="color subCateStyle">Email<br> <input class="form-control" placeholder="Email" (keyup)="filterData($event, 'email')"></th>
-   
-        </tr>
-    </thead>
-  
-  
-  
+<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 250px; background-position: center top;">
+  <!-- Mask -->
+  <span class="mask bg-gradient-danger opacity-8"></span>
+  <!-- Header container -->
  
 </div>
-<!-- Page content -->
 <div class="container-fluid mt--7">
- <!---- <button type="button" class="btn btn-primary fas fa-plus merchantbtn">Add</button> -->
-
-  <!-- Table -->
   <div class="row">
-    <div class="col">
-      <div class="card shadow">
-        <div class="card-header border-0">
-          <h3 class="mb-0">Merchant Gallary</h3>
+    <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+      <div class="card card-profile shadow">
+        <div class="row justify-content-center">
+          <div class="col-lg-3 order-lg-2">
+            <div class="card-profile-image">
+              <a href="javascript:void(0)">
+                <img src="assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
+              </a>
+            </div>
+          </div>
         </div>
-        <div class="table-responsive">
-          <table class="table align-items-center table-flush">
-            <thead class="thead-light">
-              <tr>
-                <th scope="col" (click)="sort('id')">S.NO&nbsp;<i class="fa fa-sort"></i></th>
-                <th scope="col" (click)="sort('business_name')">Business Name&nbsp;<i class="fa fa-sort"></i></th>
-                <th scope="col" (click)="sort('email')">Email&nbsp;<i class="fa fa-sort"></i></th>
-                <th scope="col">Gallary Photos</th>
-                <th scope="col">+Add</th>
-
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let merchant of tempSellers | orderBy: key: reverse | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: tempTotalRecords }; let i = index">
-
-                <td>
-                  {{merchant.id}}
-                </td>
-                <th scope="row">
-                  <div class="media align-items-center">
-                    <div class="media-body">
-                      <span class="mb-0 text-sm">{{merchant.business_name}}</span>
-                    </div>
+        <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+          <div class="d-flex justify-content-between">
+           <!---- <a href="javascript:void(0)" class="btn btn-sm btn-info mr-4">Connect</a> -->
+         <!-- <a href="javascript:void(0)" class="btn btn-sm btn-default float-right">Message</a> -->
+          </div>
+        </div>
+        <div class="card-body pt-0 pt-md-4">
+          <div class="row">
+            <div class="col">
+              <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+               <!---- <div>
+                  <span class="heading">22</span>
+                  <span class="description">Coupons</span>
+                </div> -->
+                <div> 
+                  <span class="heading">{{merchantDe.coupons_detail.length}}</span>
+                  <span class="description">Total Coupons</span>
+                </div>
+              <!---  <div>
+                  <span class="heading">89</span>
+                  <span class="description">Custom</span>
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <h3>
+              {{merchantDe.email}}
+            </h3>
+            <div class="h5 font-weight-300">
+              <i class="ni location_pin mr-2"></i>{{merchantDe.address}}, {{merchantDe.city}}
+            </div>
+            <div class="h5 mt-4">
+              <i class="ni business_briefcase-24 mr-2"></i>{{merchantDe.business_license_no}}
+            </div>
+            <div>
+              <i class="ni education_hat mr-2"></i>{{merchantDe.business_name}}
+            </div>
+            <hr class="my-4" />
+           
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-8 order-xl-1">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0">Merchant account</h3>
+            </div>
+            <div class="col-4 text-right">
+              <a href="javascript:void(0)" class="btn btn-sm btn-primary" (click)="clickOnGallary(merchantDe.user_id)" >View Images</a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <form>
+            <h6 class="heading-small text-muted mb-4">User information</h6>
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-username">Business Name</label>
+                    <input type="text" id="input-username" class="form-control form-control-alternative" value="{{merchantDe.business_name}}" >
                   </div>
-                </th>
-                <td>
-                  {{merchant.email}}
-                </td>
-          
-                <td>
-                  <a class="btn btn-secondary" (click)="clickOnGallary(merchant.user_id)">Click Here</a>
-                </td>
-                <td>
-                   
-                  <form [formGroup]="fileUploadForm" (ngSubmit)="onFormSubmit()">
-                 
-                    <div class="row">
-                   
-                      <div class="col-sm-6">
-                
-                        <div class="custom-file">
-                
-                          <input type="file" multiple class="custom-file-input" id="customFile" name="images"
-                            (change)="onFileSelect($event)" #UploadFileInput>
-                
-                          <label class="custom-file-label" for="customFile">{{fileInputLabel || 'Choose File'}}</label>
-                        
-                        </div>
-                
-                      </div>
-                    
-                
-                      <div class="col-sm-6"> <button class="btn btn-primary" (click)="clickOnUserId(merchant.user_id)" type="submit">Upload</button> </div>
-                
-                    </div>
-                   
-                  </form>
-                </td>
-              
-              </tr>
-              
-            </tbody>
-          </table>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-email">Email address</label>
+                    <input type="email" id="input-email" class="form-control form-control-alternative"  value="{{merchantDe.email}}" >
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-first-name">Tagline</label>
+                    <input type="text" id="input-first-name" class="form-control form-control-alternative" value="{{merchantDe.tagline}}" >
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-last-name">Website</label>
+                    <input type="text" id="input-last-name" class="form-control form-control-alternative" value="{{merchantDe.website}}">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-username">Contact Number</label>
+                    <input type="text" id="input-username" class="form-control form-control-alternative" value="{{merchantDe.phone_no}}" >
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-email">Business License No </label>
+                    <input type="email" id="input-email" class="form-control form-control-alternative"  value="{{merchantDe.business_license_no}}" >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr class="my-4" />
+            <!-- Address -->
+            <h6 class="heading-small text-muted mb-4">Contact information</h6>
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-address">Address</label>
+                    <input id="input-address" class="form-control form-control-alternative" value="{{merchantDe.address}}" type="text">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-city">City</label>
+                    <input type="text" id="input-city" class="form-control form-control-alternative" value="{{merchantDe.city}}">
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-state">State</label>
+                    <input type="text" id="input-country" class="form-control form-control-alternative" value="{{merchantDe.state}}">
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-zipcode">Zipcode</label>
+                    <input type="text" id="input-postal-code" class="form-control form-control-alternative" value="{{merchantDe.zipcode}}">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr class="my-4" />
+            <!-- Description -->
+            <h6 class="heading-small text-muted mb-4">Other Detail</h6>
+            <div class="pl-lg-4">
+              <div class="form-group">
+                <label class="form-control-label" for="input-description">Description</label>
+                <textarea rows="4" class="form-control form-control-alternative">{{merchantDe.description}}"</textarea>
+              </div>
+            </div>
+            <!--shop timing-->
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="input-opening_time">Opening Time</label>
+                  <input type="text" id="input-username" class="form-control form-control-alternative" value="{{merchantDe.opening_time}}" >
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="input-closing_time">Closing Time</label>
+                  <input type="email" id="input-email" class="form-control form-control-alternative"  value="{{merchantDe.closing_time}}" >
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
-       
       </div>
     </div>
   </div>
-
 </div>
-<div class="card-footer">
-  <pagination-controls style="text-align: center;" (pageChange)="p = $event"></pagination-controls>
-</div>
-

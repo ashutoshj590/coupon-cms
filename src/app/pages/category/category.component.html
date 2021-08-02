@@ -1,16 +1,11 @@
 <style>
 
+.block {
+      margin-left: 20px;
+  }
   .color {
     color: white;
-  }
-  .box {
-    margin-top: -50px;
-  }
-  .subCateStyle {
-    padding-left: 80px;
-  }
-  .cateStyle {
-    padding-left: 15px;
+    padding-left: 40px;
   }
  
   
@@ -18,8 +13,6 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
-     
-
       <!-- Card stats -->
       <form class="form-horizontal box" [formGroup]="categoryForm">
         <div class="row">
@@ -40,8 +33,6 @@
 
       <div class="container">
           <h3 class="color">Add Sub Category</h3>
-        
-        
           <form [formGroup]="fileUploadForm" (ngSubmit)="onFormSubmit()">
             <div class="row">
             
@@ -80,9 +71,11 @@
          <!--code for search-->
       <thead class="thead-light">
         <tr>
+          <div class="row">
             <th class="color cateStyle">Category Name<br> <input class="form-control" placeholder="Category" (keyup)="filterData($event, 'category')"></th>
             <th class="color subCateStyle">Sub Category Name<br> <input class="form-control" placeholder="Sub Category" (keyup)="filterData($event, 'subcategory')"></th>
             <th class="color subCateStyle">Date<br> <input class="form-control" placeholder="Date" (keyup)="filterData($event, 'date')"></th>
+          </div>
    
         </tr>
     </thead>
