@@ -24,6 +24,8 @@ export class RegisterComponent implements OnInit {
   allImages: any = [];
   public copy: string;
   coupon_detail: any;
+  categoryDetail: any;
+  couponCounts: any = [];
 
 
     
@@ -53,6 +55,9 @@ export class RegisterComponent implements OnInit {
  getAllMerchant(id) {
     this.MerchantService.merchantDetail(id).subscribe(data => {
         this.merchantDe = data.merchant_detail;
+        this.categoryDetail = data.merchant_detail.category_detail;
+        this.couponCounts = data.merchant_detail.coupon_detail;
+      
        
        }); 
   }
@@ -104,7 +109,7 @@ export class RegisterComponent implements OnInit {
       }, er => {
         console.log(er);
       });
-     // window.location.reload()
+     window.location.reload()
   }
 
 

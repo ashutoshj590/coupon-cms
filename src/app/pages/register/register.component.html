@@ -27,18 +27,18 @@
           <div class="row">
             <div class="col">
               <div class="card-profile-stats d-flex justify-content-center mt-md-5">
-               <!---- <div>
-                  <span class="heading">22</span>
-                  <span class="description">Coupons</span>
-                </div> -->
-                <div> 
-                  <span class="heading">{{merchantDe.coupons_detail.length}}</span>
+               <div>
+                  <span class="heading">{{merchantDe.total_coupons}}</span>
                   <span class="description">Total Coupons</span>
                 </div>
-              <!---  <div>
-                  <span class="heading">89</span>
-                  <span class="description">Custom</span>
-                </div> -->
+                <div> 
+                  <span class="heading">{{merchantDe.used_coupons}}</span>
+                  <span class="description">Used Coupons</span>
+                </div>
+                <div>
+                  <span class="heading">{{merchantDe.custom_coupons}}</span>
+                  <span class="description">Custom Coupons</span>
+                </div>
               </div>
             </div>
           </div>
@@ -56,11 +56,52 @@
               <i class="ni education_hat mr-2"></i>{{merchantDe.business_name}}
             </div>
             <hr class="my-4" />
+
+             <!--images upload-->
            
+    <form [formGroup]="fileUploadForm" (ngSubmit)="onFormSubmit()">
+                 
+      <div class="row">
+     
+        <div class="col-sm-6">
+  
+          <div class="custom-file">
+  
+            <input type="file" multiple class="custom-file-input" id="customFile" name="images"
+              (change)="onFileSelect($event)" #UploadFileInput>
+  
+            <label class="custom-file-label" for="customFile">{{fileInputLabel || ''}}</label>
+          
+          </div>
+  
+        </div>
+      
+  
+        <div class="col-sm-6"> <button class="btn btn-primary" (click)="clickOnUserId(merchantDe.user_id)" type="submit">Upload</button> </div>
+  
+      </div>
+     
+    </form>
+           
+          </div>
+    
+        </div>
+                <!--categry detail-->
+    <div class="row">
+      <div class="col-lg-11">
+        <div class="form-group">
+          <label class="form-control-label" for="input-opening_time">Selected Subcategories</label>
+          <div *ngFor="let category of categoryDetail; let i = index" >
+          <input type="text" id="input-username" class="form-control form-control-alternative" value="{{i+1+'.'+' ' + category.name}}" disabled>
           </div>
         </div>
       </div>
+     
     </div>
+      </div>
+    </div>
+  
+   
     <div class="col-xl-8 order-xl-1">
       <div class="card bg-secondary shadow">
         <div class="card-header bg-white border-0">
@@ -68,6 +109,7 @@
             <div class="col-8">
               <h3 class="mb-0">Merchant account</h3>
             </div>
+     
             <div class="col-4 text-right">
               <a href="javascript:void(0)" class="btn btn-sm btn-primary" (click)="clickOnGallary(merchantDe.user_id)" >View Images</a>
             </div>
@@ -177,6 +219,7 @@
                 </div>
               </div>
             </div>
+            
           </form>
         </div>
       </div>

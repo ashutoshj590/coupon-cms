@@ -9,6 +9,7 @@ import { MerchantService } from '../_services';
   export class DialogEdit implements OnInit {
     
     ischeckbox: boolean;
+    categoryDetail: any;
     
     constructor(@Inject(MAT_DIALOG_DATA) public data: any,
                           private merchantService: MerchantService,
@@ -16,6 +17,7 @@ import { MerchantService } from '../_services';
     ) {}
 
     ngOnInit() {
+      this.getcategories();
     
       if (this.data.merchant_detail.notification_email == 1){
          this.ischeckbox = true;
@@ -32,6 +34,14 @@ import { MerchantService } from '../_services';
     this.merchantService.editMerchantDetail(data).subscribe((data: {}) => {
           window.location.reload()
       });
+  }
+
+
+  getcategories() {
+    this.merchantService.getAllcategory().subscribe(data => {
+         this.categoryDetail = data.category_data   
+        
+       }); 
   }
 
 

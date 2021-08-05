@@ -69,9 +69,15 @@
             <input matInput name="closing_time" ngModel="{{data.merchant_detail.closing_time}}">
           </mat-form-field>
           <br>
-          <mat-form-field appearance="fill">
+        <!----  <mat-form-field appearance="fill">
             <mat-label>Sub Category ids</mat-label>
             <input matInput name="sub_category_id" ngModel="{{data.merchant_detail.sub_category_id}}">
+          </mat-form-field>--> 
+          <mat-form-field appearance="fill">
+            <mat-label>Select Category</mat-label>
+            <mat-select name="sub_category_id" ngModel multiple>
+              <mat-option *ngFor="let category of categoryDetail" [value]="category.sub_category_id"> {{category.sub_cate_name}}</mat-option>
+            </mat-select>
           </mat-form-field>
             <mat-label>Notification Email</mat-label>
             <input name="notification_email" class="input" type="checkbox" [(ngModel)]="ischeckbox">

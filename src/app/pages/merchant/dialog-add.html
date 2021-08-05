@@ -14,8 +14,12 @@
     <div class="example-container">
         <form #userPost="ngForm" (ngSubmit)="onSubmit(userPost.value)" >
           <mat-form-field appearance="fill">
-            <mat-label>user_id</mat-label>
-            <input matInput name="user_id" ngModel>
+            <mat-label>Select User</mat-label>
+            <mat-select name="user_id" ngModel>
+           <mat-option *ngFor="let user of usersDetail" [value]="user.id">
+            {{user.email}}
+            </mat-option>
+            </mat-select>
           </mat-form-field>
         <mat-form-field appearance="fill" class="input">
           <mat-label>Address</mat-label>
@@ -69,9 +73,19 @@
             <input matInput name="closing_time" ngModel>
           </mat-form-field>
           <br>
+         <!---- <mat-form-field appearance="fill">
+            <mat-label>Select Category</mat-label>
+            <mat-select name="sub_category_id" ngModel>
+           <mat-option *ngFor="let category of categoryDetail" [value]="category.sub_category_id">
+            {{category.sub_cate_name}}
+            </mat-option>
+            </mat-select>
+          </mat-form-field> -->
           <mat-form-field appearance="fill">
-            <mat-label>Sub Category ids</mat-label>
-            <input matInput name="sub_category_id" ngModel>
+            <mat-label>Select Category</mat-label>
+            <mat-select name="sub_category_id" ngModel multiple>
+              <mat-option *ngFor="let category of categoryDetail" [value]="category.sub_category_id"> {{category.sub_cate_name}}</mat-option>
+            </mat-select>
           </mat-form-field>
             <mat-label>Notification Email</mat-label>
             <input name="notification_email" class="input" type="checkbox" [(ngModel)]="ischeckbox">

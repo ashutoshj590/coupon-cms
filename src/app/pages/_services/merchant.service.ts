@@ -32,6 +32,15 @@ export class MerchantService {
     }
 
 
+    getAllcategory(): Observable<any> {
+      return this.http.post<any>(this.apiURL + '/category/get-cate-sub-cate', null)
+          .pipe(map(response => {
+              console.log(response);
+              return response;
+          }));
+  }
+
+
     getAllMerchant(): Observable<any> {
       return this.http.post<any>(this.apiURL + '/user/get-all-merchant', null)
           .pipe(map(response => {
@@ -48,7 +57,7 @@ export class MerchantService {
           'Accept': 'application/json, text/plain'
         })
       };
-      return this.http.post<any>(this.apiURL + '/user/get-merchant-detail', JSON.stringify({user_id:id}), httpOpt)
+      return this.http.post<any>(this.apiURL + '/user/get-merchant-detail-admin', JSON.stringify({user_id:id}), httpOpt)
           .pipe(map(response => {
               console.log(response);
               return response;

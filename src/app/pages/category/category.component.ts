@@ -123,7 +123,7 @@ export class CategoryComponent implements OnInit {
           console.log(er);
         
         });
-        window.location.reload()
+      //  window.location.reload()
     }
   
 
