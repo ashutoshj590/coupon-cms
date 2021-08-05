@@ -109,7 +109,7 @@ export class RegisterComponent implements OnInit {
       }, er => {
         console.log(er);
       });
-     window.location.reload()
+     //window.location.reload()
   }
 
 
