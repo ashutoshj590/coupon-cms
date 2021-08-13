@@ -1,13 +1,35 @@
+<style>
+  .block {
+      margin-left: 20px;
+  }
+  .color {
+    color: white;
+    padding-left: 40px;
+  }
+  .addMerchantbtn {
+    margin-top: 22px;
+    margin-left: 32px;
+  }
+  
+</style>
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">     
-        <!--code for search-->
-        <thead class="thead-light">
-          <tr>
-              
-          </tr>
-      </thead>
-    
+        <!-- Card stats -->
+      <thead class="thead-light">
+        <tr>
+          <div class="row">
+          <!---  <th class="color">Business Name <br> <input class="form-control" placeholder="Name" (keyup)="filterData($event, 'business_name')"></th> -->
+            <th class="color">Coupon Tpye <br> <input class="form-control" placeholder="Email" (keyup)="filterData($event, 'coupon_type')"></th>
+            <th class="color">Coupon Code <br> <input class="form-control" placeholder="Contact No" (keyup)="filterData($event, 'coupon_code')"></th>
+         <!--   <th class="color">Website <br> <input class="form-control" placeholder="Website" (keyup)="filterData($event, 'website')"></th> -->
+            <th class="color">expiry Date<br> <input class="form-control" placeholder="License No" (keyup)="filterData($event, 'expiry_date')"></th>
+            <th class="color">Date<br> <input class="form-control" placeholder="Date" (keyup)="filterData($event, 'date')"></th>
+
+          <!---  <button type="button" class="btn btn-primary fas fa-plus addMerchantbtn" (click)="clickOnAdd()">Add</button> -->
+            </div>
+        </tr>
+    </thead>
         
    
      
@@ -31,8 +53,8 @@
                 <th scope="col" (click)="sort('email')">Coupon Type&nbsp;<i class="fa fa-sort"></i></th>
                 <th scope="col" (click)="sort('type')">Coupon Code&nbsp;<i class="fa fa-sort"></i></th>
                 <th scope="col" (click)="sort('device_type')">expiry Date&nbsp;<i class="fa fa-sort"></i></th>
-                <th scope="col" (click)="sort('createdAt')">Category<br>Sub Category&nbsp;<i class="fa fa-sort"></i></th>
-                <th scope="col">Coupon Detail</th>
+                <th scope="col" (click)="sort('createdAt')">Date&nbsp;<i class="fa fa-sort"></i></th>
+              <!----  <th scope="col">Coupon Detail</th> -->
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -52,13 +74,11 @@
                   {{coupon.expiry_date}}
                 </td>
                 <td>
-                  saloon <br> shave
-                </td>
+                  {{coupon.createdAt | date:'dd/MM/yyyy' }}
+                </td> 
+              
                 <td>
-                  <a class="btn btn-secondary" >Click Here</a>
-                </td>
-                <td>
-                  <mat-icon aria-hidden="false" style="cursor: pointer;" (click)="warningDialog(consumer.id)" aria-label="Example home icon">delete_outline</mat-icon>
+                  <mat-icon aria-hidden="false" style="cursor: pointer;" (click)="warningDialog(coupon.id)" aria-label="Example home icon">delete_outline</mat-icon>
 
                 </td>
           

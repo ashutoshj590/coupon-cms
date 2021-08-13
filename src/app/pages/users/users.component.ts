@@ -4,7 +4,7 @@ import { AlertService, MerchantService } from '../_services';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import * as _ from 'lodash';
-
+import {MatSnackBar} from '@angular/material/snack-bar';
 import { DialogForConsumer } from './dialog-consumer';
 import { DialogAddUser } from './dialog-addUser';
 import { UserResetPassword } from './dialog-resetUser';
@@ -37,6 +37,7 @@ export class ConsumerComponent implements OnInit {
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     private http: HttpClient,
+    private snackBar: MatSnackBar
     
   ) { }
 
@@ -76,8 +77,12 @@ export class ConsumerComponent implements OnInit {
     let dialogRef = this.dialog.open(warningDialogConsumer);
     dialogRef.afterClosed().subscribe(result  => {
      if (result == "true"){
-       this.MerchantService.deleteConsumer(id).subscribe((data: {}) => { 
-         window.location.reload();
+       this.MerchantService.deleteConsumer(id).subscribe(data => {
+      if(data.response_code === 200){
+      this.snackBar.open("User deleted Successfully!!", "dismiss", {duration: 3000});
+       window.location.reload();
+
+      }
        });
      }
      console.log(result);
@@ -121,12 +126,18 @@ export class ConsumerComponent implements OnInit {
           );
           this.tempTotalRecords = this.tempSellers.length;
           break;
-        case 'date':
+        case 'createdAt':
           this.tempSellers = this.sellers.filter(item =>
             item.createdAt != null && item.createdAt.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
           );
           this.tempTotalRecords = this.tempSellers.length;
           break;
+          case 'updatedAt':
+            this.tempSellers = this.sellers.filter(item =>
+              item.updatedAt != null && item.updatedAt.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
+            );
+            this.tempTotalRecords = this.tempSellers.length;
+            break;
   
     }
     if(this.filterText.length == 0) {

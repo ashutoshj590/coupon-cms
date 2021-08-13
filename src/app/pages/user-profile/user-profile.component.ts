@@ -65,21 +65,21 @@ export class UserProfileComponent implements OnInit {
    filterData(event, type) {
     this.filterText = event.target.value;
     switch (type) {
-      case 'email':
+      case 'coupon_type':
         this.tempSellers = this.sellers.filter(item =>
-          item.email != null && item.email.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
+          item.coupon_type != null && item.coupon_type.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
         );
         this.tempTotalRecords = this.tempSellers.length;
         break;
-      case 'type':
+      case 'coupon_code':
         this.tempSellers = this.sellers.filter(item =>
-          item.type != null && item.type.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
+          item.coupon_code != null && item.coupon_code.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
         );
         this.tempTotalRecords = this.tempSellers.length;
         break;
-        case 'device_type':
+        case 'expiry_date':
           this.tempSellers = this.sellers.filter(item =>
-            item.device_type != null && item.device_type.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
+            item.expiry_date != null && item.expiry_date.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
           );
           this.tempTotalRecords = this.tempSellers.length;
           break;

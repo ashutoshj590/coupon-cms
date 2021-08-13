@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-
+import {MatSnackBar} from '@angular/material/snack-bar';
 import { AlertService, AuthenticationService } from '../_services';
 
 
@@ -22,7 +22,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private snackBar: MatSnackBar
   ) {
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
@@ -56,20 +57,29 @@ export class LoginComponent implements OnInit {
 
     this.loading = true;
     this.authenticationService.login(this.f.email.value, this.f.password.value, this.f.type.value, this.f.device_type.value)
-    .subscribe((data: {}) => {
-      this.userLoginData =  data;
-      console.log("sucess");
-      console.log(this.userLoginData);
-      console.log(this.userLoginData.response_code)
-      if (this.userLoginData.response_code === 200){
-            this.returnUrl =  '/dashboard'
-            this.router.navigate([this.returnUrl]);
-            this.loading = false;
+    .subscribe(data => {
+      if(data.response_code === 200){
+      this.snackBar.open("logged In Successfully!", "dismiss", {duration: 3000});
+      this.returnUrl =  '/dashboard'
+      this.router.navigate([this.returnUrl]);
+      this.loading = false;
+      } else {
+        this.snackBar.open(data.response_message.response, "dismiss", {duration: 3000});
       }
-      
-    });
+       });
    
   } 
+
+
+ /* getAllMerchant(id) {
+    this.MerchantService.merchantDetail(id).subscribe(data => {
+        this.merchantDe = data.merchant_detail;
+        this.categoryDetail = data.merchant_detail.category_detail;
+        this.couponCounts = data.merchant_detail.coupon_detail;
+      
+       
+       }); 
+  } */
   
 
  

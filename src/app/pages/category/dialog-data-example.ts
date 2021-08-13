@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import { CategoryService } from '../_services';
 import { HttpClient } from '@angular/common/http';
 import * as _ from 'lodash';
-
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -28,7 +28,8 @@ import * as _ from 'lodash';
                           private formBuilder: FormBuilder,
                           private categoryService: CategoryService,
                           public dialog: MatDialog,
-                          private http: HttpClient
+                          private http: HttpClient,
+                          private snackBar: MatSnackBar
     ) {
      
     }
@@ -58,10 +59,12 @@ import * as _ from 'lodash';
       formData.append('uploadedImage', this.fileUploadForm.get('uploadedImage').value);
       this.http.post<any>('https://www.mccpapp.com:8080/category/file', formData).subscribe(response => {
           console.log(response);
-          if (response.statusCode === 200) {
+          if (response.response_code === 200) {
             // Reset the file input
+            this.snackBar.open("Service Uploaded Successfully!", "dismiss", {duration: 3000});
             this.uploadFileInput.nativeElement.value = "";
             this.fileInputLabel = undefined;
+            window.location.reload()
           }
         }, er => {
           console.log(er);

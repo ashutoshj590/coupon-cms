@@ -4,7 +4,7 @@ import { AlertService, CategoryService } from '../_services';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import {MatSnackBar} from '@angular/material/snack-bar';
 //import { DialogDataExampleDialog } from './dialog-data-example'
 
 @Component({
@@ -48,6 +48,7 @@ export class CategoryComponent implements OnInit {
         public dialog: MatDialog,
         private router: Router,
         private http: HttpClient,
+        private snackBar: MatSnackBar
         
       ) { }
 
@@ -87,6 +88,7 @@ export class CategoryComponent implements OnInit {
           
       this.categoryId = {name: this.f.name.value}; 
       this.categoryService.addNewCategory(this.categoryId).subscribe((data: {}) => {
+        this.snackBar.open("Category Added Successfully!", "dismiss", {duration: 3000});
         window.location.reload()
        // this.SpinnerService.hide();
       });
@@ -114,16 +116,20 @@ export class CategoryComponent implements OnInit {
       this.http
         .post<any>('https://www.mccpapp.com:8080/category/add-sub-category', formData).subscribe(response => {
           console.log(response);
-          if (response.statusCode === 200) {
+          if (response.response_code === 200) {
             // Reset the file input
+            this.snackBar.open("SubCategory Added Successfully!", "dismiss", {duration: 3000});
             this.uploadFileInput.nativeElement.value = "";
             this.fileInputLabel = undefined;
+            window.location.reload()
           }
         }, er => {
           console.log(er);
         
         });
       //  window.location.reload()
+      
+
     }
   
 
@@ -163,7 +169,8 @@ export class CategoryComponent implements OnInit {
       let dialogRef = this.dialog.open(warningDialogComponent);
       dialogRef.afterClosed().subscribe(result  => {
        if (result == "true"){
-         this.categoryService.deleteSubCategory(id).subscribe((data: {}) => { 
+         this.categoryService.deleteSubCategory(id).subscribe((data: {}) => {
+          this.snackBar.open("Deleted Successfully!", "dismiss", {duration: 3000}); 
            window.location.reload();
          });
        }

@@ -6,7 +6,7 @@ import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import * as _ from 'lodash';
 import { ActivatedRoute } from '@angular/router';
 import { DialogGallary } from './dialog-gallary';
-
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -21,6 +21,7 @@ export class RegisterComponent implements OnInit {
   fileInputLabel: string;
 
   merchantDe: any = {};
+  merchantImgs: any = [];
   allImages: any = [];
   public copy: string;
   coupon_detail: any;
@@ -39,7 +40,8 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     private http: HttpClient,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -55,6 +57,7 @@ export class RegisterComponent implements OnInit {
  getAllMerchant(id) {
     this.MerchantService.merchantDetail(id).subscribe(data => {
         this.merchantDe = data.merchant_detail;
+        this.merchantImgs = data.merchant_detail.images;
         this.categoryDetail = data.merchant_detail.category_detail;
         this.couponCounts = data.merchant_detail.coupon_detail;
       
@@ -101,10 +104,12 @@ export class RegisterComponent implements OnInit {
     formData.append('user_id', this.userId);
     this.http.post<any>('https://www.mccpapp.com:8080/user/uplaod-image', formData).subscribe(response => {
         console.log(response);
-        if (response.statusCode === 200) {
+        if (response.response_code === 200) {
           // Reset the file input
+          this.snackBar.open("Merchant Image Uploaded Successfully!", "dismiss", {duration: 3000});
           this.uploadFileInput.nativeElement.value = "";
           this.fileInputLabel = undefined;
+          window.location.reload()
         }
       }, er => {
         console.log(er);

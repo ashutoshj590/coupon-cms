@@ -51,7 +51,9 @@ export class AuthenticationService {
                     this.currentUserSubject.next(user);
 
                     return response;
-                }
+                } else {
+                    return response; 
+                } 
             }));
     }
 

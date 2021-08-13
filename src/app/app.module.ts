@@ -39,6 +39,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {  MatIconModule  } from '@angular/material/icon';
 import {  MatTreeModule  } from '@angular/material/tree';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { FileUploadModule } from 'ng2-file-upload';
 import { CommonModule } from '@angular/common';
@@ -64,6 +65,7 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
+    MatSnackBarModule,
     BrowserModule,
     CommonModule,
     FileUploadModule,

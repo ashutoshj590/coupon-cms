@@ -201,7 +201,7 @@ export class MerchantService {
 
 
     resetPassMerchant(formData) { 
-      return this.http.post<any>(this.apiURL + '/auth/reset-password', formData)
+      return this.http.post<any>(this.apiURL + '/auth/change-password', formData)
           .pipe(map(response => {
               console.log(response);
               return response;

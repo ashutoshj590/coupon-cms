@@ -4,7 +4,7 @@ import { AlertService, MerchantService } from '../_services';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import * as _ from 'lodash';
-
+import {MatSnackBar} from '@angular/material/snack-bar';
 import { DialogForCoupon } from './dialog-coupon';
 import { DialogEdit } from './dialog-edit';
 import { DialogAdd } from './dialog-add';
@@ -43,7 +43,8 @@ export class MerchantComponent implements OnInit {
     private MerchantService: MerchantService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
-    private http: HttpClient
+    private http: HttpClient,
+    private snackBar: MatSnackBar
     
   ) { }
 
@@ -124,7 +125,8 @@ clickReset() {
     let dialogRef = this.dialog.open(warningDialogMerchant);
     dialogRef.afterClosed().subscribe(result  => {
      if (result == "true"){
-       this.MerchantService.deleteMerchant(id).subscribe((data: {}) => { 
+       this.MerchantService.deleteMerchant(id).subscribe((data: {}) => {
+        this.snackBar.open("item deleted Successfully!", "dismiss", {duration: 3000}); 
          window.location.reload();
        });
      }
@@ -166,9 +168,15 @@ clickReset() {
         );
         this.tempTotalRecords = this.tempSellers.length;
         break;
-        case 'date':
+        case 'createdAt':
           this.tempSellers = this.sellers.filter(item =>
             item.createdAt != null && item.createdAt.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
+          );
+          this.tempTotalRecords = this.tempSellers.length;
+          break;
+          case 'updatedAt':
+          this.tempSellers = this.sellers.filter(item =>
+            item.updatedAt != null && item.updatedAt.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
           );
           this.tempTotalRecords = this.tempSellers.length;
           break;

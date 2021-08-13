@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import { MerchantService } from '../_services';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
     selector: 'dialog-resetUser',
@@ -12,12 +13,13 @@ import { MerchantService } from '../_services';
     
     constructor(@Inject(MAT_DIALOG_DATA) public data: any,
                           private merchantService: MerchantService,
-                          public dialog: MatDialog
+                          public dialog: MatDialog,
+                          private snackBar: MatSnackBar
+                          
     ) {}
 
     ngOnInit() {
     
-     
 
     }
 
@@ -25,9 +27,14 @@ import { MerchantService } from '../_services';
 
  
   onSubmit(data){
-    this.merchantService.resetPassMerchant(data).subscribe((data: {}) => {
-          window.location.reload()
-      });
+    this.merchantService.resetPassMerchant(data).subscribe(data => {
+      if(data.response_code === 200){
+      this.snackBar.open("Password Change Successfully!", "dismiss", {duration: 3000});
+      window.location.reload();
+      } else {
+        this.snackBar.open(data.response_message, "dismiss", {duration: 3000});
+      }
+       });
   }
 
 

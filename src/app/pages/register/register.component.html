@@ -11,8 +11,9 @@
         <div class="row justify-content-center">
           <div class="col-lg-3 order-lg-2">
             <div class="card-profile-image">
-              <a href="javascript:void(0)">
-                <img src="assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
+              <a href="javascript:void(0)" *ngFor="let profile of merchantImgs" >
+             <!----   <img src="assets/img/theme/team-4-800x800.jpg" class="rounded-circle"> -->
+                <img src="https://www.mccpapp.com:8080/{{profile.image}}" class="rounded-circle">
               </a>
             </div>
           </div>
@@ -28,16 +29,20 @@
             <div class="col">
               <div class="card-profile-stats d-flex justify-content-center mt-md-5">
                <div>
-                  <span class="heading">{{merchantDe.total_coupons}}</span>
-                  <span class="description">Total Coupons</span>
+                  <span class="heading">{{merchantDe.flash_coupons}}</span>
+                  <span class="description">Flash</span>
                 </div>
-                <div> 
-                  <span class="heading">{{merchantDe.used_coupons}}</span>
-                  <span class="description">Used Coupons</span>
+                <div>
+                  <span class="heading">{{merchantDe.community_coupons}}</span>
+                  <span class="description">Community</span>
                 </div>
                 <div>
                   <span class="heading">{{merchantDe.custom_coupons}}</span>
-                  <span class="description">Custom Coupons</span>
+                  <span class="description">Custom</span>
+                </div>
+                <div> 
+                  <span class="heading">{{merchantDe.used_coupons}}</span>
+                  <span class="description">Used</span>
                 </div>
               </div>
             </div>
@@ -200,7 +205,7 @@
             <h6 class="heading-small text-muted mb-4">Other Detail</h6>
             <div class="pl-lg-4">
               <div class="form-group">
-                <label class="form-control-label" for="input-description">Description</label>
+                <label class="form-control-label" for="input-description">Restrictions</label>
                 <textarea rows="4" class="form-control form-control-alternative">{{merchantDe.description}}"</textarea>
               </div>
             </div>
