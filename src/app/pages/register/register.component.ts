@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 import { ActivatedRoute } from '@angular/router';
 import { DialogGallary } from './dialog-gallary';
 import {MatSnackBar} from '@angular/material/snack-bar';
-
+import { apiUrl } from '../../_constant';
 
 @Component({
   selector: 'app-register',
@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
   categoryDetail: any;
   couponCounts: any = [];
 
-
+  apiURL = apiUrl.server;
     
     userId: any;
 
@@ -58,6 +58,7 @@ export class RegisterComponent implements OnInit {
     this.MerchantService.merchantDetail(id).subscribe(data => {
         this.merchantDe = data.merchant_detail;
         this.merchantImgs = data.merchant_detail.images;
+        console.log(this.merchantImgs);
         this.categoryDetail = data.merchant_detail.category_detail;
         this.couponCounts = data.merchant_detail.coupon_detail;
       
@@ -102,7 +103,7 @@ export class RegisterComponent implements OnInit {
     const formData = new FormData();
     formData.append('images', this.fileUploadForm.get('images').value);
     formData.append('user_id', this.userId);
-    this.http.post<any>('https://www.mccpapp.com:8080/user/uplaod-image', formData).subscribe(response => {
+    this.http.post<any>(this.apiURL + '/user/uplaod-image', formData).subscribe(response => {
         console.log(response);
         if (response.response_code === 200) {
           // Reset the file input

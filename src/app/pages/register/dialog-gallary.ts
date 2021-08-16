@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import { MerchantService } from '../_services';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { apiUrl } from '../../_constant';
 
 @Component({
     selector: 'dialog-gallary',
@@ -15,6 +16,9 @@ import {MatSnackBar} from '@angular/material/snack-bar';
         name: new FormControl()
        });
    
+
+  apiURL = apiUrl.server;
+
     
     constructor(@Inject(MAT_DIALOG_DATA) public data: any,
                           private formBuilder: FormBuilder,

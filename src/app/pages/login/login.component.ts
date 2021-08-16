@@ -4,7 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { AlertService, AuthenticationService } from '../_services';
-
+import {MatDialog} from '@angular/material/dialog';
+import { DialogResetPassword } from '../merchant/dialog-reset';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private alertService: AlertService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog,
   ) {
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
@@ -59,10 +61,16 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.f.email.value, this.f.password.value, this.f.type.value, this.f.device_type.value)
     .subscribe(data => {
       if(data.response_code === 200){
-      this.snackBar.open("logged In Successfully!", "dismiss", {duration: 3000});
-      this.returnUrl =  '/dashboard'
-      this.router.navigate([this.returnUrl]);
-      this.loading = false;
+        if (data.user_Detail.type === "admin"){
+          this.snackBar.open("logged In Successfully!", "dismiss", {duration: 3000});
+          this.returnUrl =  '/dashboard'
+          this.router.navigate([this.returnUrl]);
+          this.loading = false;
+        } else {
+            this.snackBar.open("Only Admin has the Authority to Login", "dismiss", {duration: 3000});
+            
+        }
+     
       } else {
         this.snackBar.open(data.response_message.response, "dismiss", {duration: 3000});
       }
@@ -80,7 +88,10 @@ export class LoginComponent implements OnInit {
        
        }); 
   } */
-  
+  clickReset() {
+    this.dialog.open(DialogResetPassword, {});
+   
+}
 
  
 

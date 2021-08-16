@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { apiUrl } from '../../_constant';
 //import { DialogDataExampleDialog } from './dialog-data-example'
 
 @Component({
@@ -19,6 +20,9 @@ export class CategoryComponent implements OnInit {
   @ViewChild('UploadFileInput', { static: false }) uploadFileInput: ElementRef;
   fileUploadForm: FormGroup;
   fileInputLabel: string;
+
+  apiURL = apiUrl.server;
+
 
  
     allCategories: any = [];
@@ -114,7 +118,7 @@ export class CategoryComponent implements OnInit {
       formData.append('name', this.fu.name.value);
       formData.append('category_id', this.fu.category_id.value);
       this.http
-        .post<any>('https://www.mccpapp.com:8080/category/add-sub-category', formData).subscribe(response => {
+        .post<any>(this.apiURL +'/category/add-sub-category', formData).subscribe(response => {
           console.log(response);
           if (response.response_code === 200) {
             // Reset the file input

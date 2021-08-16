@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { DialogForConsumer } from './dialog-consumer';
 import { DialogAddUser } from './dialog-addUser';
-import { UserResetPassword } from './dialog-resetUser';
+import { DialogResetPassword } from '../merchant/dialog-reset';
 
 @Component({
   selector: 'app-icons',
@@ -99,9 +99,10 @@ export class ConsumerComponent implements OnInit {
   }
 
   clickReset() {
-    this.dialog.open(UserResetPassword, {});
+    this.dialog.open(DialogResetPassword, {});
    
 }
+
 
 
 
@@ -126,7 +127,7 @@ export class ConsumerComponent implements OnInit {
           );
           this.tempTotalRecords = this.tempSellers.length;
           break;
-        case 'createdAt':
+      /*  case 'createdAt':
           this.tempSellers = this.sellers.filter(item =>
             item.createdAt != null && item.createdAt.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
           );
@@ -137,7 +138,7 @@ export class ConsumerComponent implements OnInit {
               item.updatedAt != null && item.updatedAt.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
             );
             this.tempTotalRecords = this.tempSellers.length;
-            break;
+            break; */
   
     }
     if(this.filterText.length == 0) {

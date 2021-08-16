@@ -112,7 +112,7 @@
             <tbody>
            <tr *ngFor="let subcategory of tempSellers | orderBy: key: reverse | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: tempTotalRecords }; let i = index">
                 <td>
-                {{subcategory.id}}
+                  {{pageSize *(p-1)+i+1}}
                 </td>
                 <td scope="row">
                   <div class="media align-items-center">
@@ -132,7 +132,7 @@
                   {{subcategory.createdAt | date:'dd/MM/yyyy' }}
                 </td>
                 <td>
-                    <img height="100px" width="100px" src="https://www.mccpapp.com:8080/{{subcategory.img_url}}">
+                    <img height="100px" width="100px" src="{{apiURL}}/{{subcategory.img_url}}">
                 </td>
                 <td>
                   <div (click)="changeStatus(subcategory.id)">

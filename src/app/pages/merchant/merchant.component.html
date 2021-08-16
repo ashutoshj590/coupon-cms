@@ -27,8 +27,8 @@
             <th class="color">Contact No <br> <input class="form-control" placeholder="Contact No" (keyup)="filterData($event, 'phone_no')"></th>
          <!--   <th class="color">Website <br> <input class="form-control" placeholder="Website" (keyup)="filterData($event, 'website')"></th> -->
             <th class="color">License No<br> <input class="form-control" placeholder="License No" (keyup)="filterData($event, 'business_license_no')"></th>
-            <th class="color">First Login<br> <input class="form-control" placeholder="Date" (keyup)="filterData($event, 'createdAt')"></th>
-            <th class="color">last Login<br> <input class="form-control" placeholder="Date" (keyup)="filterData($event, 'updatedAt')"></th>
+         <!----   <th class="color">First Login<br> <input class="form-control" placeholder="Date" (keyup)="filterData($event, 'createdAt')"></th> -->
+          <!----  <th class="color">last Login<br> <input class="form-control" placeholder="Date" (keyup)="filterData($event, 'updatedAt')"></th> -->
 
             <button type="button" class="btn btn-primary fas fa-plus addMerchantbtn" (click)="clickOnAdd()">Add</button> 
             </div>
@@ -72,7 +72,7 @@
             <tbody>
               <tr *ngFor="let merchant of tempSellers | orderBy: key: reverse | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: tempTotalRecords }; let i = index">
                 <td>
-                  {{merchant.user_id}}
+                  {{pageSize *(p-1)+i+1}}
                 </td> 
             <!-- <td>
               {{merchant.business_name}}
@@ -99,7 +99,7 @@
                   {{merchant.createdAt | date:'short':'UTC-5'}}
                 </td>
                 <td>
-                  {{merchant.updatedAt | date:'short':'UTC-5'}}
+                  {{merchant.last_login | date:'short':'UTC-5'}}
                 </td>
               <!--  <td>
                   <div (click)="changeStatus(merchant.user_id)">
@@ -140,7 +140,7 @@
                             </div>
                           <a class="dropdown-item" href="javascript:void(0)" (click)="clickOnCouponDetail(merchant.user_id)">Coupon Detail</a>
                           <a class="dropdown-item" href="javascript:void(0)" (click)="clickOnEdit(merchant.user_id)">Edit</a>
-                          <a class="dropdown-item" href="javascript:void(0)" (click)="clickReset(merchant.user_id)">Reset Password</a>
+                          <a class="dropdown-item" href="javascript:void(0)" (click)="clickReset()">Reset Password</a>
                           <a class="dropdown-item" href="javascript:void(0)" (click)="warningDialog(merchant.user_id)"><mat-icon aria-hidden="false" style="cursor: pointer;" (click)="warningDialog(merchant.user_id)" aria-label="Example home icon">delete_outline</mat-icon></a>
                         </div>
                       </div>

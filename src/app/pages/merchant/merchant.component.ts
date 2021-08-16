@@ -55,7 +55,6 @@ export class MerchantComponent implements OnInit {
 
 
   sort(key){
-    console.log("clicked !!!")
     this.key = key;
     this.reverse = !this.reverse;
   }
@@ -168,7 +167,7 @@ clickReset() {
         );
         this.tempTotalRecords = this.tempSellers.length;
         break;
-        case 'createdAt':
+      /*  case 'createdAt':
           this.tempSellers = this.sellers.filter(item =>
             item.createdAt != null && item.createdAt.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
           );
@@ -179,7 +178,7 @@ clickReset() {
             item.updatedAt != null && item.updatedAt.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
           );
           this.tempTotalRecords = this.tempSellers.length;
-          break;
+          break;*/
     }
     if(this.filterText.length == 0) {
       this.tempSellers = this.sellers;

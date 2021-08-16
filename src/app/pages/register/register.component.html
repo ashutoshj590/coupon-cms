@@ -13,7 +13,7 @@
             <div class="card-profile-image">
               <a href="javascript:void(0)" *ngFor="let profile of merchantImgs" >
              <!----   <img src="assets/img/theme/team-4-800x800.jpg" class="rounded-circle"> -->
-                <img src="https://www.mccpapp.com:8080/{{profile.image}}" class="rounded-circle">
+                <img src= "{{apiURL}}/{{profile.image}}" class="rounded-circle">
               </a>
             </div>
           </div>

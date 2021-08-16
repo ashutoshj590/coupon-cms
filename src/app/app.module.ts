@@ -29,7 +29,6 @@ import {DialogEdit} from './pages/merchant/dialog-edit';
 import {DialogAdd} from './pages/merchant/dialog-add';
 import {DialogAddUser} from './pages/users/dialog-addUser';
 import {DialogResetPassword} from './pages/merchant/dialog-reset';
-import {UserResetPassword} from './pages/users/dialog-resetUser';
 import {DialogEditCoupon} from './pages/merchant/edit-coupon';
 import {DialogEditCouponConsumer} from './pages/users/edit-coupon.user';
 import {DialogForConsumer} from './pages/users/dialog-consumer';
@@ -95,7 +94,6 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
     DialogAdd,
     DialogAddUser,
     DialogResetPassword,
-    UserResetPassword,
     warningDialogCoupon,
     DialogEditCoupon,
     warningDialogConsumerCoupon,

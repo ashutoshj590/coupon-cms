@@ -5,7 +5,7 @@ import { CategoryService } from '../_services';
 import { HttpClient } from '@angular/common/http';
 import * as _ from 'lodash';
 import {MatSnackBar} from '@angular/material/snack-bar';
-
+import { apiUrl } from '../../_constant';
 
 @Component({
   selector: 'app-icons',
@@ -20,6 +20,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
     fileUploadForm: FormGroup;
     fileInputLabel: string;
 
+    apiURL = apiUrl.server;
   
    submitted = false;
    subCategory: any;
@@ -57,7 +58,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
       }
       const formData = new FormData();
       formData.append('uploadedImage', this.fileUploadForm.get('uploadedImage').value);
-      this.http.post<any>('https://www.mccpapp.com:8080/category/file', formData).subscribe(response => {
+      this.http.post<any>(this.apiURL +'/category/file', formData).subscribe(response => {
           console.log(response);
           if (response.response_code === 200) {
             // Reset the file input

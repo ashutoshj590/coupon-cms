@@ -25,8 +25,8 @@
               <th class="color emailStyle">Email<br> <input class="form-control" placeholder="Email" (keyup)="filterData($event, 'email')"></th>
               <th class="color typeStyle">User Type<br> <input class="form-control" placeholder="User Type" (keyup)="filterData($event, 'type')"></th>
               <th class="color deviceTypeStyle">Device Type<br> <input class="form-control" placeholder="Device Type" (keyup)="filterData($event, 'device_type')"></th>
-              <th class="color dateStyle">First Login<br> <input class="form-control" placeholder="Date" (keyup)="filterData($event, 'createdAt')"></th>
-              <th class="color dateStyle">Last Login<br> <input class="form-control" placeholder="Date" (keyup)="filterData($event, 'updatedAt')"></th>
+            <!--  <th class="color dateStyle">First Login<br> <input class="form-control" placeholder="Date" (keyup)="filterData($event, 'createdAt')"></th>
+              <th class="color dateStyle">Last Login<br> <input class="form-control" placeholder="Date" (keyup)="filterData($event, 'updatedAt')"></th> -->
 
               <button type="button" class="btn btn-primary fas fa-plus addUserbtn" (click)="clickOnAdd()">Add</button>
             </div>
@@ -68,7 +68,7 @@
 
             <!----  <tr *ngFor="let consumer of allConsumer.consumer_list;"> -->
                 <td>
-                  {{consumer.id}}
+                  {{pageSize *(p-1)+i+1}}
                 </td>
                 <td>
                   {{consumer.email}}
@@ -101,7 +101,7 @@
                     
                       <a class="dropdown-item" href="javascript:void(0)" (click)="clickOnCouponDetail(consumer.id)">Coupon Detail</a>
                      <!-- <a class="dropdown-item" href="javascript:void(0)" >Edit</a> -->
-                      <a class="dropdown-item" href="javascript:void(0)" (click)="clickReset(consumer.id)">Reset Password</a>
+                      <a class="dropdown-item" href="javascript:void(0)" (click)="clickReset()">Reset Password</a>
                       <a class="dropdown-item" href="javascript:void(0)" (click)="warningDialog(consumer.id)"><mat-icon aria-hidden="false" style="cursor: pointer;" (click)="warningDialog(merchant.user_id)" aria-label="Example home icon">delete_outline</mat-icon></a>
                     </div>
                   </div>
