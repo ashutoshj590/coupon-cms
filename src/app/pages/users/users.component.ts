@@ -16,7 +16,7 @@ import { DialogResetPassword } from '../merchant/dialog-reset';
 })
 export class ConsumerComponent implements OnInit {
 
-
+  showSpinner = false;
   allConsumer: any = [];
   public copy: string;
   allCoupons: any = [];
@@ -44,12 +44,21 @@ export class ConsumerComponent implements OnInit {
  
   ngOnInit(){
     this.getAllConsumer();
+    this.loadData();
   
   }
 
   sort(key){
     this.key = key;
     this.reverse = !this.reverse;
+  }
+
+  
+  loadData() {
+    this.showSpinner = true;
+    setTimeout(()=> {
+      this.showSpinner = false;
+    }, 3000);
   }
 
 

@@ -1,3 +1,26 @@
+<style>
+  .center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+.my-val{
+  margin-top: -14px;
+}
+
+.overlay{
+  height:100vh;
+  width:100%;
+  background-color:rgba(0, 0, 0, 0.286);
+  z-index:    10;
+  top:        0; 
+  left:       0; 
+  position:   fixed;
+}
+  </style>
 <h1 mat-dialog-title>Coupon List</h1>
 <div mat-dialog-content>
   
@@ -20,11 +43,22 @@
 
   <thead class="thead-light">
     <tr>
-        <th class="color">Short Name <br> <input class="form-control" placeholder="Short Name" (keyup)="filterData($event, 'short_name')"></th>
-        <th class="color">Coupon Type <br> <input class="form-control" placeholder="Coupon Type" (keyup)="filterData($event, 'coupon_type')"></th>
-        <th class="color">Coupon Code <br> <input class="form-control" placeholder="Coupon Code" (keyup)="filterData($event, 'coupon_code')"></th>
-        <th class="color">Date <br> <input class="form-control" placeholder="Date" (keyup)="filterData($event, 'date')"></th>
-
+      <div class="row">
+      <th class="color">
+      <mat-form-field appearance="fill">
+        <mat-label>Coupon Type</mat-label>
+        <mat-select (ngModelChange)="dropDownData($event, 'coupon_type')" ngModel>
+          <mat-option value="" selected>All </mat-option>
+       <mat-option value="custom"> Custom </mat-option>
+       <mat-option value="flash"> Flash </mat-option>
+       <mat-option value="community"> Community </mat-option>
+        </mat-select>
+      </mat-form-field>
+      </th>
+      <!--- <th class="color">Coupon Type <br> <input class="form-control" placeholder="Coupon Type" (keyup)="filterData($event, 'coupon_type')"></th>-->
+        <th class="color my-val"><br> <input class="form-control" placeholder="Coupon Code" (keyup)="filterData($event, 'coupon_code')"></th>
+        <th class="color my-val"><br> <input class="form-control" placeholder="Date" (keyup)="filterData($event, 'date')"></th>
+</div>
     </tr>
 </thead>
 
@@ -34,7 +68,6 @@
     <thead class="thead-light">
       <tr>
         <th scope="col" (click)="sort('id')">ID.NO&nbsp;<i class="fa fa-sort"></i></th>
-        <th scope="col" (click)="sort('short_name')">Short Name&nbsp;<i class="fa fa-sort"></i></th>
         <th scope="col" (click)="sort('coupon_type')">Coupon Type&nbsp;<i class="fa fa-sort"></i></th>
         <th scope="col" (click)="sort('start_time')">Start Time&nbsp;<i class="fa fa-sort"></i></th>
         <th scope="col" (click)="sort('end_time')">End Time&nbsp;<i class="fa fa-sort"></i></th>
@@ -47,17 +80,20 @@
 
       </tr>
     </thead>
+    <!--spinner-->
+    <div class="overlay" *ngIf="showSpinner">
+      <div class="center">
+          <mat-progress-spinner diameter=100 
+                              mode="indeterminate" 
+                    color="accent">
+        </mat-progress-spinner> 
+      </div>
+      </div>
+     <!--spinner-->
     <tbody>
       <tr *ngFor="let coupon of tempSellers | orderBy: key: reverse | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: tempTotalRecords }; let i = index">
         <td>
-           {{coupon.id}}
-        </td>
-        <td scope="row">
-          <div class="media align-items-center">
-            <div class="media-body">
-              <span class="mb-0 text-sm">{{coupon.short_name}}</span>
-            </div>
-          </div>
+          {{pageSize *(p-1)+i+1}}
         </td>
         <td>
             {{coupon.coupon_type}}
@@ -81,10 +117,7 @@
             {{coupon.coupon_code}}
         </td>
         <td>
-            {{coupon.createdAt | date:'dd/MM/yyyy'}}
-        </td>
-        <td>
-            {{coupon.status}}
+            {{coupon.createdAt | date:'short':'UTC-5'}}
         </td>
         <td>
           <mat-icon aria-hidden="false" style="cursor: pointer;" (click)="deleteCoupon(coupon.id)" aria-label="Example home icon">delete_outline</mat-icon>

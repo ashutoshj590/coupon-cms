@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
           this.loading = false;
         } else {
-            this.snackBar.open("Only Admin has the Authority to Login", "dismiss", {duration: 3000});
+            this.snackBar.open("Please Login with Admin Credentials", "dismiss", {duration: 3000});
             
         }
      

@@ -25,7 +25,7 @@ import { DialogEditCoupon } from './edit-coupon';
     p: number = 1;
     totalRecords: number = 0;
     pageSize: number = 5;
-
+    showSpinner = false;
     key: string = 'id';
     reverse: boolean = false;
     
@@ -38,7 +38,7 @@ import { DialogEditCoupon } from './edit-coupon';
     ngOnInit() {
              this.sellers = this.tempSellers = this.data.coupon_detail;
              this.totalRecords = this.tempTotalRecords = this.sellers.length;
-    
+             this.loadData();
     
     }
 
@@ -46,6 +46,16 @@ import { DialogEditCoupon } from './edit-coupon';
       this.key = key;
       this.reverse = !this.reverse;
     }
+
+    
+  loadData() {
+    this.showSpinner = true;
+    setTimeout(()=> {
+      this.showSpinner = false;
+    }, 1000);
+  }
+
+
 
 
     deleteCoupon(id) {
@@ -72,18 +82,6 @@ import { DialogEditCoupon } from './edit-coupon';
   filterData(event, type) {
     this.filterText = event.target.value;
     switch (type) {
-      case 'short_name':
-        this.tempSellers = this.sellers.filter(item =>
-          item.short_name != null && item.short_name.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
-        );
-        this.tempTotalRecords = this.tempSellers.length;
-        break;
-      case 'coupon_type':
-        this.tempSellers = this.sellers.filter(item =>
-          item.coupon_type != null && item.coupon_type.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
-        );
-        this.tempTotalRecords = this.tempSellers.length;
-        break;
       case 'coupon_code':
         this.tempSellers = this.sellers.filter(item =>
           item.coupon_code != null && item.coupon_code.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
@@ -103,6 +101,26 @@ import { DialogEditCoupon } from './edit-coupon';
     }
     this.p = 1;
   }
+
+
+  dropDownData(event, type) {
+    this.filterText = event;
+    switch (type) {
+      case 'coupon_type':
+        this.tempSellers = this.sellers.filter(item =>
+          item.coupon_type != null && item.coupon_type.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
+        );
+        this.tempTotalRecords = this.tempSellers.length;
+        break;
+      
+    }
+    if(this.filterText.length == 0) {
+      this.tempSellers = this.sellers;
+      this.tempTotalRecords = this.tempSellers.length;
+    }
+    this.p = 1;
+  }
+  
 
  
 

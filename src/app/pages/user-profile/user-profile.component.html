@@ -10,26 +10,35 @@
     margin-top: 22px;
     margin-left: 32px;
   }
+
+  .center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.overlay{
+  height:100vh;
+  width:100%;
+  background-color:rgba(0, 0, 0, 0.286);
+  z-index:    10;
+  top:        0; 
+  left:       0; 
+  position:   fixed;
+}
+
+  
+ 
   
 </style>
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">     
         <!-- Card stats -->
-      <thead class="thead-light">
-        <tr>
-          <div class="row">
-          <!---  <th class="color">Business Name <br> <input class="form-control" placeholder="Name" (keyup)="filterData($event, 'business_name')"></th> -->
-            <th class="color">Coupon Tpye <br> <input class="form-control" placeholder="Email" (keyup)="filterData($event, 'coupon_type')"></th>
-            <th class="color">Coupon Code <br> <input class="form-control" placeholder="Contact No" (keyup)="filterData($event, 'coupon_code')"></th>
-         <!--   <th class="color">Website <br> <input class="form-control" placeholder="Website" (keyup)="filterData($event, 'website')"></th> -->
-            <th class="color">expiry Date<br> <input class="form-control" placeholder="License No" (keyup)="filterData($event, 'expiry_date')"></th>
-            <th class="color">Date<br> <input class="form-control" placeholder="Date" (keyup)="filterData($event, 'date')"></th>
-
-          <!---  <button type="button" class="btn btn-primary fas fa-plus addMerchantbtn" (click)="clickOnAdd()">Add</button> -->
-            </div>
-        </tr>
-    </thead>
+ 
         
    
      
@@ -43,43 +52,89 @@
     <div class="col">
       <div class="card shadow">
         <div class="card-header border-0">
-          <h3 class="mb-0">Coupon List</h3>
+          <h3 class="mb-0">Request List</h3>
         </div>
         <div class="table-responsive">
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
                 <th scope="col" (click)="sort('id')">S.NO&nbsp;<i class="fa fa-sort"></i></th>
-                <th scope="col" (click)="sort('email')">Coupon Type&nbsp;<i class="fa fa-sort"></i></th>
-                <th scope="col" (click)="sort('type')">Coupon Code&nbsp;<i class="fa fa-sort"></i></th>
-                <th scope="col" (click)="sort('device_type')">expiry Date&nbsp;<i class="fa fa-sort"></i></th>
-                <th scope="col" (click)="sort('createdAt')">Date&nbsp;<i class="fa fa-sort"></i></th>
-              <!----  <th scope="col">Coupon Detail</th> -->
-                <th scope="col">Action</th>
+                <th scope="col" (click)="sort('email')">Email&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('date')">Date&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('time')">Time&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('detail')">Detail&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col">Allow</th>
+               <!---- <th scope="col" (click)="sort('createdAt')">createdAt&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('updatedAt')">updatedAt&nbsp;<i class="fa fa-sort"></i></th> -->
+                <th scope="col">Reject</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let coupon of tempSellers | orderBy: key: reverse | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: tempTotalRecords }; let i = index">
 
                 <td>
-                  {{i+1}}
+                  {{pageSize *(p-1)+i+1}}
                 </td>
                 <td>
-                  {{coupon.coupon_type}}
+                  {{coupon.consumer_email}}
                 </td>
                 <td>
-                  {{coupon.coupon_code}}
+                  {{coupon.date}}
                 </td>
                 <td>
-                  {{coupon.expiry_date}}
+                  {{coupon.time}}
                 </td>
                 <td>
+               {{coupon.detail}} 
+                </td>
+                <!--spinner-->
+                <div class="overlay" *ngIf="showSpinner">
+                  <div class="center">
+                      <mat-progress-spinner diameter=100 
+                                          mode="indeterminate" 
+                                color="accent">
+                    </mat-progress-spinner> 
+                  </div>
+                  </div>
+                
+              <!---- <td>
+                
+                  {{coupon.sub_category_name}}
+                </td> -->
+             <!----   <td>
                   {{coupon.createdAt | date:'dd/MM/yyyy' }}
-                </td> 
-              
+                </td>
                 <td>
-                  <mat-icon aria-hidden="false" style="cursor: pointer;" (click)="warningDialog(coupon.id)" aria-label="Example home icon">delete_outline</mat-icon>
+                  {{coupon.updatedAt | date:'dd/MM/yyyy' }}
+                </td>  -->
 
+             <!----   <td class="text-right">
+                  <div ngbDropdown placement="bottom-right">
+                    <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                      <div (click)="changeStatus(coupon.request_id)">
+                        <div *ngIf="coupon.is_allow == 1">
+                          <a class="dropdown-item" href="javascript:void(0)" style="color: green;">Allowed</a>
+                        </div>
+                        <div *ngIf="coupon.is_allow == 0">
+                          <a class="dropdown-item" href="javascript:void(0)" style="color: red;">Not Allowed</a>
+                        </div>
+                        </div>
+                      <a class="dropdown-item" href="javascript:void(0)"><mat-icon aria-hidden="false" style="cursor: pointer;" aria-label="Example home icon">delete_outline</mat-icon></a>
+                    </div>
+                  </div>
+                </td> -->
+                <td>
+                  <div (click)="changeStatusToOne(coupon.request_id)">
+                    <span class="btn btn-success" style="cursor: pointer;">Allow</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div (click)="changeStatusToZero(coupon.request_id)">
+                    <span class="btn btn-danger" style="cursor: pointer;">Reject</span>
+                    </div>
                 </td>
           
               </tr>

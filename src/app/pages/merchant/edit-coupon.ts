@@ -16,6 +16,8 @@ import { MerchantService } from '../_services';
     ) {}
 
     ngOnInit() {
+      console.log("detail of coupon");
+      console.log(this.data.coupon_detail);
       if (this.data.coupon_detail.flash_deal == 1){
         this.ischeckbox = true;
      } else {

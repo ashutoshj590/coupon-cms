@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AlertService, MerchantService } from '../_services';
+import { MerchantService } from '../_services';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import * as _ from 'lodash';
@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
   apiURL = apiUrl.server;
     
     userId: any;
-
+    showSpinner = false;
     key: string = 'id';
     reverse: boolean = false;
 
@@ -46,12 +46,21 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllMerchant(this.router.snapshot.params.id);
-
+    this.loadData();
     this.fileUploadForm = this.formBuilder.group({
       images: [''],
       user_id: ['']
     });
   }
+
+
+  loadData() {
+    this.showSpinner = true;
+    setTimeout(()=> {
+      this.showSpinner = false;
+    }, 1000);
+  }
+
 
 
  getAllMerchant(id) {

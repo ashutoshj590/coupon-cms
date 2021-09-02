@@ -45,6 +45,9 @@ export class CategoryComponent implements OnInit {
     categoryId: any;
     submitted = false;
     allCategory: any;
+
+    showSpinner = false;
+
     
     constructor(
         private categoryService: CategoryService,
@@ -61,6 +64,7 @@ export class CategoryComponent implements OnInit {
       ngOnInit() {
         this.getAllCategory();
         this.getSubCategory();
+        this.loadData();
 
         this.categoryForm = this.formBuilder.group({
           name: ['', Validators.required]
@@ -135,6 +139,16 @@ export class CategoryComponent implements OnInit {
       
 
     }
+
+
+
+    loadData() {
+      this.showSpinner = true;
+      setTimeout(()=> {
+        this.showSpinner = false;
+      }, 1000);
+    }
+  
   
 
     

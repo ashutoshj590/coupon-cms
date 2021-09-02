@@ -9,7 +9,7 @@ import { CategoryService } from '../_services';
 })
 export class DashboardComponent implements OnInit {
   alldata: any = [];
- 
+  showSpinner = false;
 
   constructor(
     private categoryService: CategoryService
@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.getAllCountsForAdmin();
-  
+    this.loadData();
     
   }
 
@@ -29,6 +29,16 @@ export class DashboardComponent implements OnInit {
     });
    
   }
+
+
+  loadData() {
+    this.showSpinner = true;
+    setTimeout(()=> {
+      this.showSpinner = false;
+    }, 1000);
+  }
+
+
 
 
   

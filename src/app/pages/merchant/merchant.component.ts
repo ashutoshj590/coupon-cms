@@ -18,7 +18,7 @@ import { DialogResetPassword } from './dialog-reset';
 })
 export class MerchantComponent implements OnInit {
 
-
+  showSpinner = false;
   allMerchants: any = [];
   allCoupons: any = [];
   allImages: any = [];
@@ -50,7 +50,15 @@ export class MerchantComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllMerchant();
+    this.loadData();
        
+  }
+
+  loadData() {
+    this.showSpinner = true;
+    setTimeout(()=> {
+      this.showSpinner = false;
+    }, 3000);
   }
 
 
@@ -167,18 +175,18 @@ clickReset() {
         );
         this.tempTotalRecords = this.tempSellers.length;
         break;
-      /*  case 'createdAt':
+        case 'country_name':
           this.tempSellers = this.sellers.filter(item =>
-            item.createdAt != null && item.createdAt.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
+            item.country_name != null && item.country_name.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
           );
           this.tempTotalRecords = this.tempSellers.length;
           break;
-          case 'updatedAt':
+          case 'zipcode_new':
           this.tempSellers = this.sellers.filter(item =>
-            item.updatedAt != null && item.updatedAt.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
+            item.zipcode_new != null && item.zipcode_new.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
           );
           this.tempTotalRecords = this.tempSellers.length;
-          break;*/
+          break;
     }
     if(this.filterText.length == 0) {
       this.tempSellers = this.sellers;

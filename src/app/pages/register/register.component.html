@@ -1,3 +1,23 @@
+<style>
+   .center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.overlay{
+  height:100vh;
+  width:100%;
+  background-color:rgba(0, 0, 0, 0.286);
+  z-index:    10;
+  top:        0; 
+  left:       0; 
+  position:   fixed;
+}
+  </style>
 <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 250px; background-position: center top;">
   <!-- Mask -->
   <span class="mask bg-gradient-danger opacity-8"></span>
@@ -120,6 +140,16 @@
             </div>
           </div>
         </div>
+        <!--Spinner code-->
+        <div class="overlay" *ngIf="showSpinner">
+          <div class="center">
+              <mat-progress-spinner diameter=100 
+                                  mode="indeterminate" 
+                        color="accent">
+            </mat-progress-spinner> 
+          </div>
+          </div>
+          <!--Spinner code-->
         <div class="card-body">
           <form>
             <h6 class="heading-small text-muted mb-4">User information</h6>

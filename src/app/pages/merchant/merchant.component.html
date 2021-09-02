@@ -10,6 +10,25 @@
     margin-top: 22px;
     margin-left: 32px;
   }
+
+  .center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.overlay{
+  height:100vh;
+  width:100%;
+  background-color:rgba(0, 0, 0, 0.286);
+  z-index:    10;
+  top:        0; 
+  left:       0; 
+  position:   fixed;
+}
   
 </style>
 
@@ -27,8 +46,8 @@
             <th class="color">Contact No <br> <input class="form-control" placeholder="Contact No" (keyup)="filterData($event, 'phone_no')"></th>
          <!--   <th class="color">Website <br> <input class="form-control" placeholder="Website" (keyup)="filterData($event, 'website')"></th> -->
             <th class="color">License No<br> <input class="form-control" placeholder="License No" (keyup)="filterData($event, 'business_license_no')"></th>
-         <!----   <th class="color">First Login<br> <input class="form-control" placeholder="Date" (keyup)="filterData($event, 'createdAt')"></th> -->
-          <!----  <th class="color">last Login<br> <input class="form-control" placeholder="Date" (keyup)="filterData($event, 'updatedAt')"></th> -->
+         <th class="color">Country<br> <input class="form-control" placeholder="Date" (keyup)="filterData($event, 'country_name')"></th>
+          <th class="color">Zipcode<br> <input class="form-control" placeholder="Zipcode" (keyup)="filterData($event, 'zipcode_new')"></th>
 
             <button type="button" class="btn btn-primary fas fa-plus addMerchantbtn" (click)="clickOnAdd()">Add</button> 
             </div>
@@ -61,14 +80,26 @@
              <!--   <th scope="col" (click)="sort('website')">Website&nbsp;<i class="fa fa-sort"></i></th> -->
               <th scope="col" (click)="sort('business_license_no')">License No&nbsp;<i class="fa fa-sort"></i></th> 
               <!---  <th scope="col" (click)="sort('sub_category_id')">Sub Category&nbsp;<i class="fa fa-sort"></i></th> -->
+              <th scope="col" (click)="sort('country_name')">Country&nbsp;<i class="fa fa-sort"></i></th>
+              <th scope="col" (click)="sort('zipcode_new')">Zipcode&nbsp;<i class="fa fa-sort"></i></th>
               <th scope="col" (click)="sort('createdAt')">First Login&nbsp;<i class="fa fa-sort"></i></th>
               <th scope="col" (click)="sort('updateddAt')">Last Login&nbsp;<i class="fa fa-sort"></i></th>
+             
              <!---  <th scope="col">Status</th>
                 <th scope="col">Merchant Detail</th>
                 <th scope="col">Update</th>-->
                 <th scope="col">Action</th>
               </tr>
             </thead>
+            <!--spinner code-->
+            <div class="overlay" *ngIf="showSpinner">
+              <div class="center">
+                  <mat-progress-spinner diameter=100 
+                                      mode="indeterminate" 
+                            color="accent">
+                </mat-progress-spinner> 
+              </div>
+              </div>
             <tbody>
               <tr *ngFor="let merchant of tempSellers | orderBy: key: reverse | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: tempTotalRecords }; let i = index">
                 <td>
@@ -86,15 +117,20 @@
                 <td>
                   {{merchant.phone_no}}
                 </td>
-             <!--  <td>
-                  {{merchant.website}}
-                </td> -->
+           
                 <td>
                   {{merchant.business_license_no}}
                 </td>
-             <!--   <td>
-                  {{merchant.sub_category_id}}
-                </td> -->
+               <td>
+                <a routerLinkActive="active" [routerLink]="['/maps',merchant.formatted_address,merchant.lat,merchant.lang]">
+                  {{merchant.country_name}}
+                  </a>
+                </td>    
+              <td>
+                <a routerLinkActive="active" [routerLink]="['/maps',merchant.formatted_address,merchant.lat,merchant.lang]">
+                  {{merchant.zipcode_new}}
+                  </a>
+                </td>
                 <td>
                   {{merchant.createdAt | date:'short':'UTC-5'}}
                 </td>
@@ -141,6 +177,9 @@
                           <a class="dropdown-item" href="javascript:void(0)" (click)="clickOnCouponDetail(merchant.user_id)">Coupon Detail</a>
                           <a class="dropdown-item" href="javascript:void(0)" (click)="clickOnEdit(merchant.user_id)">Edit</a>
                           <a class="dropdown-item" href="javascript:void(0)" (click)="clickReset()">Reset Password</a>
+                          <a routerLinkActive="active" [routerLink]="['/maps',merchant.formatted_address,merchant.lat,merchant.lang]">
+                            <mat-icon aria-hidden="false" style="cursor: pointer; margin-left: 12px;" aria-label="Example home icon"> location_on</mat-icon>
+                          </a>
                           <a class="dropdown-item" href="javascript:void(0)" (click)="warningDialog(merchant.user_id)"><mat-icon aria-hidden="false" style="cursor: pointer;" (click)="warningDialog(merchant.user_id)" aria-label="Example home icon">delete_outline</mat-icon></a>
                         </div>
                       </div>

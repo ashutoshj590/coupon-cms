@@ -18,6 +18,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MerchantComponent } from './pages/merchant/merchant.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { RegisterComponent } from './pages/register/register.component';
+import {MapsComponent} from './pages/maps/maps.component';
 import { ConsumerComponent } from './pages/users/users.component';
 import { warningDialogComponent } from './pages/category/category.component';
 import { warningDialogMerchant } from './pages/merchant/merchant.component';
@@ -39,6 +40,7 @@ import {  MatIconModule  } from '@angular/material/icon';
 import {  MatTreeModule  } from '@angular/material/tree';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { BrowserModule } from '@angular/platform-browser';
 import { FileUploadModule } from 'ng2-file-upload';
 import { CommonModule } from '@angular/common';
@@ -65,6 +67,7 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
     MatButtonModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
     BrowserModule,
     CommonModule,
     FileUploadModule,
@@ -80,6 +83,7 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
     AdminLayoutComponent,
     AuthLayoutComponent,
     LoginComponent,
+    MapsComponent,
     DashboardComponent,
     MerchantComponent,
     CategoryComponent,

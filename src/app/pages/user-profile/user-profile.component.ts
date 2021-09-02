@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AlertService, MerchantService } from '../_services';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import * as _ from 'lodash';
 //import { DialogForConsumer } from './dialog-consumer'
 
@@ -16,6 +17,8 @@ export class UserProfileComponent implements OnInit {
   public copy: string;
   allCoupons: any = [];
 
+  allrequests: any = [];
+
     filterText = '';
     sellers = [];
     tempSellers = [];
@@ -26,18 +29,21 @@ export class UserProfileComponent implements OnInit {
 
     key: string = 'id';
     reverse: boolean = false;
+    showSpinner = false;
 
   constructor(
     private MerchantService: MerchantService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     private http: HttpClient,
+    private snackBar: MatSnackBar
     
   ) { }
 
  
   ngOnInit(){
-    this.getAllCops();
+    this.getAllreq();
+    this.loadData();
   
   }
 
@@ -46,14 +52,41 @@ export class UserProfileComponent implements OnInit {
     this.reverse = !this.reverse;
   }
 
+  loadData() {
+    this.showSpinner = true;
+    setTimeout(()=> {
+      this.showSpinner = false;
+    }, 1000);
+  }
 
 
-  getAllCops() {
-    this.MerchantService.getAllCoupons().subscribe(data => {
+  getAllreq() {
+    this.MerchantService.getAllRequestsDetail().subscribe(data => {
      
-         this.sellers = this.tempSellers = data.coupon_detail;
+         this.sellers = this.tempSellers = data.request_list;
          this.totalRecords = this.tempTotalRecords = this.sellers.length;
        }); 
+   
+  }
+
+
+  changeStatusToOne(id) {
+    this.MerchantService.allowRequests(id).subscribe((data: {}) => {
+      this.allrequests = data;
+      this.snackBar.open("Request Allowed Successfully!", "dismiss", {duration: 3000});
+      window.location.reload()
+    });
+   
+  }
+
+
+
+  changeStatusToZero(id) {
+    this.MerchantService.rejectRequests(id).subscribe((data: {}) => {
+      this.allrequests = data;
+      this.snackBar.open("Request denied Successfully!", "dismiss", {duration: 3000});
+      window.location.reload()
+    });
    
   }
 

@@ -158,6 +158,39 @@ export class MerchantService {
     }
 
 
+
+    allowRequests(id: any) {
+      const httpOpt = {
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Accept': 'application/json, text/plain'
+          })
+        };
+      return this.http.post<any>(this.apiURL + '/coupon/allow-request-admin', JSON.stringify({request_id:id}), httpOpt)
+          .pipe(map(response => {
+              console.log(response);
+              return response;
+          }));
+  }
+
+
+
+  rejectRequests(id: any) {
+    const httpOpt = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Accept': 'application/json, text/plain'
+        })
+      };
+    return this.http.post<any>(this.apiURL + '/coupon/reject-request-admin', JSON.stringify({request_id:id}), httpOpt)
+        .pipe(map(response => {
+            console.log(response);
+            return response;
+        }));
+}
+
+
+
     deleteMerchant(id: any) { 
         const httpOpt = {
             headers: new HttpHeaders({
@@ -273,8 +306,8 @@ export class MerchantService {
 
 
 
-getAllCoupons(): Observable<any> {
-  return this.http.post<any>(this.apiURL + '/coupon/get-all-coupons-by-detail', null)
+getAllRequestsDetail(): Observable<any> {
+  return this.http.post<any>(this.apiURL + '/coupon/get-all-request', null)
       .pipe(map(response => {
           console.log(response);
           return response;
