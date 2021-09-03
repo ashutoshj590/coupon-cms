@@ -26,13 +26,14 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 
  
   onSubmit(data){
+    console.log(data);
     this.merchantService.addUserDetail(data).subscribe(data => {
       if(data.response_code === 200){
-      this.snackBar.open("User added Successfully!!", "dismiss", {duration: 3000});
-         window.location.reload()
+      this.snackBar.open("User added Successfully!", "dismiss", {duration: 3000});
+       window.location.reload()
       } else if (data.response_code === 403) {
         this.snackBar.open(data.response_message.response, "dismiss", {duration: 3000});
-        window.location.reload()
+       // window.location.reload()
       }
       });
   }

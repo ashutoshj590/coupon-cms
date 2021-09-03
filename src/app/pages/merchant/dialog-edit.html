@@ -19,54 +19,54 @@
           </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Address</mat-label>
-          <input matInput name="address" ngModel="{{data.merchant_detail.address}}" >
+          <input matInput name="address" ngModel="{{data.merchant_detail.address}}" required>
         </mat-form-field>
         <mat-form-field class="input" appearance="fill">
             <mat-label>City</mat-label>
-            <input matInput name="city" ngModel="{{data.merchant_detail.city}}">
+            <input matInput name="city" ngModel="{{data.merchant_detail.city}}" required>
           </mat-form-field>
         <mat-form-field class="input" appearance="fill">
             <mat-label>State</mat-label>
-            <input matInput name="state" ngModel="{{data.merchant_detail.state}}">
+            <input matInput name="state" ngModel="{{data.merchant_detail.state}}" required>
           </mat-form-field>
           <br>
           <mat-form-field appearance="fill">
             <mat-label>Zipcode</mat-label>
-            <input matInput name="zipcode" ngModel="{{data.merchant_detail.zipcode}}">
+            <input matInput name="zipcode" ngModel="{{data.merchant_detail.zipcode}}" required>
           </mat-form-field>
           <mat-form-field class="input" appearance="fill">
             <mat-label>business Name</mat-label>
-            <input matInput name="business_name" ngModel="{{data.merchant_detail.business_name}}">
+            <input matInput name="business_name" ngModel="{{data.merchant_detail.business_name}}" required>
           </mat-form-field>
           <mat-form-field class="input" appearance="fill">
             <mat-label>Tagline</mat-label>
-            <input matInput name="tagline" ngModel="{{data.merchant_detail.tagline}}">
+            <input matInput name="tagline" ngModel="{{data.merchant_detail.tagline}}" required>
           </mat-form-field>
           <br>
           <mat-form-field appearance="fill">
             <mat-label>Website</mat-label>
-            <input matInput name="website" ngModel="{{data.merchant_detail.website}}">
+            <input matInput name="website" ngModel="{{data.merchant_detail.website}}"required>
           </mat-form-field>
           <mat-form-field class="input" appearance="fill">
             <mat-label>Phone No</mat-label>
-            <input matInput name="phone_no" ngModel="{{data.merchant_detail.phone_no}}">
+            <input matInput name="phone_no" ngModel="{{data.merchant_detail.phone_no}}" required>
           </mat-form-field>
           <mat-form-field class="input" appearance="fill">
             <mat-label>Business License No</mat-label>
-            <input matInput name="business_license_no" ngModel="{{data.merchant_detail.business_license_no}}">
+            <input matInput name="business_license_no" ngModel="{{data.merchant_detail.business_license_no}}" required>
           </mat-form-field>
           <br>
           <mat-form-field appearance="fill">
             <mat-label>Description</mat-label>
-            <input matInput name="description" ngModel="{{data.merchant_detail.description}}">
+            <input matInput name="description" ngModel="{{data.merchant_detail.description}}" required>
           </mat-form-field>
           <mat-form-field class="input" appearance="fill">
             <mat-label>Opening Time</mat-label>
-            <input matInput name="opening_time" ngModel="{{data.merchant_detail.opening_time}}">
+            <input matInput name="opening_time" ngModel="{{data.merchant_detail.opening_time}}" required>
           </mat-form-field>
           <mat-form-field class="input" appearance="fill">
             <mat-label>Closing Time</mat-label>
-            <input matInput name="closing_time" ngModel="{{data.merchant_detail.closing_time}}">
+            <input matInput name="closing_time" ngModel="{{data.merchant_detail.closing_time}}" required>
           </mat-form-field>
           <br>
         <!----  <mat-form-field appearance="fill">
@@ -75,7 +75,7 @@
           </mat-form-field>--> 
           <mat-form-field appearance="fill">
             <mat-label>Select Category</mat-label>
-            <mat-select name="sub_category_id" ngModel multiple>
+            <mat-select name="sub_category_id" ngModel multiple required>
               <mat-option *ngFor="let category of categoryDetail" [value]="category.sub_category_id"> {{category.sub_cate_name}}</mat-option>
             </mat-select>
           </mat-form-field>

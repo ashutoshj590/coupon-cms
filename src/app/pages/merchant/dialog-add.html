@@ -15,7 +15,7 @@
         <form #userPost="ngForm" (ngSubmit)="onSubmit(userPost.value)" >
           <mat-form-field appearance="fill">
             <mat-label>Select User</mat-label>
-            <mat-select name="user_id" ngModel>
+            <mat-select name="user_id" ngModel required>
            <mat-option *ngFor="let user of usersDetail" [value]="user.id">
             {{user.email}}
             </mat-option>
@@ -23,54 +23,54 @@
           </mat-form-field>
         <mat-form-field appearance="fill" class="input">
           <mat-label>Address</mat-label>
-          <input matInput name="address" ngModel>
+          <input matInput name="address" ngModel required>
         </mat-form-field>
         <mat-form-field class="input" appearance="fill">
             <mat-label>City</mat-label>
-            <input matInput name="city" ngModel>
+            <input matInput name="city" ngModel required>
           </mat-form-field>
         <mat-form-field class="input" appearance="fill">
             <mat-label>State</mat-label>
-            <input matInput name="state" ngModel>
+            <input matInput name="state" ngModel required>
           </mat-form-field>
           <br>
           <mat-form-field appearance="fill">
             <mat-label>Zipcode</mat-label>
-            <input matInput name="zipcode" ngModel>
+            <input matInput name="zipcode" ngModel required>
           </mat-form-field>
           <mat-form-field class="input" appearance="fill">
             <mat-label>business Name</mat-label>
-            <input matInput name="business_name" ngModel>
+            <input matInput name="business_name" ngModel required>
           </mat-form-field>
           <mat-form-field class="input" appearance="fill">
             <mat-label>Tagline</mat-label>
-            <input matInput name="tagline" ngModel>
+            <input matInput name="tagline" ngModel required>
           </mat-form-field>
           <br>
           <mat-form-field appearance="fill">
             <mat-label>Website</mat-label>
-            <input matInput name="website" ngModel>
+            <input matInput name="website" ngModel required>
           </mat-form-field>
           <mat-form-field class="input" appearance="fill">
             <mat-label>Phone No</mat-label>
-            <input matInput name="phone_no" ngModel>
+            <input matInput name="phone_no" ngModel required>
           </mat-form-field>
           <mat-form-field class="input" appearance="fill">
             <mat-label>Business License No</mat-label>
-            <input matInput name="business_license_no" ngModel>
+            <input matInput name="business_license_no" ngModel required>
           </mat-form-field>
           <br>
           <mat-form-field appearance="fill">
             <mat-label>Description</mat-label>
-            <input matInput name="description" ngModel>
+            <input matInput name="description" ngModel required>
           </mat-form-field>
           <mat-form-field class="input" appearance="fill">
             <mat-label>Opening Time</mat-label>
-            <input matInput name="opening_time" ngModel>
+            <input matInput name="opening_time" ngModel required>
           </mat-form-field>
           <mat-form-field class="input" appearance="fill">
             <mat-label>Closing Time</mat-label>
-            <input matInput name="closing_time" ngModel>
+            <input matInput name="closing_time" ngModel required>
           </mat-form-field>
           <br>
          <!---- <mat-form-field appearance="fill">
@@ -83,7 +83,7 @@
           </mat-form-field> -->
           <mat-form-field appearance="fill">
             <mat-label>Select Category</mat-label>
-            <mat-select name="sub_category_id" ngModel multiple>
+            <mat-select name="sub_category_id" ngModel multiple required>
               <mat-option *ngFor="let category of categoryDetail" [value]="category.sub_category_id"> {{category.sub_cate_name}}</mat-option>
             </mat-select>
           </mat-form-field>

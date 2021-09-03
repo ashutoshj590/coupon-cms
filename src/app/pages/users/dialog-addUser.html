@@ -15,17 +15,17 @@
         <form #userPost="ngForm" (ngSubmit)="onSubmit(userPost.value)" >
         <mat-form-field appearance="fill" class="input">
           <mat-label>Email</mat-label>
-          <input matInput name="email" ngModel>
+          <input matInput name="email" ngModel [formControl]="email"  required>
         </mat-form-field>
         <br>
         <mat-form-field class="input" appearance="fill">
             <mat-label>Password</mat-label>
-            <input matInput name="password" type="password" ngModel>
+            <input matInput name="password" type="password" ngModel required>
           </mat-form-field>
           <br>
           <mat-form-field class="input" appearance="fill">
               <mat-label>Device Type</mat-label>
-              <select matNativeControl name="device_type" ngModel>
+              <select matNativeControl name="device_type" ngModel required>
                 <option value="android">Android</option>
                 <option value="apple">iOS</option>
               </select>
