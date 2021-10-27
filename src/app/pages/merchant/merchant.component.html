@@ -46,7 +46,7 @@
             <th class="color">Contact No <br> <input class="form-control" placeholder="Contact No" (keyup)="filterData($event, 'phone_no')"></th>
          <!--   <th class="color">Website <br> <input class="form-control" placeholder="Website" (keyup)="filterData($event, 'website')"></th> -->
             <th class="color">License No<br> <input class="form-control" placeholder="License No" (keyup)="filterData($event, 'business_license_no')"></th>
-         <th class="color">Country<br> <input class="form-control" placeholder="Country" (keyup)="filterData($event, 'country_name')"></th>
+         <th class="color">State<br> <input class="form-control" placeholder="State" (keyup)="filterData($event, 'country_name')"></th>
           <th class="color">Zipcode<br> <input class="form-control" placeholder="Zipcode" (keyup)="filterData($event, 'zipcode_new')"></th>
 
             <button type="button" class="btn btn-primary fas fa-plus addMerchantbtn" (click)="clickOnAdd()">Add</button> 
@@ -80,7 +80,7 @@
              <!--   <th scope="col" (click)="sort('website')">Website&nbsp;<i class="fa fa-sort"></i></th> -->
               <th scope="col" (click)="sort('business_license_no')">License No&nbsp;<i class="fa fa-sort"></i></th> 
               <!---  <th scope="col" (click)="sort('sub_category_id')">Sub Category&nbsp;<i class="fa fa-sort"></i></th> -->
-              <th scope="col" (click)="sort('country_name')">Country&nbsp;<i class="fa fa-sort"></i></th>
+              <th scope="col" (click)="sort('country_name')">State&nbsp;<i class="fa fa-sort"></i></th>
               <th scope="col" (click)="sort('zipcode_new')">Zipcode&nbsp;<i class="fa fa-sort"></i></th>
               <th scope="col" (click)="sort('createdAt')">First Login&nbsp;<i class="fa fa-sort"></i></th>
               <th scope="col" (click)="sort('updateddAt')">Last Login&nbsp;<i class="fa fa-sort"></i></th>
@@ -123,7 +123,7 @@
                 </td>
                <td>
                 <a routerLinkActive="active" [routerLink]="['/maps',merchant.formatted_address,merchant.lat,merchant.lang]">
-                  {{merchant.country_name}}
+                  {{merchant.state_name}}
                   </a>
                 </td>    
               <td>

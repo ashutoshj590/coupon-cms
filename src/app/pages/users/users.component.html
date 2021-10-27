@@ -46,6 +46,8 @@
               <th class="color deviceTypeStyle">Device Type<br> <input class="form-control" placeholder="Device Type" (keyup)="filterData($event, 'device_type')"></th>
             <!--  <th class="color dateStyle">First Login<br> <input class="form-control" placeholder="Date" (keyup)="filterData($event, 'createdAt')"></th>
               <th class="color dateStyle">Last Login<br> <input class="form-control" placeholder="Date" (keyup)="filterData($event, 'updatedAt')"></th> -->
+              <th class="color">State<br> <input class="form-control" placeholder="State" (keyup)="filterData($event, 'country_name')"></th>
+              <th class="color">Zipcode<br> <input class="form-control" placeholder="Zipcode" (keyup)="filterData($event, 'zipcode_new')"></th>
 
               <button type="button" class="btn btn-primary fas fa-plus addUserbtn" (click)="clickOnAdd()">Add</button>
             </div>
@@ -76,6 +78,8 @@
                 <th scope="col" (click)="sort('email')">Email&nbsp;<i class="fa fa-sort"></i></th>
                 <th scope="col" (click)="sort('type')">User Type&nbsp;<i class="fa fa-sort"></i></th>
                 <th scope="col" (click)="sort('device_type')">Device Type&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('country_name')">State&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('zipcode_new')">Zipcode&nbsp;<i class="fa fa-sort"></i></th>
                 <th scope="col" (click)="sort('createdAt')">First Login&nbsp;<i class="fa fa-sort"></i></th>
                 <th scope="col" (click)="sort('updateddAt')">Last Login&nbsp;<i class="fa fa-sort"></i></th>
               <!---  <th scope="col">Coupon Detail</th> -->
@@ -108,6 +112,16 @@
                   {{consumer.device_type}}
                 </td>
                 <td>
+                  <a routerLinkActive="active" [routerLink]="['/maps',consumer.formatted_address,consumer.lat,consumer.lang]">
+                    {{consumer.state_name}}
+                    </a>
+                  </td>    
+                <td>
+                  <a routerLinkActive="active" [routerLink]="['/maps',consumer.formatted_address,consumer.lat,consumer.lang]">
+                    {{consumer.zipcode_new}}
+                    </a>
+                  </td>
+                <td>
                   {{consumer.createdAt | date:'short':'UTC-5'}}
                 </td>
                 <td>
@@ -130,6 +144,9 @@
                       <a class="dropdown-item" href="javascript:void(0)" (click)="clickOnCouponDetail(consumer.id)">Coupon Detail</a>
                      <!-- <a class="dropdown-item" href="javascript:void(0)" >Edit</a> -->
                       <a class="dropdown-item" href="javascript:void(0)" (click)="clickReset()">Reset Password</a>
+                      <a routerLinkActive="active" [routerLink]="['/maps',consumer.formatted_address,consumer.lat,consumer.lang]">
+                        <mat-icon aria-hidden="false" style="cursor: pointer; margin-left: 12px;" aria-label="Example home icon"> location_on</mat-icon>
+                      </a>
                       <a class="dropdown-item" href="javascript:void(0)" (click)="warningDialog(consumer.id)"><mat-icon aria-hidden="false" style="cursor: pointer;" (click)="warningDialog(merchant.user_id)" aria-label="Example home icon">delete_outline</mat-icon></a>
                     </div>
                   </div>

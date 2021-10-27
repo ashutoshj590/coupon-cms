@@ -148,6 +148,18 @@ export class ConsumerComponent implements OnInit {
             );
             this.tempTotalRecords = this.tempSellers.length;
             break; */
+            case 'country_name':
+              this.tempSellers = this.sellers.filter(item =>
+                item.country_name != null && item.country_name.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
+              );
+              this.tempTotalRecords = this.tempSellers.length;
+              break;
+              case 'zipcode_new':
+              this.tempSellers = this.sellers.filter(item =>
+                item.zipcode_new != null && item.zipcode_new.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
+              );
+              this.tempTotalRecords = this.tempSellers.length;
+              break;
   
     }
     if(this.filterText.length == 0) {
