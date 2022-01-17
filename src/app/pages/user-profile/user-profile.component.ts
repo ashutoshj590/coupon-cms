@@ -47,6 +47,8 @@ export class UserProfileComponent implements OnInit {
   
   }
 
+
+
   sort(key){
     this.key = key;
     this.reverse = !this.reverse;

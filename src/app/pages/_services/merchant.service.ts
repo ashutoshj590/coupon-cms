@@ -133,7 +133,7 @@ export class MerchantService {
           'Accept': 'application/json, text/plain'
         })
       };
-    return this.http.post<any>(this.apiURL + '/coupon/get-coupon-detail', JSON.stringify({coupon_id:id}), httpOpt)
+    return this.http.post<any>(this.apiURL + '/coupon/get-coupon-detail-admin', JSON.stringify({coupon_id:id}), httpOpt)
         .pipe(map(response => {
             console.log(response);
             return response;

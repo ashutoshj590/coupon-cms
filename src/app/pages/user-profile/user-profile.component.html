@@ -67,6 +67,7 @@
                <!---- <th scope="col" (click)="sort('createdAt')">createdAt&nbsp;<i class="fa fa-sort"></i></th>
                 <th scope="col" (click)="sort('updatedAt')">updatedAt&nbsp;<i class="fa fa-sort"></i></th> -->
                 <th scope="col">Reject</th>
+           <!--<th scope="col">Status</th> -->
               </tr>
             </thead>
             <tbody>
@@ -128,14 +129,17 @@
                 </td> -->
                 <td>
                   <div (click)="changeStatusToOne(coupon.request_id)">
-                    <span class="btn btn-success" style="cursor: pointer;">Allow</span>
+                    <button class="btn btn-success" style="cursor: pointer;" [disabled]="coupon.is_allow != 2">Allow</button>
                     </div>
                   </td>
                   <td>
                     <div (click)="changeStatusToZero(coupon.request_id)">
-                    <span class="btn btn-danger" style="cursor: pointer;">Reject</span>
+                    <button class="btn btn-danger" style="cursor: pointer;" [disabled]="coupon.is_allow != 2">Reject</button>
                     </div>
                 </td>
+              <!---  <td>
+                  {{coupon.is_allow}} 
+                   </td> -->
           
               </tr>
             
