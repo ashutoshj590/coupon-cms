@@ -5,7 +5,8 @@ import { first } from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { AlertService, AuthenticationService } from '../_services';
 import {MatDialog} from '@angular/material/dialog';
-import { DialogResetPassword } from '../merchant/dialog-reset';
+//import { DialogResetPassword } from '../merchant/dialog-reset';
+import { DialogForgotPassword } from '../login/dialog-forgot';
 
 @Component({
   selector: 'app-dashboard',
@@ -88,8 +89,8 @@ export class LoginComponent implements OnInit {
        
        }); 
   } */
-  clickReset() {
-    this.dialog.open(DialogResetPassword, {});
+  clickForgot() {
+    this.dialog.open(DialogForgotPassword, {});
    
 }
 

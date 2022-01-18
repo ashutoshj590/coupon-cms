@@ -242,6 +242,23 @@ export class MerchantService {
     }
 
 
+    forgotPassword(formData) { 
+      return this.http.post<any>(this.apiURL + '/auth/forgot-password', formData)
+          .pipe(map(response => {
+              console.log(response);
+              return response;
+          }));
+    }
+
+    resetPassword(formData) { 
+      return this.http.post<any>(this.apiURL + '/auth/reset-password', formData)
+          .pipe(map(response => {
+              console.log(response);
+              return response;
+          }));
+    }
+
+
   deleteCouponMerchant(id: any) { 
     const httpOpt = {
         headers: new HttpHeaders({

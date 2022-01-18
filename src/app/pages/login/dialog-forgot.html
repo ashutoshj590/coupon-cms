@@ -9,16 +9,20 @@
   
     
 </style>
-<h1>Change Password</h1>
+<h1>Forgot Password</h1>
 <div class="row">
     <div class="example-container">
         <form #userPost="ngForm" (ngSubmit)="onSubmit(userPost.value)" >
           <mat-form-field appearance="fill" class="input">
             <mat-label>Enter Email</mat-label>
-            <input matInput name="email" ngModel>
+            <input matInput type="email" name="email" ngModel>
           </mat-form-field>
           <br>
-          <mat-form-field class="input" appearance="fill">
+       <!--<mat-form-field class="input" appearance="fill">
+            <mat-label>Enter OTP</mat-label>
+            <input matInput name="otp" type="text" ngModel>
+          </mat-form-field>
+         <mat-form-field class="input" appearance="fill">
               <mat-label>New Password</mat-label>
               <input matInput name="new_password" type="password" ngModel>
             </mat-form-field>
@@ -26,7 +30,7 @@
             <mat-form-field class="input" appearance="fill">
               <mat-label>Confirm Password</mat-label>
               <input matInput name="confirm_password" type="password" ngModel>
-            </mat-form-field>
+            </mat-form-field> -->
           <mat-dialog-actions> 
             <button class="btn btn-primary button-submit" type="submit">Submit</button> 
           </mat-dialog-actions> 
