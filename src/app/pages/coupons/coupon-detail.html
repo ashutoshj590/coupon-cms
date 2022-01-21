@@ -1,0 +1,14 @@
+
+<h1>Coupon Detail</h1>
+<label *ngIf="data.coupon_detail.coupon_code != null"><u>Coupon Code</u></label>
+<p>{{data.coupon_detail.coupon_code}}</p>
+<label *ngIf="data.coupon_detail.days != null"><u>Week Days</u></label>
+<p>{{data.coupon_detail.days}}</p>
+<label *ngIf="data.coupon_detail.description != null"><u>Description</u></label>
+<p>{{data.coupon_detail.description}}</p>
+<label *ngIf="data.coupon_detail.restriction != null"><u>Restriction</u></label>
+<p>{{data.coupon_detail.restriction}}</p>
+
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+  </mat-dialog-actions>

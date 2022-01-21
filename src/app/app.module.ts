@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MerchantComponent } from './pages/merchant/merchant.component';
+import { CouponsComponent } from './pages/coupons/coupons.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { RegisterComponent } from './pages/register/register.component';
 import {MapsComponent} from './pages/maps/maps.component';
@@ -24,6 +25,7 @@ import { warningDialogComponent } from './pages/category/category.component';
 import { warningDialogMerchant } from './pages/merchant/merchant.component';
 import { warningDialogConsumer } from './pages/users/users.component';
 import { warningDialogCoupon } from './pages/merchant/dialog-coupon';
+import { CouponDetail } from './pages/coupons/coupon-detail';
 import {DialogDataExampleDialog} from './pages/category/dialog-data-example';
 import {DialogForCoupon} from './pages/merchant/dialog-coupon';
 import {DialogEdit} from './pages/merchant/dialog-edit'; 
@@ -88,6 +90,7 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
     MapsComponent,
     DashboardComponent,
     MerchantComponent,
+    CouponsComponent,
     CategoryComponent,
     ConsumerComponent,
     DialogDataExampleDialog,
@@ -97,6 +100,7 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
     DialogGallary,
     warningDialogMerchant,
     DialogEdit,
+    CouponDetail,
     DialogAdd,
     DialogAddUser,
     DialogResetPassword,

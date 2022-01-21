@@ -78,6 +78,13 @@ export class MerchantComponent implements OnInit {
   getAllMerchant() {
     this.MerchantService.getAllMerchant().subscribe(data => {
       //   this.allCategories = data
+      data.merchant_list.forEach(function(obj, index) {
+        if (obj.status == 0){
+          obj.status = "false";
+        } else if (obj.status == 1){
+          obj.status = "true";
+        }
+      })
          this.sellers = this.tempSellers = data.merchant_list;
          this.totalRecords = this.tempTotalRecords = this.sellers.length;
        }); 
@@ -187,6 +194,26 @@ clickReset() {
           );
           this.tempTotalRecords = this.tempSellers.length;
           break;
+    }
+    if(this.filterText.length == 0) {
+      this.tempSellers = this.sellers;
+      this.tempTotalRecords = this.tempSellers.length;
+    }
+    this.p = 1;
+  }
+
+
+
+  dropDownData(event, type) {
+    this.filterText = event;
+    switch (type) {
+      case 'status':
+        this.tempSellers = this.sellers.filter(item => 
+         item.status != null && item.status.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 
+       );
+        this.tempTotalRecords = this.tempSellers.length;
+        break;
+      
     }
     if(this.filterText.length == 0) {
       this.tempSellers = this.sellers;

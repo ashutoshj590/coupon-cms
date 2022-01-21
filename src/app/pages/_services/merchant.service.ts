@@ -333,6 +333,16 @@ getAllRequestsDetail(): Observable<any> {
 
 
 
+getAllCoupons(): Observable<any> {
+  return this.http.post<any>(this.apiURL + '/coupon/get-all-coupons-admin', null)
+      .pipe(map(response => {
+          console.log(response);
+          return response;
+      }));
+}
+
+
+
 
 
 

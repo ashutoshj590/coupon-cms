@@ -48,8 +48,17 @@
             <th class="color">License No<br> <input class="form-control" placeholder="License No" (keyup)="filterData($event, 'business_license_no')"></th>
          <th class="color">State<br> <input class="form-control" placeholder="State" (keyup)="filterData($event, 'country_name')"></th>
           <th class="color">Zipcode<br> <input class="form-control" placeholder="Zipcode" (keyup)="filterData($event, 'zipcode_new')"></th>
-
-            <button type="button" class="btn btn-primary fas fa-plus addMerchantbtn" (click)="clickOnAdd()">Add</button> 
+          <th class="color"><br>
+            <mat-form-field appearance="fill">
+              <mat-label style="background-color: white;"></mat-label>
+              <mat-select (ngModelChange)="dropDownData($event, 'status')" ngModel>
+                <mat-option value="" selected>All </mat-option>
+             <mat-option value="true"> Activate </mat-option>
+             <mat-option value="false"> Deactivate</mat-option>
+              </mat-select>
+            </mat-form-field>
+            </th>
+            <button type="button" style="margin-bottom: 20px;" class="btn btn-primary fas fa-plus addMerchantbtn" (click)="clickOnAdd()">Add</button> 
             </div>
         </tr>
     </thead>

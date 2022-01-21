@@ -1,0 +1,130 @@
+<style>
+  .block {
+      margin-left: 20px;
+  }
+  .color {
+    color: white;
+    padding-left: 40px;
+  }
+  .addMerchantbtn {
+    margin-top: 22px;
+    margin-left: 32px;
+  }
+
+  .center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.overlay{
+  height:100vh;
+  width:100%;
+  background-color:rgba(0, 0, 0, 0.286);
+  z-index:    10;
+  top:        0; 
+  left:       0; 
+  position:   fixed;
+}
+
+.hovor:hover {background-color: #fcebe6;} 
+ 
+  
+</style>
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">     
+        <!-- Card stats -->
+        <thead class="thead-light">
+          <tr>
+            <div class="row">
+              <th class="color">Email <br> <input class="form-control" placeholder="Email" (keyup)="filterData($event, 'email')"></th>
+              <th class="color">Coupon Type<br> <input class="form-control" placeholder="Coupon Type" (keyup)="filterData($event, 'coupon_type')"></th>
+              <th class="color">Subcategory<br> <input class="form-control" placeholder="Subcategory" (keyup)="filterData($event, 'name')"></th>
+           <th class="color">Expiry Date<br> <input class="form-control" placeholder="Expiry Date" (keyup)="filterData($event, 'expiry_date')"></th>
+           
+              </div>
+          </tr>
+      </thead>
+        
+   
+     
+    </div>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h3 class="mb-0">Coupon List</h3>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" (click)="sort('id')">S.NO&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('email')">Email&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('date')">Type&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('date')">SubCategory&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('time')">Expiry Date&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col">Used Coupon</th>
+               <!---- <th scope="col" (click)="sort('createdAt')">createdAt&nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('updatedAt')">updatedAt&nbsp;<i class="fa fa-sort"></i></th> -->
+           <!--<th scope="col">Status</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="hovor" (click)="clickOnDetail(coupon.id)" style="cursor: pointer;" *ngFor="let coupon of tempSellers | orderBy: key: reverse | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: tempTotalRecords }; let i = index">
+
+                <td>
+                  {{pageSize *(p-1)+i+1}}
+                </td>
+                <td>
+                 {{coupon.email}}
+                </td>
+                <td>
+                {{coupon.coupon_type}}
+                </td>
+                <td>
+                  {{coupon.name}}
+                  </td>
+                <td>
+                  {{coupon.expiry_date}}
+                </td>
+              
+                <!--spinner-->
+                <div class="overlay" *ngIf="showSpinner">
+                  <div class="center">
+                      <mat-progress-spinner diameter=100 
+                                          mode="indeterminate" 
+                                color="accent">
+                    </mat-progress-spinner> 
+                  </div>
+                  </div>
+                   <!--spinner-->
+            
+                   <td>
+                    {{coupon.used_coupons}}
+                   </td>
+          
+              </tr>
+            
+            </tbody>
+          </table>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <pagination-controls style="text-align: center;" (pageChange)="p = $event"></pagination-controls>
+</div>
+
+
+</div>
