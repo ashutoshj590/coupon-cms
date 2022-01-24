@@ -176,10 +176,10 @@
                         </a>
                         <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
                           <div (click)="changeStatus(merchant.user_id)">
-                            <div *ngIf="merchant.status == 1">
+                            <div *ngIf="merchant.status == 'true'">
                               <a class="dropdown-item" href="javascript:void(0)" style="color: green;">Activate</a>
                             </div>
-                            <div *ngIf="merchant.status == 0">
+                            <div *ngIf="merchant.status == 'false'">
                               <a class="dropdown-item" href="javascript:void(0)" style="color: red;">Deactivate</a>
                             </div>
                             </div>
